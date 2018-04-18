@@ -21,31 +21,32 @@ function isValidPhoneNumber(phone) {
     return re.test(String(phone));
 }
 
-
-
-router.delete('/:id', function (req, res, next) {
-    var idToDelete = req.params.id;
+router.post('/', function (req, res, next) {
+    res.setHeader('content-type', 'application/json');
     var usersCollection = req.db.get('users');
+    var attemptingUser = req.body;
 
-    usersCollection.remove({ _id: idToDelete }).then(function (err, d) {
+    if (!isValidMail(attemptingUser.email) || !(isValidPassword(attemptingUser.password))) {
         res.status(200);
-        res.json({ message: 'success' });
-    });
-
+        res.json({ message: "Invalid input data" });
+    } else {
+        attemptingUser.password = sha1(attemptingUser.password);
+        usersCollection.find({ email: attemptingUser.email }, {}, function (err, doc) {
+            if (err) {
+                res.status(500);
+                res.json({err: err});
+            }
+            
+            if (doc.length === 0) {
+                res.status(200);
+                res.json({message: "There is not user with this email!"});
+            } else {
+                res.status(200);
+                res.json({id: doc[0]._id});
+            }
+        });
+    }
 });
 
-router.get('/', function (req, res, next) {
-    var usersCollection = req.db.get('users');
-
-    usersCollection.find({}, {}, function (err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            res.status(200);
-            res.json(docs);
-        }
-    });
-});
 
 module.exports = router;

@@ -6,12 +6,15 @@ var logger = require('morgan');
 var mongodb = require('mongodb');
 var monk = require('monk');
 var db = monk('bookzonproject:bookzon@ds247439.mlab.com:47439/bookzondb');
-
+var sha1 = require('sha1');
+var session = require('express-session');
 
 
 // var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var booksRouter = require('./routes/books');
+var loginRouter = require('./routes/login');
+var registerRouter = require('./routes/register');
 
 var app = express();
 
@@ -24,12 +27,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'abcd1234'}));
 app.use(function(req, res, next) {
     req.db = db;
     next();
 });
 
 // app.use('/', indexRouter);
+app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 app.use('/books', booksRouter);
 
