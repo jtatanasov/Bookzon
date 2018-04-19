@@ -40,5 +40,5 @@ var userService = (function() {
 
     var us = new UserService();
     //us.register('Pesho', 'pesho@abv.bg', 'asdf1234');
-   us.login('pesho@abv.bg', 'asdf1234');
+   //us.login('pesho@abv.bg', 'asdf1234');
 })();
