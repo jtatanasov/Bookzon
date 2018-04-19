@@ -42,7 +42,10 @@ router.post('/', function (req, res, next) {
                 res.json({message: "There is not user with this email!"});
             } else {
                 res.status(200);
-                res.json({id: doc[0]._id});
+                // set session
+                // res.json({id: doc[0]._id});
+                req.session.user = doc[0];
+                res.redirect('/');
             }
         });
     }
