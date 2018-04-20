@@ -14,7 +14,7 @@ var validator = (function() {
         },
 
         isValidPassword: function(pass) {
-            return (typeof pass === 'string' && pass.length >= 6 && hasNumber(pass))
+            return (typeof pass === 'string' && pass.length >= 6 && this.hasNumber(pass))
         },
 
         isValidPhoneNumber: function (phone) {

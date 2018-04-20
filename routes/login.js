@@ -31,21 +31,22 @@ router.post('/', function (req, res, next) {
         res.json({ message: "Invalid input data" });
     } else {
         attemptingUser.password = sha1(attemptingUser.password);
-        usersCollection.find({ email: attemptingUser.email }, {}, function (err, doc) {
+        usersCollection.find({ email: attemptingUser.email, password: attemptingUser.password }, {}, function (err, doc) {
             if (err) {
                 res.status(500);
                 res.json({err: err});
             }
-            
+            console.log('asdf', doc);
             if (doc.length === 0) {
                 res.status(200);
-                res.json({message: "There is not user with this email!"});
+                res.json({message: "Wrong username or password"});
             } else {
                 res.status(200);
                 // set session
                 // res.json({id: doc[0]._id});
+                res.json({id: doc[0]._id});
                 req.session.user = doc[0];
-                res.redirect('/');
+                //res.redirect('/');
             }
         });
     }
