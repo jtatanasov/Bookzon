@@ -6,7 +6,7 @@ app.service('loginAndRegisterService', function ($http) {
                     if (response.data.id) {
                         resolve(response.data.id);
                     } else {
-                        resolve(response.data.message);
+                        resolve(null);
                     }
                 })
                 .catch(function (err) {

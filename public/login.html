@@ -9,8 +9,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-    crossorigin="anonymous">
-<link rel='stylesheet' href='assets/stylesheets/loginAndRegister.css' />
+        crossorigin="anonymous">
+    <link rel='stylesheet' href='assets/stylesheets/loginAndRegister.css' />
 
     <!-- vendor -->
     <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -20,17 +20,17 @@
         crossorigin="anonymous"></script>
 
 
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
     <script src="assets/js/app.js"></script>
 
-    
+
     <script src="assets/js/Validator.js"></script>
     <script src="assets/js/loginAndRegister/LoginAndRegisterController.js"></script>
     <script src="assets/js/loginAndRegister/loginAndRegisterService.js"></script>
 
-   
+
 </head>
 
 <body ng-app='app'>
@@ -41,7 +41,7 @@
 
         </header>
         <section>
-            <div  id="container_demo">
+            <div id="container_demo">
                 <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
                 <a class="hiddenanchor" id="toregister"></a>
                 <a class="hiddenanchor" id="tologin"></a>
@@ -50,14 +50,16 @@
                         <form action="mysuperscript.php" autocomplete="on">
                             <h1>Log in</h1>
                             <p>
-                                <label for="email"  class="youmail"> Your email</label>
-                                <input id="email" ng-model='attemptingUser.email' name="email" required="required" type="email" placeholder="mymail@mail.com" />
+                                <label for="email" class="youmail"> Your email</label>
+                                <input id="email" ng-model='attemptingUser.email' name="email" required="required" type="email" placeholder="mymail@mail.com"
+                                />
                                 <p ng-show='wrongEmail' class='ng-hide error'>Invalid email</p>
                             </p>
                             <p>
                                 <label for="password" class="youpasswd"> Your password </label>
-                                <input id="password" ng-model='attemptingUser.password' name="password" required="required" type="password" placeholder="eg. X8df!90EO" />
-                                <p ng-show='wrongPassword' class='error ng-hide' >Invalid password</p>
+                                <input id="password" ng-model='attemptingUser.password' name="password" required="required" type="password" placeholder="eg. X8df!90EO"
+                                />
+                                <p ng-show='wrongPassword' class='error ng-hide'>Invalid password</p>
                                 <p ng-show='noUser' class='ng-hide error'>There is no user with this email/password!</p>
                             </p>
                             <p ng-click='userLogin($event)' class="login button">
@@ -76,24 +78,36 @@
                         <form action="mysuperscript.php" autocomplete="on">
                             <h1> Sign up </h1>
                             <p>
+                                <label for="namesignup" class="name"> Your name</label>
+                                <input ng-model='newUser.name' id="namesignup" name="namesignup" required="required" type="text" placeholder="eg. John Doe"
+                                />
+                                <p ng-show='wrongSignUpName' class='ng-hide error'>Invalid name</p>
+                            </p>
+                            <p>
                                 <label for="emailsignup" class="youmail"> Your email</label>
-                                <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com" />
+                                <input ng-model='newUser.email' id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
+                                <p ng-show='wrongSignUpEmail' class='ng-hide error'>Invalid email</p>
                             </p>
                             <p>
                                 <label for="passwordsignup" class="youpasswd">Your password </label>
-                                <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                <input ng-model='newUser.password' id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"
+                                />
+                                <p ng-show='wrongSignUpPassword' class='ng-hide error'>Invalid password</p>
                             </p>
                             <p>
                                 <label for="passwordsignup_confirm" class="youpasswd">Please confirm your password </label>
-                                <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. X8df!90EO"
-                                />
+                                <input ng-model='newUser.confirmPassword' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password"
+                                    placeholder="eg. X8df!90EO">
+                                <p ng-show='wrongSignUpConfirmPassword' class='ng-hide error'>Invalid confirm password</p>
+                                <p ng-show='alreadyRegistered' class='ng-hide error'>There is registered user with this email</p>
+                                
                             </p>
-                            <p class="signin button">
+                            <p ng-click='userRegister($event)' class="signin button">
                                 <input type="submit" value="Sign up" />
                             </p>
                             <p class="change_link">
                                 Already a member ?
-                                <a href="http://localhost:3000/login.html#toregister" class="to_register"> Go and log in </a>
+                                <a href="#tologin" class="to_register"> Go and log in </a>
                             </p>
                         </form>
                     </div>

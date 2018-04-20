@@ -38,7 +38,7 @@ router.post('/', function (req, res, next) {
 
             if (doc.length === 0) {
                 newUser.password = sha1(newUser.password);
-                delete newUser['confirm-password'];
+                delete newUser.confirmPassword;
                 usersCollection.insert(newUser, function (err, doc) {
                     if (err) throw err;
                     res.status(200);
