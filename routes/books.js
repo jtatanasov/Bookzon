@@ -4,7 +4,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     var booksCollection = req.db.get('books');
 
-    booksCollection.find({"volumeInfo.category" : "art"},  {} , function(err, docs) {
+    booksCollection.find({},  {} , function(err, docs) {
+    // booksCollection.find({"volumeInfo.category" : "art"},  {} , function(err, docs) {
         if (err) {
             res.status(500);
             res.json(err);

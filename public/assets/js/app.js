@@ -6,6 +6,9 @@ mainApp.config(function ($routeProvider) {
         .when('/login', {
             templateUrl: 'login.html',
         })
+        .when('/books', {
+            templateUrl: 'assets/js/books/books.htm',
+        })
         .otherwise({
             templateUrl: 'assets/js/main/mainTemplate.htm',
             controller: 'MainController'

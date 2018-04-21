@@ -1,0 +1,24 @@
+#booksSection {
+    padding: 10px 0  0 30px;
+}
+.card-deck {
+    margin-right: 0; /* bootstrap bug fix horizontal scroller*/
+}
+.card-deck .card {
+    margin: 0 auto;
+    max-width: 12rem;
+    min-width: 12rem;
+    width: 12rem;
+
+}
+
+.card-deck .card > a {
+    display: block;
+    height: 14rem;
+}
+
+@media (min-width: 576px) { 
+    .card-deck .card {
+        margin: 0 15px;
+    }
+}
