@@ -1,4 +1,4 @@
-app.controller('LoginAndRegisterController', function ($scope, loginAndRegisterService) {
+loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegisterService) {
     //login
     $scope.wrongPassword = false;
     $scope.wrongEmail = false;

@@ -23,16 +23,16 @@ function isValidPhoneNumber(phone) {
 
 
 
-router.delete('/:id', function (req, res, next) {
-    var idToDelete = req.params.id;
-    var usersCollection = req.db.get('users');
+// router.delete('/:id', function (req, res, next) {
+//     var idToDelete = req.params.id;
+//     var usersCollection = req.db.get('users');
 
-    usersCollection.remove({ _id: idToDelete }).then(function (err, d) {
-        res.status(200);
-        res.json({ message: 'success' });
-    });
+//     usersCollection.remove({ _id: idToDelete }).then(function (err, d) {
+//         res.status(200);
+//         res.json({ message: 'success' });
+//     });
 
-});
+// });
 
 router.get('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
@@ -47,5 +47,23 @@ router.get('/', function (req, res, next) {
         }
     });
 });
+
+router.get('/:id', function (req, res, next) {
+    var usersCollection = req.db.get('users');
+    var idToSearch = req.params.id;
+
+    usersCollection.find({ _id: idToSearch}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            var user = docs[0];
+            delete user.password;
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
+
 
 module.exports = router;

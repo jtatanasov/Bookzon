@@ -33,11 +33,11 @@
 
 </head>
 
-<body ng-app='app'>
+<body ng-app='loginApp'>
     <div class="container" ng-controller="LoginAndRegisterController">
 
         <header>
-            <h1>Welcome to Bookzon</h1>
+            <h1>Welcome to <a id='link-to-home' href='/'>Bookzon</a></h1>
 
         </header>
         <section>
@@ -48,7 +48,7 @@
                 <div id="wrapper">
                     <div id="login" class="animate form">
                         <form action="mysuperscript.php" autocomplete="on">
-                            <h1>Log in</h1>
+                            <h1>Log in to Bookzon</h1>
                             <p>
                                 <label for="email" class="youmail"> Your email</label>
                                 <input id="email" ng-model='attemptingUser.email' name="email" required="required" type="email" placeholder="mymail@mail.com"
@@ -76,7 +76,7 @@
 
                     <div id="register" class="animate form">
                         <form action="mysuperscript.php" autocomplete="on">
-                            <h1> Sign up </h1>
+                            <h1>Sign up</h1>
                             <p>
                                 <label for="namesignup" class="name"> Your name</label>
                                 <input ng-model='newUser.name' id="namesignup" name="namesignup" required="required" type="text" placeholder="eg. John Doe"

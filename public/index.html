@@ -10,64 +10,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
     <script src="assets/js/app.js"></script>
-    
+
     <script src="assets/js/Validator.js"></script>
     <script src="assets/js/script.js"></script>
 
+
+    <script src="assets/js/main/mainController.js"></script>
+    <script src="assets/js/main/mainService.js"></script>
+
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"> -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel='stylesheet' href='assets/stylesheets/style.css' />
 </head>
 </head>
 
-<body>
+<body ng-app='mainApp' ng-cloak="" ng-controller='MainController as user'>
     <!-- Welcome to bookzon
     <p><a href="login.html">Login</a></p>
     <p><a href="register.html">Register</a></p>
     -->
-        
-        <nav id='main-navbar' class="navbar navbar-inverse">
-          <div class="container">
+
+    <nav id='main-navbar' class="navbar navbar-inverse">
+        <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                
-              <a herf='#'><img style="width:80px" id='bookzon-logo' src='assets/images/bookzon-logo.png'/></a>
-              <button id='button-collapse-navbar' type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a id='bookzon-title' class="navbar-brand" href="#">Bookzon</a>
+
+                <a herf='#'>
+                    <img style="width:80px" id='bookzon-logo' src='assets/images/bookzon-logo.png' />
+                </a>
+                <button id='button-collapse-navbar' type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id='bookzon-title' class="navbar-brand" href="#">Bookzon</a>
             </div>
-        
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Profile</a></li>
-                <li><a href="#">Orders</a></li>
-                <li><a href="#">Cart</a></li>
-                <li>
-                  <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
-                </li>
-              </ul>
-              <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
-                <form class="navbar-form navbar-right" role="search">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search" />
-                  </div>
-                  <button id='search-btn' type="submit" class="btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                </form>
-              </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-show='user.loggedUser' class='ng-hide'>
+                        <a href="#">Profile</a>
+                    </li>
+                    <li ng-show='user.loggedUser' class='ng-hide'>
+                        <a href="#">Orders</a>
+                    </li>
+                    <li ng-show='user.loggedUser' class='ng-hide'>
+                        <a href="#">Cart</a>
+                    </li>
+                    <li ng-show='user.loggedUser' ng-click='user.logOut($event)'class='ng-hide'>
+                            <a href="#">Log Out</a>
+                    </li>
+                    <li ng-show='!user.loggedUser' class='ng-hide'>
+                        <a href="" ng-click='user.goToLoginPage($event)'>Login</a>
+                    </li>
+                    <li ng-show='!user.loggedUser' class='ng-hide'>
+                        <a href="" ng-click='user.goToSignUpPage($event)'>Sign Up</a>
+                    </li>
+                    <li>
+                        <a class="btn btn-default btn-outline btn-circle collapsed" data-toggle="collapse" href="#nav-collapse3" aria-expanded="false"
+                            aria-controls="nav-collapse3">Search</a>
+                    </li>
+                </ul>
+                <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" />
+                        </div>
+                        <button id='search-btn' type="submit" class="btn">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </div>
             </div>
-          </div>
-        </nav>
-        
-      
-    
-    <main ng-view></main>
+        </div>
+    </nav>
+    <main ng-view>
+    </main>
 </body>
 
 </html>

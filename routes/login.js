@@ -36,7 +36,6 @@ router.post('/', function (req, res, next) {
                 res.status(500);
                 res.json({err: err});
             }
-            console.log('asdf', doc);
             if (doc.length === 0) {
                 res.status(200);
                 res.json({message: "Wrong username or password"});
@@ -45,7 +44,11 @@ router.post('/', function (req, res, next) {
                 // set session
                 // res.json({id: doc[0]._id});
                 res.json({id: doc[0]._id});
-                req.session.user = doc[0];
+                var tmpUser = doc[0];
+                delete tmpUser.password;
+                req.session.user = tmpUser;
+                console.log(req.session);
+                
                 //res.redirect('/');
             }
         });

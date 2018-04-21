@@ -50,7 +50,7 @@ body{
 	font-weight: 400;
 	font-size: 15px;
 	color: #1d3c41;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 a{
 	color: #333;
@@ -225,7 +225,7 @@ a.hiddenanchor{
 }
 
 #wrapper p{
-    margin-bottom:15px;
+    margin-bottom:5px;
     width:100%;
 }
 #wrapper p:first-child{
@@ -4476,6 +4476,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 .error {
     color: red;
+}
+
+
+#link-to-home {
+    color: #fff;
+    text-decoration: none;
+}
+
+#link-to-home:hover {
+    text-decoration: underline;
 }
 
 

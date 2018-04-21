@@ -112,3 +112,12 @@
     border-color: #AA6839;
     background-color: #331500;
 }
+
+#link-to-home {
+    color: #fff;
+    text-decoration: none;
+}
+
+ng-cloak {
+    display: none !important;
+}

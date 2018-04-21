@@ -1,4 +1,4 @@
-app.service('loginAndRegisterService', function ($http) {
+loginApp.service('loginAndRegisterService', function ($http) {
     this.register = function (user) {
         return new Promise(function (resolve, reject) {
             $http.post('/register', user)
@@ -20,6 +20,7 @@ app.service('loginAndRegisterService', function ($http) {
             $http.post('/login', user)
                 .then(function (response) {
                     if (response.data.id) {
+                        sessionStorage.setItem('userId', response.data.id);
                         resolve(response.data.id);
                     } else {
                         resolve(null);
@@ -42,4 +43,5 @@ app.service('loginAndRegisterService', function ($http) {
                 });
         });
     }
+
 });
