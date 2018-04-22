@@ -1,4 +1,4 @@
-mainApp.controller('MainController', function ($scope, mainService) {
+mainApp.controller('MainController', function ($scope, $location, mainService) {
     var vm = this;
     vm.loggedUser = true;
 
@@ -12,6 +12,7 @@ mainApp.controller('MainController', function ($scope, mainService) {
     });
 
     
+    //loggedout
     vm.goToLoginPage = function($event) {
         $event.preventDefault();
         location.replace('login.html')
@@ -21,6 +22,12 @@ mainApp.controller('MainController', function ($scope, mainService) {
         location.replace('login.html#toregister')
     }
 
+
+    //logedin
+    vm.goToProfilePage = function($event) {
+        $event.preventDefault();
+        $location.path('/profile');
+    }
     vm.logOut = function($event) {
         $event.preventDefault();
         mainService.logout();

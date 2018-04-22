@@ -146,3 +146,55 @@ body {
 .nav-item:last-of-type > a {
     padding: 0.2rem .5rem;
 }
+
+#amazon-profile-user-name {
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    border-bottom: 1px solid #7C4823;
+    background-color: hsl(60, 48%, 87%);
+    height: 100%;
+    -webkit-box-shadow: 0px 4px 8px 0px rgba(84,42,12,0.76);
+    -moz-box-shadow: 0px 4px 8px 0px rgba(84,42,12,0.76);
+    box-shadow: 0px 4px 8px 0px rgba(84,42,12,0.76);
+}
+
+#amazon-profile {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.option {
+    display: inline-block;
+    width: 20em;
+    height: 6em;
+    vertical-align: top;
+    border: 1px solid #E6BB9D;
+    border-radius: 5px;
+    padding: 1em;
+    margin: 0.5rem;
+    text-align: left;
+}
+
+.option:hover {
+    cursor: pointer;
+    background-color: #FFE4D1;
+    
+}
+
+@media screen and (max-width: 350px) {
+    .option {
+        width: 90%;
+    }
+}
+
+.option-description {
+    font-size: 0.7rem;
+}
+.option-icons {
+    width: 4em;
+}
+
+.option-icon-container {
+    padding-right: 0.5rem;
+}

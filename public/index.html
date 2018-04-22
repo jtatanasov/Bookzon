@@ -23,6 +23,9 @@
     <script src="assets/js/main/mainController.js"></script>
     <script src="assets/js/main/mainService.js"></script>
 
+    <script src="assets/js/profile/profileController.js"></script>
+    <script src="assets/js/profile/profileService.js"></script>
+
     <script src="assets/js/books/booksService.js"></script>
     <script src="assets/js/books/booksController.js"></script>
 
@@ -60,7 +63,7 @@
             and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav ml-auto">
-                    <li ng-show="user.loggedUser" class="ng-hide nav-item">
+                    <li ng-show="user.loggedUser" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
                         <a href="#" class="nav-link">Profile</a>
                     </li>
                     <li ng-show="user.loggedUser" class="ng-hide nav-item">

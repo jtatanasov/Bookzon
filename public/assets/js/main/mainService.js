@@ -6,7 +6,6 @@ mainApp.service('mainService', function ($http) {
         }
 
         return new Promise(function (resolve, reject) {
-            console.log(id == 'null');
             if (id == 'null') {
                 resolve(null);
                 return;
