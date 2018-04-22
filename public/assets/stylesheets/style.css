@@ -74,7 +74,12 @@ body {
         transform: translate(0px,0px);
     }
 }
-
+.nav-link {
+    display: inline-block;
+}
+.nav-icon {
+    width: 1.5em;
+}
 #navbar-collapse-3 ul > li {
     color: #AA6839;
 }
@@ -88,6 +93,7 @@ body {
 
 #navbar-collapse-3 ul > li:hover {
     background-color: #170900;
+    cursor: pointer;
 }
 
 #navbar-collapse-3 ul > li:hover:last-of-type {

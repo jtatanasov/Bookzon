@@ -9,7 +9,7 @@
 
         ProfileService.getUserById().then(function (data) {
             if(data == null) {
-                vm.loggedUser = false;
+                location.replace('login.html')
                 return;
             }
             vm.user = data.data[0];

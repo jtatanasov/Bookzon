@@ -64,26 +64,32 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav ml-auto">
                     <li ng-show="user.loggedUser" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
+                        <img class='nav-icon' src='assets/images/icons/edit-profile.png' />
                         <a href="#" class="nav-link">Profile</a>
                     </li>
-                    <li ng-show="user.loggedUser" class="ng-hide nav-item">
+                    <li ng-show="user.loggedUser" class="ng-hide nav-item"> 
+                        <img class='nav-icon' src='assets/images/icons/orders.png' />
                         <a href="#" class="nav-link">Orders</a>
                     </li>
                     <li ng-show="user.loggedUser" class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/cart.png' />
                         <a href="#" class="nav-link">Cart</a>
                     </li>
                     <li ng-show="user.loggedUser" ng-click="user.logOut($event)" class="ng-hide nav-item">
+                        <img class='nav-icon' src='assets/images/icons/logout.png' />
                         <a href="#" class="nav-link">Log Out</a>
                     </li>
                     <li ng-show="!user.loggedUser" class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/login.png' />
                         <a href="" ng-click="user.goToLoginPage($event)" class="nav-link">Login</a>
                     </li>
                     <li ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <a href="" ng-click="user.goToSignUpPage($event)" class="nav-link">Sign Up</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item"> 
                         <a class="btn btn-secondary btn-outline btn-circle collapsed nav-link" data-toggle="collapse" href="#nav-collapse3"
-                            aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+                            aria-expanded="false" aria-controls="nav-collapse3">
+                            <img class='nav-icon' src='assets/images/icons/search.png' />Search</a>
                     </li>
                 </ul>
                 <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
