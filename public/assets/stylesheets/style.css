@@ -1,4 +1,6 @@
-
+body {
+    line-height: 1.1;
+}
 .navbar-brand { position: relative; z-index: 2; color: #fff }
 
 .navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; transition: transform 0.3s; }
@@ -32,6 +34,20 @@
     transform: translate(0px,0px);
 }
 
+.btn:focus,.btn:active {
+    outline: none !important;
+    box-shadow: none;
+ }
+
+ #button-collapse-navbar {
+     float: right;
+ }
+
+ @media screen and (max-width: 500px) {
+    #search-btn {
+        margin-top: -1em;
+    }
+ }
 
 @media screen and (max-width: 767px) {
     .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
@@ -90,10 +106,13 @@
 
 .navbar a,li {
     color: #fff;
+    padding-left:0.2em;
+    padding-right:0.2em;
 }
 
 #main-navbar {
     color: #fff;
+    padding:0;
 }
 #nav-collapse3 {
     background-color: #331500;
@@ -106,18 +125,24 @@
 
 #search-btn {
     background-color: #AA6839;
+    color:#fff;
 }
 
 #button-collapse-navbar {
-    border-color: #AA6839;
+    border-color: #fff;
     background-color: #331500;
+    margin-right: 0.1rem;
 }
 
-#link-to-home {
-    color: #fff;
-    text-decoration: none;
-}
 
-ng-cloak {
+.ng-cloak {
     display: none !important;
+}
+
+.nav-item:last-of-type {
+    z-index:2;
+}
+
+.nav-item:last-of-type > a {
+    padding: 0.2rem .5rem;
 }

@@ -1,9 +1,13 @@
-mainApp.service('mainService', function($http) {
+mainApp.service('mainService', function ($http) {
     this.getUserById = function () {
-        var id = sessionStorage.getItem('userId');
-        
+        var id = 'null';
+        if (sessionStorage.getItem('userId')) {
+            id = sessionStorage.getItem('userId');
+        }
+
         return new Promise(function (resolve, reject) {
-            if(id == 'null') {
+            console.log(id == 'null');
+            if (id == 'null') {
                 resolve(null);
                 return;
             }
@@ -17,7 +21,7 @@ mainApp.service('mainService', function($http) {
         });
     }
 
-    this.logout = function() {
+    this.logout = function () {
         sessionStorage.setItem('userId', null);
     }
 });
