@@ -62,6 +62,14 @@
                 &#x2630;</button>
             <!-- Collect the nav links, forms,
             and other content for toggling -->
+            <form id='search-form' class="form-inline mr-auto" role="search">
+                <div class="form-group">
+                    <input id='search-input' type="text" class="form-control" placeholder="Search">
+                </div>
+                <!-- <button id="search-btn" type="submit" class="btn">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button> -->
+            </form>
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav ml-auto">
                     <li ng-show="user.loggedUser" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
@@ -81,28 +89,28 @@
                         <a href="#" class="nav-link">Log Out</a>
                     </li>
                     <li ng-show="!user.loggedUser" class="ng-hide nav-item">
-                            <img class='nav-icon' src='assets/images/icons/login.png' />
+                        <img class='nav-icon' src='assets/images/icons/login.png' />
                         <a href="" ng-click="user.goToLoginPage($event)" class="nav-link">Login</a>
                     </li>
                     <li ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <a href="" ng-click="user.goToSignUpPage($event)" class="nav-link">Sign Up</a>
                     </li>
-                    <li class="nav-item"> 
+                    <!-- <li class="nav-item"> 
                         <a class="btn btn-secondary btn-outline btn-circle collapsed nav-link" data-toggle="collapse" href="#nav-collapse3"
                             aria-expanded="false" aria-controls="nav-collapse3">
                             <img class='nav-icon' src='assets/images/icons/search.png' />Search</a>
-                    </li>
+                    </li> -->
                 </ul>
-                <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
-                    <form class="form-inline ml-auto" role="search">
+                <!-- <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3"> -->
+                    <!-- <form class="form-inline ml-auto" role="search">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
                         <button id="search-btn" type="submit" class="btn">
                             <span class="fa fa-search" aria-hidden="true"></span>
                         </button>
-                    </form>
-                </div>
+                    </form> -->
+                <!-- </div> -->
             </div>
         </div>
     </nav>

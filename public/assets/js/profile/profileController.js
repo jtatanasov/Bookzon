@@ -1,21 +1,12 @@
-(function() {
+(function () {
     'use strict'
 
     mainApp.controller('ProfileController', ProfileController);
 
-    function ProfileController(ProfileService) {
+    function ProfileController($scope, $rootScope, ProfileService) {
         var vm = this;
         vm.firstName = '';
 
-        ProfileService.getUserById().then(function (data) {
-            if(data == null) {
-                location.replace('login.html')
-                return;
-            }
-            vm.user = data.data[0];
-            vm.firstName = vm.user.name.split(' ')[0];
-        })
-        .catch(err => console.log(err));
-
+        vm.firstName = $rootScope.user.name.split(' ')[0];
     }
 })();

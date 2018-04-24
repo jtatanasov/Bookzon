@@ -9,13 +9,17 @@ loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegi
         password: ''
     }
     angular.element('#email').on('focus', function () {
-        $scope.wrongEmail = false;
-        $scope.noUser = false;
+        $scope.$apply(function () {
+            $scope.wrongEmail = false;
+            $scope.noUser = false;
+        });
     });
 
     angular.element('#password').on('focus', function () {
-        $scope.wrongPassword = false;
-        $scope.noUser = false;
+        $scope.$apply(function () {
+            $scope.wrongPassword = false;
+            $scope.noUser = false;
+        });
     });
 
     $scope.userLogin = function ($event) {
@@ -33,7 +37,9 @@ loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegi
         loginAndRegisterService.login($scope.attemptingUser)
             .then(function (data) {
                 if (data == null) {
-                    $scope.noUser = true;
+                    $scope.$apply(function () {
+                        $scope.noUser = true;
+                    });
                 } else {
                     location.replace('/');
                 }
@@ -97,17 +103,14 @@ loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegi
         }
 
         loginAndRegisterService.register($scope.newUser)
-        .then(function(data) {
-            $scope.wrongSignUpConfirmPassword = false;
-            if(data == null) {
-                $scope.alreadyRegistered = true;
-            } else {
-                location.replace('#tologin');
-            }
-        })
+            .then(function (data) {
+                $scope.wrongSignUpConfirmPassword = false;
+                if (data == null) {
+                    $scope.alreadyRegistered = true;
+                } else {
+                    location.replace('#tologin');
+                }
+            })
     }
 
-    $scope.users = loginAndRegisterService.getUsers().then(function (data) {
-        // console.log(data.data);
-    });
 });

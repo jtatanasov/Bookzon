@@ -27,17 +27,30 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'abcd1234'}));
-app.use(function(req, res, next) {
+app.use(session({ secret: 'abcd1234' }));
+app.use(function (req, res, next) {
     req.db = db;
     next();
 });
 
+function checkLogin(req, res, next) {
+    if ((req.session) && (req.session.user)) {
+        next();
+    } else {
+        res.status(401);
+        res.json({ status: 'not authorized' });
+    }
+}
+
 // app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/users', usersRouter);
+app.use('/users', checkLogin, usersRouter);
 app.use('/api/books', booksRouter);
+app.use('/logout', checkLogin, function (req, res, next) {
+    req.session.destroy();
+    res.redirect('/login.html');
+  });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

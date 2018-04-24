@@ -32,16 +32,5 @@ loginApp.service('loginAndRegisterService', function ($http) {
         })
     }
 
-    this.getUsers = function () {
-        return new Promise(function (resolve, reject) {
-            $http.get('/users')
-                .then(function (response) {
-                    resolve(response);
-                }).catch(function (err) {
-                    // location.replace('./login.html');
-                    reject(err);
-                });
-        });
-    }
 
 });
