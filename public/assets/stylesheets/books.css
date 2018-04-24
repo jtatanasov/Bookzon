@@ -1,15 +1,42 @@
+/* BOOKS AND CATEGORIES ON HOME PAGE */
+
+.categories .card-deck .card {
+    /* margin: 0 auto; */
+    max-width: 10rem;
+    min-width: 5rem;
+    width: 5rem;
+}
+
+.categories .card-deck .card:hover {
+    border-color: #331500;
+}
+
+
+.categories .card-deck .card:hover img.card-img-top {
+    opacity: 0.6;
+}
+
+.categories .card img.card-img-top {
+    max-width: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
+/* BOOKS */
 #booksSection {
     padding: 10px 0  0 30px;
 }
-.card-deck {
+
+#booksSection .card-deck {
     margin-right: 0; /* bootstrap bug fix horizontal scroller*/
 }
-.card-deck .card {
+
+/* books list */
+#booksSection .card-deck .card {
     margin: 0 auto;
     max-width: 12rem;
     min-width: 12rem;
     width: 12rem;
-
 }
 
 .card-deck .card > a {

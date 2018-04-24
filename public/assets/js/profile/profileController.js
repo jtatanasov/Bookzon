@@ -3,14 +3,19 @@
 
     mainApp.controller('ProfileController', ProfileController);
 
-    function ProfileController($scope, $rootScope, ProfileService) {
+    function ProfileController($scope, $rootScope, $timeout, ProfileService) {
         var vm = this;
         vm.firstName = '';
-        setTimeout(function () {
+        
+        $timeout(function () {
+            $scope.$apply(function () {
             if (!$rootScope.user) {
                 location.replace('/login.html');
+            } else {
+                vm.firstName = $rootScope.user.name.split(' ')[0];
             }
-        }, 0);
-        vm.firstName = $rootScope.user.name.split(' ')[0];
+        }); 
+        }, 100);
+        
     }
 })();

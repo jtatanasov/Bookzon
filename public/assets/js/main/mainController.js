@@ -1,14 +1,19 @@
 mainApp.controller('MainController', function ($scope, $location, $rootScope, mainService) {
     var vm = this;
     vm.loggedUser = true;
+
     if (!($rootScope.user)) {
         mainService.getUserById().then(function (data) {
             if (data == null) {
-                vm.loggedUser = false;
+                $scope.$apply(function () {
+                    vm.loggedUser = false;
+                });
                 return;
             }
-            $rootScope.user = data.data[0];
-            vm.name = data.data[0].name;
+            $scope.$apply(function () {
+                $rootScope.user = data.data[0];
+                vm.name = data.data[0].name;
+            });
         });
     }
 
@@ -27,7 +32,7 @@ mainApp.controller('MainController', function ($scope, $location, $rootScope, ma
     //logedin
     vm.goToProfilePage = function ($event) {
         $event.preventDefault();
-        $location.path('profile');
+        $location.path('/profile');
     }
     vm.logOut = function ($event) {
         $event.preventDefault();
