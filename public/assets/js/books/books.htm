@@ -1,10 +1,13 @@
 <h1 class="text-center mb-4">Books at Bookzon</h1>
 
 <section id="booksSection" ng-controller="BooksController as booksCtr">
+
+    <img id="mySpinner" src="http://www.fivestarfireplaces.com.au/album/images/loading.gif" ng-show="booksCtr.loading" class="loader" />
+    <!-- books listing -->
     <div class="card-deck-wrapper">
         <div class="card-deck">
             <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books">
-                <a href="#!book/{{book.id}}" class="text-center">
+                <a href="#!books/{{book._id}}" class="text-center">
                     <img class="mw-100" src="{{book.volumeInfo.imageLinks.smallThumbnail}}" alt="{{book.volumeInfo.title}}">
                 </a>
 

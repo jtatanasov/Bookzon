@@ -1,0 +1,22 @@
+<section id="bookDetailsSection" ng-controller="BookDetailsController as ctrl" class="container container-fluid p-3">
+    <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
+    <div class="media">
+        <img class="mr-3" ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+        <div class="media-body">
+            <div class="book-heading">
+                <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
+                <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+            </div>
+            <div class="reviews">
+                <a class="btn btn-link p-0" ng-href="#"><small>Be the first to review this book</small></a>
+            </div>
+            <hr class="mt-0"/>
+            <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
+            <p><b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
+            <p><b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
+            <p><b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
+            <p><b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
+            <p><b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
+        </div>
+    </div>
+</section>

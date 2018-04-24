@@ -22,3 +22,13 @@
         margin: 0 15px;
     }
 }
+
+/* BOOK DETAILS */
+.text-bigger {
+    font-size: 1.1rem;
+}
+
+img.loader {
+    display: block;
+    margin: 0 auto;
+}

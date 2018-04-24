@@ -8,9 +8,12 @@
         // this.addBook = addBook;
         // this.removeBook = removeBook;
         this.getBooks = function() {
-            return $http.get('/api/books')
+            return $http.get('/api/books');
         }
 
+        this.getBookById = function(bookId) {
+            return $http.get('/api/books/' + bookId);
+        }
         
         // function getBooks() {
         //     return new Promise(function (resolve, reject) {
