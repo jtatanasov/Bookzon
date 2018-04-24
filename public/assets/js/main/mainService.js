@@ -5,16 +5,15 @@ mainApp.service('mainService', function ($http) {
             id = sessionStorage.getItem('userId');
         }
         return new Promise(function (resolve, reject) {
-            // if (id == 'null') {
-            //     resolve(null);
-            //     return;
-            // }
+            if (id == 'null') {
+                resolve(null);
+                return;
+            }
 
             $http.get('/users/' + id)
                 .then(function (response) {
                     resolve(response);
                 }).catch(function (err) {
-                    location.replace('./login.html');
                     reject(null);
                 });
         });

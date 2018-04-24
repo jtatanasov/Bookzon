@@ -8,7 +8,6 @@ mainApp.controller('MainController', function ($scope, $location, $rootScope, ma
                 return;
             }
             $rootScope.user = data.data[0];
-            sessionStorage.setItem('userId', null);
             vm.name = data.data[0].name;
         });
     }

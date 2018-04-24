@@ -45,12 +45,12 @@ function checkLogin(req, res, next) {
 // app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-app.use('/users', checkLogin, usersRouter);
+app.use('/users', usersRouter);
 app.use('/api/books', booksRouter);
-app.use('/logout', checkLogin, function (req, res, next) {
-    req.session.destroy();
-    res.redirect('/login.html');
-  });
+// app.use('/logout', checkLogin, function (req, res, next) {
+//     req.session.destroy();
+//     res.redirect('/login.html');
+//   });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
