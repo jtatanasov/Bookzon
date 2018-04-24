@@ -27,7 +27,7 @@ mainApp.controller('MainController', function ($scope, $location, $rootScope, ma
     //logedin
     vm.goToProfilePage = function ($event) {
         $event.preventDefault();
-        $location.path('/profile');
+        $location.path('profile');
     }
     vm.logOut = function ($event) {
         $event.preventDefault();

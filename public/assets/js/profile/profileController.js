@@ -6,9 +6,11 @@
     function ProfileController($scope, $rootScope, ProfileService) {
         var vm = this;
         vm.firstName = '';
-        if(!$rootScope.user) {
-            location.replace('/login.html');
-        }
+        setTimeout(function () {
+            if (!$rootScope.user) {
+                location.replace('/login.html');
+            }
+        }, 0);
         vm.firstName = $rootScope.user.name.split(' ')[0];
     }
 })();
