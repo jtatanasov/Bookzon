@@ -8,7 +8,7 @@
         vm.firstName = '';
         console.log($rootScope.user);
         // $timeout(function () {
-            // $scope.$apply(function () {
+        //     $scope.$apply(function () {
             if (!$rootScope.user) {
                 location.replace('/login.html');
             } else {
