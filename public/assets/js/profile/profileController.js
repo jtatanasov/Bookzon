@@ -8,12 +8,12 @@
         vm.firstName = '';
         // console.log($rootScope.user);
         // $timeout(function () {
-        // $scope.$apply(function () {
-        if (!$rootScope.user) {
-            location.replace('/login.html');
-        } else {
-            vm.firstName = $rootScope.user.name.split(' ')[0];
-        }
+        //     $scope.$apply(function () {
+            if (!$rootScope.user) {
+                location.replace('/login.html');
+            } else {
+                vm.firstName = $rootScope.user.name.split(' ')[0];
+            }
         // }); 
         // }, 100);
 
