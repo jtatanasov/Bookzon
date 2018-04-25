@@ -15,8 +15,16 @@ mainApp.config(function ($routeProvider) {
             templateUrl: 'assets/js/books/bookDetails.htm',
         })
         .when('/profile', {
-            templateUrl: 'assets/js/profile/profile.htm'
-            // controller: 'ProfileController'
+            templateUrl: 'assets/js/profile/profile.htm',
+            controller: 'ProfileController',
+            controllerAs: 'profile',
+            resolve: {
+                delay: function($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 100);
+                    return delay.promise;
+                  }
+            }
         })
         .otherwise({
             templateUrl: 'assets/js/home/home.htm',
