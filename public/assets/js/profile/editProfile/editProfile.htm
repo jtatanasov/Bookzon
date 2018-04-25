@@ -1,0 +1,76 @@
+<div id='edit-profile' ng-controller="EditProfileController as profile">
+    <div class='profile-nav'>
+        <a href="#!profile">Profile</a>
+        <span>&#8250;</span>
+        <span>Edit profile</span>
+    </div>
+
+    <div>
+        <h2>Login and Security</h2>
+        <form id='edit-profile-form' action="">
+            <div>
+                <p>
+                    <label class='captions' for="edit-name">Name</label>
+                </p>
+                <label ng-show='!profile.editNameMode' for='edit-name'>{{profile.name}}</label>
+                <input ng-show='profile.editNameMode' type="text" id='edit-name' ng-model='profile.name' />
+                <button class='buttons' ng-show='!profile.editNameMode' ng-click='profile.editName($event)'>Edit</button>
+                <button class='buttons' ng-show='profile.editNameMode' ng-click='profile.saveName($event)'>Save</button>
+                <p ng-show='profile.wrongName' class='errors'>Invalid name</p>
+            </div>
+            <div>
+                <p>
+                    <label class='captions' for="edit-email">Email</label>
+                </p>
+                <label ng-show='!profile.editEmailMode' for="edit-email">{{profile.email}}</label>
+                <input ng-show='profile.editEmailMode' ng-model='profile.email' type="email" id='edit-email' />
+                <button class='buttons' ng-show='!profile.editEmailMode' ng-click='profile.editEmail($event)'>Edit</button>
+                <button class='buttons' ng-show='profile.editEmailMode' ng-click='profile.saveEmail($event)'>Save</button>
+                <p ng-show='profile.wrongEmail' class='errors'>Invalid email</p>
+            </div>
+            <div>
+                <p>
+                    <label class='captions' for="edit-mobile-number">Mobile phone number</label>
+                </p>
+                <label ng-show='!profile.editPhoneNumber' for="edit-mobile-number">{{profile.mobileNumber}}</label>
+                <input ng-show='profile.editPhoneNumber' ng-model='profile.mobileNumber' type="text" id='edit-mobile-number' />
+                <button class='buttons' ng-show='!profile.editPhoneNumber' ng-click='profile.editPhone($event)'>Edit</button>
+                <button class='buttons' ng-show='profile.editPhoneNumber' ng-click='profile.savePhone($event)'>Save</button>
+                <p ng-show='profile.wrongMobileNumber' class='errors'>Invalid phone number</p>
+            </div>
+            <div>
+                <p>
+                    <label class='captions' for="edit-password">Password</label>
+                </p>
+                <p id='password-conditions'>
+                    <label ng-show='profile.editPasswordMode'>Password must contain at least 6 symbols and at least 1 digit</label>
+                </p>
+                <p>
+                    <input placeholder='Enter password' ng-model='profile.password' ng-show='profile.editPasswordMode' type="password" id='edit-password' />
+                </p>
+                <p>
+                    <input placeholder='Repeat password' ng-show='profile.editPasswordMode' ng-model='profile.confirmPassword' type="password" />
+                </p>
+                <button class='buttons' ng-show='!profile.editPasswordMode' ng-click='profile.editPassword($event)'>Edit</button>
+                <button class='buttons' ng-show='profile.editPasswordMode' ng-click='profile.savePassword($event)'>Save</button>
+                <p ng-show='profile.wrongPassword' class='errors'>Invalid password or confirmation</p>
+            </div>
+        </form>
+
+        <h2>Address</h2>
+        <form id='address-form'>
+            <div>
+                <p>
+                    <label class='captions' for="edit-address">Address</label>
+                </p>
+                <label ng-show='!profile.editAddressMode' for="edit-address">{{profile.address}}</label> 
+                <input ng-show='profile.editAddressMode' ng-model='profile.address' type="text" id='edit-address' />
+                <button class='buttons' ng-show='!profile.editAddressMode' ng-click='profile.editAddress($event)'>Edit</button>
+                <button class='buttons' ng-show='profile.editAddressMode' ng-click='profile.saveAddress($event)'>Save</button>
+                <p ng-show='profile.wrongAddress' class='errors'>Invalid phone number</p>
+            </div>
+        </form>
+    </div>
+
+
+</div>

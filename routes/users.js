@@ -52,7 +52,7 @@ router.get('/:id', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var idToSearch = req.params.id;
 
-    usersCollection.find({ _id: idToSearch}, {}, function (err, docs) {
+    usersCollection.find({ _id: idToSearch }, {}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
@@ -63,6 +63,84 @@ router.get('/:id', function (req, res, next) {
             res.json(docs);
         }
     });
+});
+
+router.put('/:id', function (req, res, next) {
+    var usersCollection = req.db.get('users');
+    var idToSearch = req.params.id;
+
+    var updateObj = {};
+    usersCollection.find({ _id: idToSearch }, {}, function (err, docs) {
+        var user = docs[0];
+
+        if (req.body.name) {
+            if (!isValidString(req.body.name)) {
+                res.status(412);
+                res.json({ message: 'Invalid name' });
+                return;
+            }
+            updateObj.name = req.body.name;
+        } else {
+            updateObj.name = user.name;
+        }
+        if (req.body.email) {
+            if (!isValidMail(req.body.email)) {
+                res.status(412);
+                res.json({ message: 'Invalid email' });
+                return;
+            }
+            updateObj.email = req.body.email;
+        } else {
+            updateObj.email = user.email;
+        }
+        if (req.body.mobileNumber) {
+            if (!isValidPhoneNumber(req.body.mobileNumber)) {
+                res.status(412);
+                res.json({ message: 'Invalid mobile number' });
+            }
+            updateObj.mobileNumber = req.body.mobileNumber;
+        }else {
+            if(user.mobileNumber != undefined)
+                updateObj.mobileNumber = user.mobileNumber;
+        }
+        if (req.body.password) {
+            if (!isValidPassword(req.body.password)) {
+                res.status(412);
+                res.json({ message: 'Invalid password' });
+                return;
+            }
+            updateObj.password = sha1(req.body.password);
+        } else {
+            updateObj.password = user.password;
+        }
+        if( req.body.address) {
+            if(!isValidString(req.body.address)) {
+                res.status(412);
+                res.json({message: 'Invalid address'});
+                return;
+            }
+            updateObj.address = req.body.address;
+        } else {
+            if(user.address != undefined) {
+                updateObj.address = user.address;
+            }
+        }
+        
+        usersCollection.update({ _id: idToSearch }, updateObj, function (err, docs) {
+            if (err) {
+                res.json({ message: 'No such user' });
+                res.status(404);
+                return;
+            } else {
+                res.status(200);
+            }
+    
+        });
+    });
+
+    
+
+
 });
 
 

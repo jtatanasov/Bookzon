@@ -19,11 +19,23 @@ mainApp.config(function ($routeProvider) {
             controller: 'ProfileController',
             controllerAs: 'profile',
             resolve: {
-                delay: function($q, $timeout) {
+                delay: function ($q, $timeout) {
                     var delay = $q.defer();
                     $timeout(delay.resolve, 100);
                     return delay.promise;
-                  }
+                }
+            }
+        })
+        .when('/profile/edit-profile', {
+            templateUrl: 'assets/js/profile/editProfile/editProfile.htm',
+            controller: 'EditProfileController',
+            controllerAs: 'profile',
+            resolve: {
+                delay: function ($q, $timeout) {
+                    var delay = $q.defer();
+                    $timeout(delay.resolve, 100);
+                    return delay.promise;
+                }
             }
         })
         .otherwise({

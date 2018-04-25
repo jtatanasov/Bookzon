@@ -225,3 +225,71 @@ body {
 .option-icon-container {
     padding-right: 0.5rem;
 }
+
+.profile-nav {
+    font-size: 0.8rem;
+}
+#edit-profile {
+    width:40%;
+    margin: 0 auto;
+    margin-top: 1em;
+}
+
+@media screen and (max-width:500px) {
+    #edit-profile {
+        width: 90%;
+    }
+}
+
+.captions {
+    font-weight: bold;
+}
+
+#edit-profile-form,
+#address-form {
+    border: 1px solid #E6BB9D;
+    border-radius: 0.25rem;
+}
+
+#address-form > div {
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+}
+
+#edit-profile-form > div {
+    border-bottom: 1px solid #E6BB9D;
+    padding: 0.5em;
+    padding-bottom: 1.5em;
+}
+
+#edit-profile-form > div:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0.3em;
+}
+
+.errors {
+    color: red;
+    font-size: 0.9em;
+}
+
+.buttons {
+    float: right;
+    color: #fff;
+    background-color: #331500;
+    border-color: #331500;
+    padding: 0.1em 0.5em;
+    border-radius: 5px;
+}
+
+.buttons:hover {
+    background-color: #7C4823;
+    border-color: #7C4823;
+}
+
+#password-conditions {
+    color: #331500;
+}
+
+#edit-address {
+    width: 20em;
+}
