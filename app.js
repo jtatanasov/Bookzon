@@ -2,12 +2,18 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 var logger = require('morgan');
 var mongodb = require('mongodb');
 var monk = require('monk');
 var db = monk('bookzonproject:bookzon@ds247439.mlab.com:47439/bookzondb');
 var sha1 = require('sha1');
 var session = require('express-session');
+var multer = require('multer');
+var upload = multer({ 
+    dest: '/uploads',
+    fileSize: 100000000
+ });
 
 
 // var indexRouter = require('./routes/index');
@@ -17,15 +23,17 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json({limit: '50mb'}));
+// app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(upload.array());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'abcd1234' }));
 app.use(function (req, res, next) {

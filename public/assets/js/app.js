@@ -19,6 +19,11 @@ mainApp.config(function ($routeProvider) {
             controller: 'ProfileController',
             controllerAs: 'profile',
         })
+        .when('/add-book', {
+            templateUrl: 'assets/js/admin/addBook.htm',
+            controller: 'AdminController',
+            controllerAs: 'admin'
+        })
         .when('/profile/edit-profile', {
             templateUrl: 'assets/js/profile/editProfile/editProfile.htm',
             controller: 'EditProfileController',

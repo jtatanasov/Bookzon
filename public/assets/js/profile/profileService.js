@@ -4,6 +4,8 @@
     mainApp.service('ProfileService', ProfileService);
 
     function ProfileService($http, $rootScope) {
+        var userId,
+            url;
         
         this.changeName = function(name) {
             setupReq();
@@ -26,12 +28,13 @@
         }
 
         this.changeAddress = function(address) {
+            setupReq();
             return $http.put(url, {address: address});
         }
 
         function setupReq() {
-            var userId = $rootScope.user._id;
-            var url = '/users/' + userId;
+            userId = $rootScope.user._id;
+            url = '/users/' + userId;
         }
     }
 })();

@@ -3,6 +3,7 @@
 
 <head>
     <title>Bookzon</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/bookzon-favicon.png" />
     <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>-->
 
@@ -27,6 +28,9 @@
     <script src="assets/js/profile/profileController.js"></script>
     <script src="assets/js/profile/editProfile/editProfileController.js"></script>
     <script src="assets/js/profile/profileService.js"></script>
+
+    <script src="assets/js/directives/fileModel.js"></script>
+    <script src="assets/js/admin/adminController.js"></script>
 
     <script src="assets/js/books/booksService.js"></script>
     <script src="assets/js/books/booksController.js"></script>
@@ -63,27 +67,26 @@
             <button id="button-collapse-navbar" type="button" class="btn navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#navbar-collapse-3">
                 <span class="sr-only">Toggle navigation</span>
                 &#x2630;</button>
-            <!-- Collect the nav links, forms,
-            and other content for toggling -->
             <form id='search-form' class="form-inline mr-auto" role="search">
                 <div class="form-group">
                     <input id='search-input' type="text" class="form-control" placeholder="Search">
                 </div>
-                <!-- <button id="search-btn" type="submit" class="btn">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button> -->
             </form>
             <div class="collapse navbar-collapse" id="navbar-collapse-3">
                 <ul class="nav navbar-nav ml-auto">
-                    <li ng-show="user.loggedUser" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
+                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/edit-profile.png' />
                         <a href="#" class="nav-link">Profile</a>
                     </li>
-                    <li ng-show="user.loggedUser" class="ng-hide nav-item"> 
+                    <li ng-show="user.isAdmin" ng-click='user.addNewBook($event)' class="ng-hide nav-item">
+                        <img class='nav-icon' src='assets/images/icons/books.png' />
+                        <a href="#" class="nav-link">Add new books</a>
+                    </li>
+                    <li ng-show="user.loggedUser && !user.isAdmin" class="ng-hide nav-item"> 
                         <img class='nav-icon' src='assets/images/icons/orders.png' />
                         <a href="#" class="nav-link">Orders</a>
                     </li>
-                    <li ng-show="user.loggedUser" class="ng-hide nav-item">
+                    <li ng-show="user.loggedUser && !user.isAdmin" class="ng-hide nav-item">
                             <img class='nav-icon' src='assets/images/icons/cart.png' />
                         <a href="#" class="nav-link">Cart</a>
                     </li>
@@ -98,22 +101,9 @@
                     <li ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <a href="" ng-click="user.goToSignUpPage($event)" class="nav-link">Sign Up</a>
                     </li>
-                    <!-- <li class="nav-item"> 
-                        <a class="btn btn-secondary btn-outline btn-circle collapsed nav-link" data-toggle="collapse" href="#nav-collapse3"
-                            aria-expanded="false" aria-controls="nav-collapse3">
-                            <img class='nav-icon' src='assets/images/icons/search.png' />Search</a>
-                    </li> -->
+                 
                 </ul>
-                <!-- <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3"> -->
-                    <!-- <form class="form-inline ml-auto" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                        </div>
-                        <button id="search-btn" type="submit" class="btn">
-                            <span class="fa fa-search" aria-hidden="true"></span>
-                        </button>
-                    </form> -->
-                <!-- </div> -->
+               
             </div>
         </div>
     </nav>

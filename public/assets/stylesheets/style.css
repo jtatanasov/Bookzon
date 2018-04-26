@@ -209,11 +209,7 @@ body {
     
 }
 
-@media screen and (max-width: 350px) {
-    .option {
-        width: 90%;
-    }
-}
+
 
 .option-description {
     font-size: 0.7rem;
@@ -232,6 +228,14 @@ body {
 #edit-profile {
     width:40%;
     margin: 0 auto;
+    margin-top: 1em;
+}
+
+#edit-profile > div {
+    margin-bottom: 1em;
+}
+
+#edit-profile > div > h2 {
     margin-top: 1em;
 }
 
@@ -292,4 +296,33 @@ body {
 
 #edit-address {
     width: 20em;
+}
+
+
+
+#address-form {
+    margin-bottom: 2em;
+}
+
+.form-inputs {
+    padding: 0.2em 0.6em;
+    border-radius: 5px;
+    border: 1px solid #331500;
+    outline: none;
+    height: 2em;
+}
+
+.form-inputs:focus {
+    border-color: #7C4823;
+}
+
+
+@media screen and (max-width: 350px) {
+    .option {
+        width: 90%;
+    }
+
+    #edit-address {
+        width: 90%;
+    }
 }
