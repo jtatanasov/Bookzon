@@ -5,26 +5,12 @@
 
     function MainController($scope, $location, $rootScope, MainService) {
         var vm = this;
-        vm.loggedUser = true;
-        if ($rootScope.user) {
-            console.log("uraaa")
-        } else {
-            console.log("nqma go")
+        vm.loggedUser = false;
+
+        $rootScope.user = MainService.getLoggedUser();
+        if (typeof $rootScope.user != 'undefined') {
+            vm.loggedUser = true;
         }
-        // if (!($rootScope.user)) {
-        //     mainService.getUserById().then(function (data) {
-        //         if (data == null) {
-        //             $scope.$apply(function () {
-        //                 vm.loggedUser = false;
-        //             });
-        //             return;
-        //         }
-        //         $scope.$apply(function () {
-        //             $rootScope.user = data.data[0];
-        //             vm.name = data.data[0].name;
-        //         });
-        //     });
-        // }
 
 
         //loggedout
@@ -45,7 +31,8 @@
         }
         vm.logOut = function ($event) {
             $event.preventDefault();
-            mainService.logout();
+            MainService.logout();
+            vm.loggedUser = false;
             location.replace('');
         }
     }

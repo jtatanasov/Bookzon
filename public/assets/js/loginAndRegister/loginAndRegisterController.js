@@ -44,6 +44,11 @@ loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegi
                     location.replace('/');
                 }
             })
+            .catch(function (err) {
+                $scope.$apply(function () {
+                    $scope.noUser = true;
+                });
+            })
 
     }
 
@@ -110,6 +115,9 @@ loginApp.controller('LoginAndRegisterController', function ($scope, loginAndRegi
                 } else {
                     location.replace('#tologin');
                 }
+            })
+            .catch(function (err) {
+                console.log(err);
             })
     }
 

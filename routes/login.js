@@ -37,14 +37,14 @@ router.post('/', function (req, res, next) {
                 res.json({err: err});
             }
             if (doc.length === 0) {
-                res.status(200);
+                res.status(404);
                 res.json({message: "Wrong username or password"});
             } else {
                 res.status(200);
                 var tmpUser = doc[0];
                 delete tmpUser.password;
                 req.session.user = tmpUser;
-                res.json({id: doc[0]._id});
+                res.json(tmpUser);
                 // res.json(tmpUser);
                 // console.log(req.session);
                 

@@ -19,15 +19,16 @@ loginApp.service('loginAndRegisterService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.post('/login', user)
                 .then(function (response) {
-                    if (response.data.id) {
-                        sessionStorage.setItem('userId', response.data.id);
-                        resolve(response.data.id);
+                    console.log(response);
+                    if (response.data._id) {
+                        sessionStorage.setItem('user', JSON.stringify(response.data));
+                        resolve(response.data);
                     } else {
                         resolve(null);
                     }
                 })
                 .catch(function (err) {
-                    throw new Error(err);
+                    reject(err.data.message);
                 })
         })
     }
