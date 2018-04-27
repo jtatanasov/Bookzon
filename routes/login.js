@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
     var attemptingUser = req.body;
 
     if (!isValidMail(attemptingUser.email) || !(isValidPassword(attemptingUser.password))) {
-        res.status(200);
+        res.status(412);
         res.json({ message: "Invalid input data" });
     } else {
         attemptingUser.password = sha1(attemptingUser.password);

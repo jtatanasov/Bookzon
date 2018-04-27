@@ -1,39 +1,70 @@
 var express = require('express');
 var router = express.Router();
 var multer = require('multer');
-var upload = multer({ 
-    dest: 'uploads/',
-    fileSize: 100000000
- });
 
-// var multerConf = {
-//     storage: multer.diskStorage({
-//         destination: function (req, file, next) {
-//             next(null, 'uploads/')
-//         },
-//         filename: function (req, file, next) {
-//             const ext = file.mimetype.split('/')[1];
-//             next(null, file.fieldname + '-' + Date.now() + ext);
-//         }
-//     }),
-//     fileFilter: function (req, file, next) {
-//         if (!file) {
-//             next();
-//         }
-//         console.log(req.body);
-//         console.log(file);
-//         next(null, true);
-        
+function isValidString(str) {
+    return (typeof str === 'string' && str.length > 0);
+}
+function isValidNumber(num) {
+    num = +num;
+    return (typeof num == 'number' && num > 0);
+}
 
-//     }
-// }
+router.post('/', function (req, res, next) {
+    // console.log(req.body);
+    // console.log(req.files);
+    var book = req.body;
 
-router.post('/', upload.array('bookImage', 12), function (req, res) {
-    console.log(req.body);
-    console.log(req.files);
-    //...................................................
-    res.json();
+    if (!isValidString(book.title) || !isValidString(book.author) ||
+        !isValidString(book.description) || !isValidNumber(book.price)) {
+        res.status(412);
+        res.json({ message: 'Invalid data' });
+        return;
+    }
+
+    var spliitedDate = book.publishedDate.split(' ');
+    var date = spliitedDate[2] + ' ' + spliitedDate[1] + ' ' + spliitedDate[3];
     
+    var newPath = 'http://localhost:3000\\'
+    var path = req.files[0].path.split('\\');
+    path.splice(0, 1);
+    path = path.join('\\');
+    newPath += path;
+    
+    var volumeInfo = {
+        title: book.title,
+        author: [book.author],
+        publisher: book.publisher,
+        publishedDate: date,
+        description: book.description,
+        pageCount: book.pages,
+        rating: 0,
+        category: book.category,
+        industryIdentifiers: [{
+            type: 'ISBN_13',
+            identifier: book.isbn13
+        }, {
+            type: 'ISBN_10',
+            identifier: book.isbn10
+        }],
+        price: book.price,
+        imageLinks: {
+            smallThumbnail: newPath
+        }
+    }
+    var newBook = {
+        volumeInfo: volumeInfo
+    }
+
+    var booksCollection = req.db.get('books');
+    booksCollection.insert(newBook, function(err, doc) {
+        if(err) {
+            res.status(500);
+        } else {
+            res.status(200);
+            res.json({id: doc._id});
+        }
+    });
 });
 
 router.get('/', function (req, res, next) {

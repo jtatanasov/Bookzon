@@ -225,52 +225,72 @@ body {
 .profile-nav {
     font-size: 0.8rem;
 }
-#edit-profile {
+#edit-profile,
+#add-new-book-form {
     width:40%;
     margin: 0 auto;
     margin-top: 1em;
 }
 
-#edit-profile > div {
+#edit-profile > div,
+#add-new-book-form > div {
     margin-bottom: 1em;
 }
 
-#edit-profile > div > h2 {
+#edit-profile > div > h2
+#add-new-book-form > div > h2 {
     margin-top: 1em;
 }
 
-@media screen and (max-width:500px) {
-    #edit-profile {
-        width: 90%;
-    }
-}
 
 .captions {
     font-weight: bold;
 }
 
 #edit-profile-form,
-#address-form {
+#address-form,
+#add-new-book-form {
     border: 1px solid #E6BB9D;
     border-radius: 0.25rem;
 }
 
-#address-form > div {
+#address-form > div,
+#add-new-book-form > div {
     padding: 0.5em;
     padding-bottom: 1.5em;
 }
 
-#edit-profile-form > div {
+#edit-profile-form > div,
+#add-new-book-form > div {
     border-bottom: 1px solid #E6BB9D;
     padding: 0.5em;
     padding-bottom: 1.5em;
 }
 
-#edit-profile-form > div:last-of-type {
+#edit-profile-form > div:last-of-type,
+#add-new-book-form > div:last-of-type {
     border-bottom: none;
     margin-bottom: 0.3em;
 }
+#add-new-book-container {
+    margin: 1em 0;
+    text-align: center;
 
+}
+#add-new-book-form {
+    width: 30%;
+    text-align: left;
+}
+
+#add-new-book-form > div > input,
+#add-new-book-form > div > textarea {
+    width: 80%; 
+}
+
+
+#add-new-book-form > div > textarea {
+    height: 5em;
+}
 .errors {
     color: red;
     font-size: 0.9em;
@@ -316,6 +336,15 @@ body {
     border-color: #7C4823;
 }
 
+@media screen and (max-width:500px) {
+    #edit-profile {
+        width: 90%;
+    }
+
+    #add-new-book-form {
+        width: 90%;
+    }
+}
 
 @media screen and (max-width: 350px) {
     .option {

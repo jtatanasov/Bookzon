@@ -21,17 +21,9 @@
             for (var key in data) {
                 fd.append(key, data[key]);
             }
-            var type = data.file.type;
-            console.log(data);
-            $http.post('/api/books', fd, {
+            return $http.post('/api/books', fd, {
                 transformRequest: angular.indentity,
-                headers: { 'Content-type': 'multipart/form-data; boundary=something' }
-            })
-            .then(resp => {
-                console.log(resp);
-            })
-            .catch(err => {
-                console.log(err);
+                headers: { 'Content-type': undefined}
             });
         }
 

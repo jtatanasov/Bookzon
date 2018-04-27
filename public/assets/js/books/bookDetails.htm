@@ -1,7 +1,7 @@
 <section id="bookDetailsSection" ng-controller="BookDetailsController as ctrl" class="container container-fluid p-3">
     <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
     <div class="media">
-        <img class="mr-3" ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+        <img class="mr-3" width='130px' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
         <div class="media-body">
             <div class="book-heading">
                 <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
