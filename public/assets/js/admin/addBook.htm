@@ -52,7 +52,7 @@
             <p>
                 <label class='captions'>Page Count</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.pages' id='pages' type="number" name='pages' />
+            <input min="1" class='form-inputs' ng-model='admin.newBook.pages' id='pages' type="number" name='pages' />
         </div>
         <div class='form-group'>
             <p>
@@ -83,7 +83,7 @@
             <p>
                 <label class='captions'>Price &#36; *</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.price' id='price' type="number" name='price' />
+            <input class='form-inputs' ng-model='admin.newBook.price' id='price' type="number" name='price' min="1" />
             <p ng-show='admin.wrongPrice' class='errors'>Invalid price</p>
         </div>
         <div class='form-group'>

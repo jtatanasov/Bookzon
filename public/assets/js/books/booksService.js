@@ -5,8 +5,7 @@
 
     function BooksService($http) {
         var books;
-        // this.addBook = addBook;
-        // this.removeBook = removeBook;
+        
         this.getBooks = function () {
             return $http.get('/api/books');
         }
@@ -25,6 +24,10 @@
                 transformRequest: angular.indentity,
                 headers: { 'Content-type': undefined}
             });
+        }
+
+        this.deleteBook = function(bookId) {
+            return $http.delete('/api/books/' + bookId)
         }
 
 

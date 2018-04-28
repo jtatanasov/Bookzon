@@ -24,16 +24,16 @@ router.post('/', function (req, res, next) {
 
     var spliitedDate = book.publishedDate.split(' ');
     var date = spliitedDate[2] + ' ' + spliitedDate[1] + ' ' + spliitedDate[3];
-    
+
     var newPath = 'http://localhost:3000\\'
     var path = req.files[0].path.split('\\');
     path.splice(0, 1);
     path = path.join('\\');
     newPath += path;
-    
+
     var volumeInfo = {
         title: book.title,
-        author: [book.author],
+        authors: [book.author],
         publisher: book.publisher,
         publishedDate: date,
         description: book.description,
@@ -57,15 +57,31 @@ router.post('/', function (req, res, next) {
     }
 
     var booksCollection = req.db.get('books');
-    booksCollection.insert(newBook, function(err, doc) {
-        if(err) {
+    booksCollection.insert(newBook, function (err, doc) {
+        if (err) {
             res.status(500);
         } else {
             res.status(200);
-            res.json({id: doc._id});
+            res.json({ id: doc._id });
         }
     });
 });
+
+router.delete('/:id', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    var bookToDelete = req.params.id;
+    booksCollection.remove({ _id: bookToDelete }, (err, docs) => {
+        if (err) {
+            res.status(404);
+            res.json({ message: 'Not Found' });
+        }
+        else {
+            res.status(200);
+            res.json({ message: 'success' });
+        }
+    });
+});
+
 
 router.get('/', function (req, res, next) {
     var booksCollection = req.db.get('books');

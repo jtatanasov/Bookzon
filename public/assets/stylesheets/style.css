@@ -310,6 +310,10 @@ body {
     border-color: #7C4823;
 }
 
+.delete-book-btns {
+    width: 7em;
+    margin: 0 auto 1em auto;
+}
 #password-conditions {
     color: #331500;
 }
