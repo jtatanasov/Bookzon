@@ -1,28 +1,51 @@
-<section id="bookDetailsSection" ng-controller="BookDetailsController as ctrl" class="container container-fluid p-3">
-    <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
-    <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)' ng-show='booksCtr.isAdmin'>Delete book</button>
-    <div class="media">
-        <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
-        <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png" alt="{{ctrl.bookDetails.volumeInfo.title}}">
-        <div class="media-body">
-            <div class="book-heading">
-                <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
-                <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+<div class="container container-fluid" ng-controller="BookDetailsController as ctrl">
+    <section id="bookDetailsSection" class="container container-fluid p-3">
+        <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
+        <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)' ng-show='booksCtr.isAdmin'>Delete book</button>
+        <div class="media">
+            <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+            <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+            <div class="media-body">
+                <div class="book-heading">
+                    <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
+                    <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+                </div>
+                <div class="rating">
+                    <div class="mt-2 mb-2" ng-if="ctrl.rating.rate">
+                        <a ng-click="ctrl.scrollTo('reviewsSection')" href="">
+                            <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                            <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span>
+                        </a>
+                    </div>
+                    <a class="btn btn-link p-0" ng-if="!ctrl.rating.rate" ng-href="#"><small>Be the first to review this book</small></a>
+                </div>
+                <hr class="mt-0"/>
+                <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
+                <p><b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
+                <p><b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                <p><b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
+                <p><b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
+                <p><b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
+                <hr class="mt-0"/>
+                <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
+                <hr class="mt-0"/>
             </div>
-            <div class="reviews">
-                <a class="btn btn-link p-0" ng-href="#"><small>Be the first to review this book</small></a>
-            </div>
-            <hr class="mt-0"/>
-            <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
-            <p><b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
-            <p><b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
-            <p><b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
-            <p><b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
-            <p><b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
-            <hr class="mt-0"/>
-            <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
-            <p><b>Rating: </b>{{ctrl.bookDetails.volumeInfo.rating}} (should be made with stars)</p>
-            <hr class="mt-0"/>
         </div>
-    </div>
-</section>
+    </section>
+<!-- todo: user submit review -->
+    <section id="reviewsSection" class="container container-fluid p-3">
+        <h4>Customer Reviews</h4>
+        <div class="rating">
+                <div class="mt-2 mb-2" ng-if="ctrl.rating.rate">
+                    <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                    <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span>
+                    </a>
+                </div>
+                <hr class="mt-0"/>
+                <div>
+                    <p>Share your thoughts with other customers</p>
+                    <a class="btn btn-warning" href="javascript:void(0)">Write a customer review</a>
+                </div>
+            </div>
+    </section>
+</div>
