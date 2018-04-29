@@ -19,6 +19,10 @@
             <p><b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
             <p><b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
             <p><b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
+            <hr class="mt-0"/>
+            <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
+            <p><b>Rating: </b>{{ctrl.bookDetails.volumeInfo.rating}} (should be made with stars)</p>
+            <hr class="mt-0"/>
         </div>
     </div>
 </section>

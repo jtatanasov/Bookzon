@@ -43,7 +43,11 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(upload.any());
-app.use(session({ secret: 'abcd1234' }));
+app.use(session({
+    secret: 'abcd1234',
+    resave: true,
+    saveUninitialized: true,
+}));
 app.use(function (req, res, next) {
     req.db = db;
     next();
@@ -62,10 +66,11 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 app.use('/api/books', booksRouter);
-// app.use('/logout', checkLogin, function (req, res, next) {
-//     req.session.destroy();
-//     res.redirect('/login.html');
-//   });
+app.use('/logout',  function (req, res, next) {
+    req.session.destroy();
+    res.status(200);
+    res.json({message: 'success'});
+  });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

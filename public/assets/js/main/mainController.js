@@ -11,7 +11,7 @@
         $rootScope.user = MainService.getLoggedUser();
         if (typeof $rootScope.user != 'undefined' && $rootScope.user != null) {
             vm.loggedUser = true;
-            if($rootScope.user.email == 'admin@bookzon.com') {
+            if ($rootScope.user.email == 'admin@bookzon.com') {
                 vm.isAdmin = true;
             }
         }
@@ -35,17 +35,22 @@
         }
         vm.logOut = function ($event) {
             $event.preventDefault();
-            MainService.logout();
-            vm.loggedUser = false;
-            vm.isASdmin = false;
-            location.replace('');
+            MainService.logout()
+                .then(r => {
+                    vm.loggedUser = false;
+                    vm.isASdmin = false;
+                    $location.path('');
+                })
+                .catch(err => {
+                    console.log(err);
+                })
         }
 
         //admin
 
-    vm.addNewBook = function($event) {
-        $event.preventDefault();
-        $location.path('/add-book');
-    }
+        vm.addNewBook = function ($event) {
+            $event.preventDefault();
+            $location.path('/add-book');
+        }
     }
 })();

@@ -11,8 +11,8 @@
 
        
         this.logout = function () {
-            $http.get('/logout');
             sessionStorage.setItem('user', null);
+            return $http.get('/logout');
         }
     }
 }) ();
