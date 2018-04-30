@@ -16,32 +16,32 @@
             <p ng-show='admin.wrongAuthor' class='errors'>Invalid author</p>
         </div>
         <div class='form-group'>
-                <p>
-                    <label class='captions'>Category*</label>
-                </p>
-                <select class='form-inputs' ng-model='admin.newBook.category' id='category' type="text" name='category' >
-                    <option value="art">Art</option>
-                    <option value="photography">Photography</option>
-                    <option value="biographies">Biographies</option>
-                    <option value="memoirs">Memoirs</option>
-                    <option value="business">Business</option>
-                    <option value="investing">Investing</option>
-                    <option value="children">Children</option>
-                    <option value="cooking">Cooking</option>
-                    <option value="food">Food</option>
-                    <option value="wine">Wine</option>
-                    <option value="history">History</option>
-                    <option value="literature">Literature</option>
-                    <option value="fiction">Fiction</option>
-                    <option value="mystery">Mystery</option>
-                    <option value="suspense ">Suspense</option>
-                    <option value="romance">Romance</option>
-                    <option value="sci-fi">Sci-Fi</option>
-                    <option value="fantasy">Fantasy</option>
-                    <option value="teens">Teens</option>
-                </select>
-                <p ng-show='admin.wrongCategory' class='errors'>Invalid category</p>
-            </div>
+            <p>
+                <label class='captions'>Category*</label>
+            </p>
+            <select class='form-inputs' ng-model='admin.newBook.category' id='category' type="text" name='category'>
+                <option value="art">Art</option>
+                <option value="photography">Photography</option>
+                <option value="biographies">Biographies</option>
+                <option value="memoirs">Memoirs</option>
+                <option value="business">Business</option>
+                <option value="investing">Investing</option>
+                <option value="children">Children</option>
+                <option value="cooking">Cooking</option>
+                <option value="food">Food</option>
+                <option value="wine">Wine</option>
+                <option value="history">History</option>
+                <option value="literature">Literature</option>
+                <option value="fiction">Fiction</option>
+                <option value="mystery">Mystery</option>
+                <option value="suspense ">Suspense</option>
+                <option value="romance">Romance</option>
+                <option value="sci-fi">Sci-Fi</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="teens">Teens</option>
+            </select>
+            <p ng-show='admin.wrongCategory' class='errors'>Invalid category</p>
+        </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Description</label>
@@ -85,6 +85,13 @@
             </p>
             <input class='form-inputs' ng-model='admin.newBook.price' id='price' type="number" name='price' min="1" />
             <p ng-show='admin.wrongPrice' class='errors'>Invalid price</p>
+        </div>
+        <div class='form-group'>
+            <p>
+                <label class='captions'>Quantity*</label>
+            </p>
+            <input class='form-inputs' ng-model='admin.newBook.quantity' id='quantity' type="number" name='quantity' min="0" />
+            <p ng-show='admin.wrongQuantity' class='errors'>Invalid quantity</p>
         </div>
         <div class='form-group'>
             <p>

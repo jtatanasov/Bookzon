@@ -29,6 +29,12 @@
                 <hr class="mt-0"/>
                 <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
                 <hr class="mt-0"/>
+                <p ng-show='ctrl.isLogged && ctrl.isAvailable'>
+                    <button ng-click='ctrl.addToCart()' id='add-to-cart-btn' class='buttons'>
+                        <img src='assets/images/icons/cart.png'/>Add to cart</button>
+                </p>
+                <p class='not-available-product' ng-show='!ctrl.isAvailable'>This book is currently out of stock!</p>
+                <hr ng-show='ctrl.isLogged && ctrl.isAvailable' class="mt-0"/>
             </div>
         </div>
     </section>

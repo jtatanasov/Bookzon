@@ -17,5 +17,8 @@
         vm.editProfile = function () {
             $location.path('/profile/edit-profile');
         }
+        vm.goToCart = function () {
+            $location.path('/profile/cart');
+        }
     }
 })();

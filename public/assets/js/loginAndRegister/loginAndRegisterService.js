@@ -19,7 +19,6 @@ loginApp.service('loginAndRegisterService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.post('/login', user)
                 .then(function (response) {
-                    console.log(response);
                     if (response.data._id) {
                         sessionStorage.setItem('user', JSON.stringify(response.data));
                         resolve(response.data);
@@ -32,6 +31,5 @@ loginApp.service('loginAndRegisterService', function ($http) {
                 })
         })
     }
-
 
 });

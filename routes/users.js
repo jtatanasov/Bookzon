@@ -36,7 +36,7 @@ function isValidPhoneNumber(phone) {
 
 router.get('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
-
+    
     usersCollection.find({}, {}, function (err, docs) {
         if (err) {
             res.status(500);

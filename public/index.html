@@ -19,9 +19,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <script src="assets/js/app.js"></script>
-
     <script src="assets/js/Validator.js"></script>
-    <script src="assets/js/script.js"></script>
 
     <script src="assets/js/main/mainController.js"></script>
     <script src="assets/js/main/mainService.js"></script>
@@ -31,6 +29,9 @@
     <script src="assets/js/profile/profileController.js"></script>
     <script src="assets/js/profile/editProfile/editProfileController.js"></script>
     <script src="assets/js/profile/profileService.js"></script>
+
+    <script src="assets/js/cart/cartController.js"></script>
+    <script src="assets/js/cart/cartService.js"></script>
 
     <script src="assets/js/directives/fileModel.js"></script>
     <script src="assets/js/admin/adminController.js"></script>
@@ -50,7 +51,7 @@
 </head>
 </head>
 
-<body ng-app='mainApp' ng-cloak="" ng-controller='MainController as user'>
+<body ng-app='mainApp' class='ng-cloak' ng-controller='MainController as user'>
 <!-- <body ng-app='mainApp' ng-cloak="" ng-controller='MainController as user'> -->
     <!-- Welcome to bookzon
     <p><a href="login.html">Login</a></p>
@@ -81,7 +82,7 @@
                         <img class='nav-icon' src='assets/images/icons/edit-profile.png' />
                         <a href="#" class="nav-link">Profile</a>
                     </li>
-                    <li ng-show="user.isAdmin" ng-click='user.addNewBook($event)' class="ng-hide nav-item">
+                    <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.addNewBook($event)' class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/books.png' />
                         <a href="#" class="nav-link">Add new books</a>
                     </li>
@@ -89,7 +90,7 @@
                         <img class='nav-icon' src='assets/images/icons/orders.png' />
                         <a href="#" class="nav-link">Orders</a>
                     </li>
-                    <li ng-show="user.loggedUser && !user.isAdmin" class="ng-hide nav-item">
+                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToCart($event)' class="ng-hide nav-item">
                             <img class='nav-icon' src='assets/images/icons/cart.png' />
                         <a href="#" class="nav-link">Cart</a>
                     </li>

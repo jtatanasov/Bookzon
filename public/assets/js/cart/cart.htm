@@ -1,0 +1,66 @@
+<div id='my-cart' class="ng-cloak">
+    <div class='profile-nav'>
+        <a href="#!profile">Profile</a>
+        <span>&#8250;</span>
+        <span>Cart</span>
+    </div>
+
+    <div id='cart'>
+        <h2>{{cartCtrl.owner}}'s Cart</h2>
+
+        <div id='empty-cart' ng-show='cartCtrl.emptyCart'>You don't have any products in your cart!</div>
+        <div id='books-in-cart' ng-show='!cartCtrl.emptyCart'>
+            <div id='remove-all-from-cart'>
+                <button ng-click='cartCtrl.removeAllFromCart()' class='buttons'>Remove all books from cart</button>
+            </div>
+
+            <table>
+                <tbody>
+                    <tr ng-repeat="book in cartCtrl.cart.books">
+                        <td class='book-in-cart-img'>
+                            <a href='#!books/{{book.bookId}}'>
+                                <img ng-src="{{book.photoUrl}}" alt="">
+                            </a>
+                        </td>
+                        <td class='book-in-cart-name'>
+                            <a href='#!books/{{book.bookId}}'>{{book.name}}</a>
+                        </td>
+                        <td class='book-in-cart-price'>
+                            <div class='price'>${{book.price}}</div>
+                            <div>
+                                <button ng-click='cartCtrl.removeBookFromCart(book.bookId)' class='buttons'>Remove</button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id='cart-prices' ng-show='!cartCtrl.emptyCart' class="ng-cloak">
+                <table>
+                    <tr>
+                        <td>
+                            <b>Price: </b>
+                        </td>
+                        <td>${{cartCtrl.cart.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Delivery price: </b>
+                        </td>
+                        <td ng-show='!cartCtrl.isDeliveryFree'>${{cartCtrl.cart.deliveryPrice}}</td>
+                        <td class='free-delivery' ng-show='cartCtrl.isDeliveryFree'>FREE</td>                        
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total price: </b>
+                        </td>
+                        <td>${{cartCtrl.cart.totalPrice}}</td>
+                    </tr>
+                </table>
+                <button id='order-button' class='buttons'>Order</button>
+            </div>
+
+        </div>
+
+    </div>

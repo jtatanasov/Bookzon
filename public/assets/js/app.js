@@ -29,6 +29,11 @@ mainApp.config(function ($routeProvider) {
             controller: 'EditProfileController',
             controllerAs: 'profile',
         })
+        .when('/profile/cart', {
+            templateUrl: 'assets/js/cart/cart.htm',
+            controller: 'CartController',
+            controllerAs: 'cartCtrl'
+        })
         .otherwise({
             templateUrl: 'assets/js/home/home.htm',
             controller: "HomeController",

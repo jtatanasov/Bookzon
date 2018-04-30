@@ -38,16 +38,16 @@ router.post('/', function (req, res, next) {
 
             if (doc.length === 0) {
                 newUser.password = sha1(newUser.password);
+                newUser.isAdmin = false;
                 delete newUser.confirmPassword;
+                
                 usersCollection.insert(newUser, function (err, doc) {
                     if (err) throw err;
                     res.status(200);
                     res.json({ id: doc._id });
-                    // req.session.user = doc[0];
-                    // res.redirect('/');
                 });
             } else {
-                res.status(200);
+                res.status(400);
                 res.json({ message: "There is user with this email" });
             }
         });

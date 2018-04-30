@@ -44,11 +44,13 @@ router.post('/', function (req, res, next) {
                 var tmpUser = doc[0];
                 delete tmpUser.password;
                 req.session.user = tmpUser;
+                tmpUser = {
+                    _id: doc[0]._id,
+                    name: doc[0].name,
+                    email: doc[0].email,
+                    isAdmin: doc[0].isAdmin
+                }
                 res.json(tmpUser);
-                // res.json(tmpUser);
-                // console.log(req.session);
-                
-                //res.redirect('/');
             }
         });
     }

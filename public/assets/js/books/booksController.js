@@ -12,7 +12,7 @@
         vm.isAdmin = false;
 
         if (typeof $rootScope.user != 'undefined' && $rootScope.user != null) {
-            if ($rootScope.user.email == 'admin@bookzon.com') {
+            if ($rootScope.user.isAdmin) {
                 vm.isAdmin = true;
             } else {
                 vm.isAdmin = false;

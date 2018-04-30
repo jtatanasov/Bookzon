@@ -12,8 +12,9 @@
         vm.wrongPrice = false;
         vm.wrongFile = false;
         vm.wrongCategory = false;
+        vm.wrongQuantity = false;
 
-        if (!$rootScope.user || ($rootScope.user.email != 'admin@bookzon.com')) {
+        if (!$rootScope.user || !($rootScope.user.isAdmin)) {
             location.replace('/login.html');
         }
 
@@ -38,42 +39,51 @@
             });
         });
         angular.element('#file').on('focus', function () {
-                $timeout(function () {
+            $timeout(function () {
                 vm.wrongFile = false;
+            });
+        });
+        angular.element('#quantity').on('focus', function () {
+            $timeout(function () {
+                vm.wrongQuantity = false;
             });
         });
 
         vm.addNewBook = function () {
-            if(!validator.isValidString(vm.newBook.title)) {
+            if (!validator.isValidString(vm.newBook.title)) {
                 vm.wrongTitle = true;
                 return;
             }
-            if(!validator.isValidString(vm.newBook.author)) {
+            if (!validator.isValidString(vm.newBook.author)) {
                 vm.wrongAuthor = true;
                 return;
             }
-            
-            if(!validator.isValidString(vm.newBook.category)) {
+
+            if (!validator.isValidString(vm.newBook.category)) {
                 vm.wrongCategory = true;
                 return;
             }
-            if(!validator.isValidString(vm.newBook.publisher)) {
+            if (!validator.isValidString(vm.newBook.publisher)) {
                 vm.wrongPublisher = true;
                 return;
             }
-            if(!validator.isValidNumber(vm.newBook.price)) {
+            if (!validator.isValidNumber(vm.newBook.price)) {
                 vm.wrongPrice = true;
                 return;
             }
-            if(vm.newBook.file == undefined) {
+            if (vm.newBook.file == undefined) {
                 vm.wrongFile = true;
                 return;
             }
+            if (vm.newBook.quantity < 0) {
+                vm.wrongQuantity = true;
+                return;
+            }
             BooksService.addBook(vm.newBook)
-            .then(res => {
-                $location.path('/books/' + res.data.id);
-            })
-            .catch(err => console.log(err));
+                .then(res => {
+                    $location.path('/books/' + res.data.id);
+                })
+                .catch(err => console.log(err));
         }
 
     }

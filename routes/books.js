@@ -39,6 +39,7 @@ router.post('/', function (req, res, next) {
         description: book.description,
         pageCount: book.pages,
         rating: 0,
+        quantity: book.quantity,
         category: book.category,
         industryIdentifiers: [{
             type: 'ISBN_13',

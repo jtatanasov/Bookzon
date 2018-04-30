@@ -226,19 +226,22 @@ body {
     font-size: 0.8rem;
 }
 #edit-profile,
-#add-new-book-form {
+#add-new-book-form,
+#my-cart {
     width:40%;
     margin: 0 auto;
     margin-top: 1em;
 }
 
 #edit-profile > div,
-#add-new-book-form > div {
+#add-new-book-form > div,
+#my-cart > div {
     margin-bottom: 1em;
 }
 
 #edit-profile > div > h2
-#add-new-book-form > div > h2 {
+#add-new-book-form > div > h2,
+#my-cart > div > h2 {
     margin-top: 1em;
 }
 
@@ -258,6 +261,13 @@ body {
 #add-new-book-form > div {
     padding: 0.5em;
     padding-bottom: 1.5em;
+}
+
+#empty-cart {
+    border: 1px solid #E6BB9D;
+    border-radius: 0.25rem;
+    padding: 0.5em;
+
 }
 
 #edit-profile-form > div,
@@ -340,12 +350,96 @@ body {
     border-color: #7C4823;
 }
 
+#remove-all-from-cart {
+    text-align: center;
+    padding: 1em 0;
+}
+#remove-all-from-cart > button {
+    float: none;
+    margin-bottom: 0.5em;
+}
+#books-in-cart {
+    display: inline-block;
+    border: 1px solid #E6BB9D;
+    border-radius: 0.25rem;
+    padding: 0.5em;
+}
+
+#books-in-cart > table {
+    border-top: 1px solid #E6BB9D;
+    border-bottom: 1px solid #E6BB9D;
+}
+#books-in-cart td {
+    padding-bottom: 2em;
+}
+.book-in-cart-img {
+    width: 30%;
+}
+.book-in-cart-img img {
+    width:100%;
+}
+.book-in-cart-name > a {
+    color: #331500;
+    font-weight: bold;
+}
+
+.book-in-cart-price {
+    text-align: center;
+}
+.book-in-cart-price > .price {
+    color: #331500;
+    font-size: 1.2em;
+    margin-bottom: 0.6em;
+}
+
+.book-in-cart-price > div > .buttons {
+    float: none;
+    font-size: 0.9em;
+}
+
+#cart-prices {
+    margin: 1em 0;
+    float: right;
+    font-size: 1.1em;
+    color: #331500;
+}
+
+#cart-prices td {
+    padding-bottom: 1em;    
+    padding-right: 1em;
+}
+.free-delivery {
+    font-weight: bold;
+    color: green;
+}
+#order-button {
+    font-size: 1.5em;
+}
+
+
+#add-to-cart-btn {
+    float: none;
+    font-size:1.2em;
+}
+
+#add-to-cart-btn > img {
+    width: 1.6em;
+}
+.not-available-product {
+    color: red;
+    font-size: 1em;
+}
+
 @media screen and (max-width:500px) {
     #edit-profile {
         width: 90%;
     }
 
     #add-new-book-form {
+        width: 90%;
+    }
+
+    #my-cart {
         width: 90%;
     }
 }
@@ -358,4 +452,9 @@ body {
     #edit-address {
         width: 90%;
     }
+
+    #add-to-cart-btn {
+        font-size: 1em;
+    }
+
 }
