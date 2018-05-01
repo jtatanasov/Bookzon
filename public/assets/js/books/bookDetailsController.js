@@ -25,22 +25,11 @@
                 vm.isAvailable = true;
             }
             // temporarily using google books averageRating
-            vm.rating.rate = vm.bookDetails.volumeInfo.rating ? vm.bookDetails.volumeInfo.rating : vm.bookDetails.volumeInfo.averageRating;
+            // vm.rating.rate = vm.bookDetails.volumeInfo.rating ? vm.bookDetails.volumeInfo.rating : vm.bookDetails.volumeInfo.averageRating;
+            // vm.rating.rate = 4;
         }).catch(function (err) {
             console.log(err);
         });
-
-        // vm.bookRating = function ($scope) {
-        // vm.rating.rate = vm.bookDetails.volumeInfo.rating;
-        // vm.rating.max = 5;
-        // vm.rating.isReadonly = true;
-
-        // vm.rating.hoveringOver = function(value) {
-        //     vm.rating.overStar = value;
-        //     vm.rating.percent = 100 * (value / vm.rating.max);
-        // };
-
-        // }
 
         /* Scroll to Customer Reviews Section */
         vm.scrollTo = function (id) {
