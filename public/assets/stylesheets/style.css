@@ -370,7 +370,8 @@ body {
     border-bottom: 1px solid #E6BB9D;
 }
 #books-in-cart td {
-    padding-bottom: 2em;
+    padding-top: 1em;
+    padding-bottom: 1em;
 }
 .book-in-cart-img {
     width: 30%;
@@ -405,6 +406,7 @@ body {
 }
 
 #cart-prices td {
+    padding-top: 0;
     padding-bottom: 1em;    
     padding-right: 1em;
 }
@@ -429,6 +431,7 @@ body {
     color: red;
     font-size: 1em;
 }
+
 
 @media screen and (max-width:500px) {
     #edit-profile {

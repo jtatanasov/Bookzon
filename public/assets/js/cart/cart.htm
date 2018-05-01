@@ -24,6 +24,8 @@
                         </td>
                         <td class='book-in-cart-name'>
                             <a href='#!books/{{book.bookId}}'>{{book.name}}</a>
+                            <br/>
+                            <small>by </small><small ng-repeat="author in book.authors">{{author}}, </small>
                         </td>
                         <td class='book-in-cart-price'>
                             <div class='price'>${{book.price}}</div>
@@ -42,7 +44,8 @@
                         <td>
                             <b>Price: </b>
                         </td>
-                        <td>${{cartCtrl.cart.price}}</td>
+                        <td>${{cartCtrl.cart.price}} 
+                        </td>
                     </tr>
                     <tr>
                         <td>

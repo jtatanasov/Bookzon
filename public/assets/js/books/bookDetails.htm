@@ -100,4 +100,56 @@
         </section>
         
     </div>
+
+        <!-- Modal dialog after adding to cart -->
+    <div>
+        <div class="modal-bg">
+            <div class="dialog">
+
+                <div id='show-modal-dialog' class="modal fade bs-example-modal-lg show" focus-group focus-group-head="loop" focus-group-tail="loop"
+                    focus-stacktabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Book info</h4>
+                            </div>
+                            <div ng-show='ctrl.addedToCart' class="modal-body">
+                                This book has already been added to cart!
+                            </div>
+                            <div ng-show='!ctrl.addedToCart' class="modal-body">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class='book-in-cart-img'>
+                                                
+                                                    <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
+                                                    alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                                                <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png"
+                                                    alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                                                
+                                            </td>
+                                            <td class='book-in-cart-name'>
+                                                <b>{{ctrl.bookDetails.volumeInfo.title}}</b>
+                                                <br/>
+                                                <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+                                            </td>
+                                            <td class='book-in-cart-price'>
+                                                <div class='price'>${{ctrl.bookDetails.volumeInfo.price}}</div>
+                                            
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click='ctrl.closeModal()' class="buttons btn btn-default" focus-element="autofocus" data-dismiss="modal">Close</button>
+                                <button ng-click='ctrl.goToCart()' type="button" class="buttons btn btn-primary"><img width='30em' src="assets/images/icons/cart.png" alt=""/> Go to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
