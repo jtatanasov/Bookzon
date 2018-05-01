@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+function Cart(userId) {
+    this.userId = userId;
+    this.books = [];
+    this.price = 0;
+    this.deliveryPrice = 0;
+    this.totalPrice = 0;
+}
 function calculatePrice(cart) {
     var price = 0;
     price = cart.books.reduce(function (price, book) {
@@ -54,6 +61,41 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+router.post('/:userId', function(req,res,next) {
+    var cartsCollection = req.db.get('carts');
+    var userId = req.params.userId;
+    var bookToAdd = req.body;
+    cartsCollection.find({userId: userId}, {}, (err, docs) => {
+        if(err) throw err;
+        else {
+            if(docs.length == 0) {
+                var cart = new Cart(userId);
+                cartsCollection.insert(cart);
+            } else {
+                var cart = docs[0];
+            }
+            var booksInCart = cart.books;
+
+            if(!booksInCart.find(b => b.bookId == bookToAdd.bookId)) {
+                booksInCart.push(bookToAdd);
+            } else {
+                res.status(200);
+                res.json({alreadyInCart: true});
+                return;
+            }
+
+            cart = updateCart(cart, booksInCart);
+
+            cartsCollection.update({ _id: cart._id }, cart, function (err, docs) {
+                if (err) throw err
+                else {
+                    res.status(200);
+                    res.json({ message: 'success' });
+                }
+            })
+        }
+    });
+});
 router.delete('/:userId', function (req, res, next) {
     var cartsCollection = req.db.get('carts');
     var userId = req.params.userId;

@@ -1,10 +1,14 @@
 <div class="container container-fluid" ng-controller="BookDetailsController as ctrl">
     <section id="bookDetailsSection" class="container container-fluid p-3">
-        <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
-        <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)' ng-show='booksCtr.isAdmin'>Delete book</button>
+        <a class="btn btn-link mb-3 p-0" ng-href="#!books">
+            <span class="text-bigger">&#171;</span> All books</a>
+        <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)'
+            ng-show='booksCtr.isAdmin'>Delete book</button>
         <div class="media">
-            <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
-            <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+            <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
+                alt="{{ctrl.bookDetails.volumeInfo.title}}">
+            <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png"
+                alt="{{ctrl.bookDetails.volumeInfo.title}}">
             <div class="media-body">
                 <div class="book-heading">
                     <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
@@ -13,45 +17,113 @@
                 <div class="rating">
                     <div class="mt-2 mb-2" ng-if="ctrl.rating.rate">
                         <a ng-click="ctrl.scrollTo('reviewsSection')" href="">
-                            <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
-                            <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span>
+                            <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
+                                aria-labelledby="custom-icons-1"></span>
+                            <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount
+                                == 1 ? "review" : "reviews")}}</span>
                         </a>
                     </div>
-                    <a class="btn btn-link p-0" ng-if="!ctrl.rating.rate" ng-href="#"><small>Be the first to review this book</small></a>
+                    <a class="btn btn-link p-0" ng-if="!ctrl.rating.rate" ng-href="#">
+                        <small>Be the first to review this book</small>
+                    </a>
                 </div>
-                <hr class="mt-0"/>
+                <hr class="mt-0" />
                 <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
-                <p><b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
-                <p><b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
-                <p><b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
-                <p><b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
-                <p><b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
-                <hr class="mt-0"/>
-                <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
-                <hr class="mt-0"/>
+                <p>
+                    <b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
+                <p>
+                    <b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                <p>
+                    <b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
+                <p>
+                    <b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
+                <p>
+                    <b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
+                <hr class="mt-0" />
+                <p>
+                    <b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
+                <hr class="mt-0" />
                 <p ng-show='ctrl.isLogged && ctrl.isAvailable'>
                     <button ng-click='ctrl.addToCart()' id='add-to-cart-btn' class='buttons'>
-                        <img src='assets/images/icons/cart.png'/>Add to cart</button>
+                        <img src='assets/images/icons/cart.png' />Add to cart</button>
                 </p>
                 <p class='not-available-product' ng-show='!ctrl.isAvailable'>This book is currently out of stock!</p>
-                <hr ng-show='ctrl.isLogged && ctrl.isAvailable' class="mt-0"/>
+                <hr ng-show='ctrl.isLogged && ctrl.isAvailable' class="mt-0" />
             </div>
         </div>
     </section>
-<!-- todo: user submit review -->
+    <!-- todo: user submit review -->
     <section id="reviewsSection" class="container container-fluid p-3">
         <h4>Customer Reviews</h4>
         <div class="rating">
-                <div class="mt-2 mb-2" ng-if="ctrl.rating.rate">
-                    <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
-                    <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span>
-                    </a>
-                </div>
-                <hr class="mt-0"/>
-                <div>
-                    <p>Share your thoughts with other customers</p>
-                    <a class="btn btn-warning" href="javascript:void(0)">Write a customer review</a>
+            <div class="mt-2 mb-2" ng-if="ctrl.rating.rate">
+                <span class="text-warning" uib-rating ng-model="ctrl.rating.rate" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
+                    aria-labelledby="custom-icons-1"></span>
+                <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ?
+                    "review" : "reviews")}}</span>
+                </a>
+            </div>
+            <hr class="mt-0" />
+            <div>
+                <p>Share your thoughts with other customers</p>
+                <a class="btn btn-warning" href="javascript:void(0)">Write a customer review</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Modal dialog after adding to cart -->
+    <div>
+        <div class="modal-bg">
+            <div class="dialog">
+
+                <div id='show-modal-dialog' class="modal fade bs-example-modal-lg show" focus-group focus-group-head="loop" focus-group-tail="loop"
+                    focus-stacktabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Book info</h4>
+                            </div>
+                            <div ng-show='ctrl.addedToCart' class="modal-body">
+                                This book has already been added to cart!
+                            </div>
+                            <div ng-show='!ctrl.addedToCart' class="modal-body">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class='book-in-cart-img'>
+                                                
+                                                    <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
+                                                    alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                                                <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png"
+                                                    alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                                                
+                                            </td>
+                                            <td class='book-in-cart-name'>
+                                                <b>{{ctrl.bookDetails.volumeInfo.title}}</b>
+                                                <br/>
+                                                <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+                                            </td>
+                                            <td class='book-in-cart-price'>
+                                                <div class='price'>${{ctrl.bookDetails.volumeInfo.price}}</div>
+                                            
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" ng-click='ctrl.closeModal()' class="buttons btn btn-default" focus-element="autofocus" data-dismiss="modal">Close</button>
+                                <button ng-click='ctrl.goToCart()' type="button" class="buttons btn btn-primary"><img width='30em' src="assets/images/icons/cart.png" alt=""/> Go to cart</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </section>
+        </div>
+
+    </div>
+
+
 </div>
