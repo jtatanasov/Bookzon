@@ -7,6 +7,7 @@
 
     <h2>{{orders.userName}}'s Orders</h2>
     <div id='user-orders'>
+        <div id='empty-cart' ng-show='orders.noOrders'>You don't have any orders yet!</div>
         <div class='simple-order' ng-repeat="order in orders.orders">
             <table>
                 <tbody>

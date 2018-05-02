@@ -517,6 +517,18 @@ body {
     margin-top: 0.5em;
     font-size: 1.2em;
 }
+
+.single-notification {
+    display:inline-block;
+    border-bottom: 1px solid #E6BB9D;
+    padding-bottom: 1em;
+}
+#seenMessage {
+    width: 10em;
+}
+#seenMessage:hover {
+    cursor: pointer;
+}
 @media screen and (max-width:500px) {
     #edit-profile,
     #add-new-book-form,

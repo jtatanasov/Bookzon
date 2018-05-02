@@ -14,6 +14,7 @@
             OrdersService.getOrders(vm.user._id)
                 .then(resp => {
                     vm.orders = resp.data.orders;
+                    vm.noOrders = (typeof vm.orders == 'undefined');
                 })
                 .catch(err => console.log(err));
         }

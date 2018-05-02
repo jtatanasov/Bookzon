@@ -7,14 +7,19 @@
             $rootScope.user = updatedUser;
             sessionStorage.setItem('user', JSON.stringify(updatedUser));
         }
-        this.getLoggedUser = function () {
-            console.log(sessionStorage.getItem('user'));
+        this.getLoggedUser = function () {  
             if(sessionStorage.getItem('user') != 'null') {
                 return JSON.parse(sessionStorage.getItem('user'));
             } 
         }
 
-       
+        this.getUserNotifications = function(userId) {
+            return $http.get('/notifications/' + userId);
+        }
+
+        this.seenNotification = function(userId, notificationId) {
+            return $http.put('/notifications/' + userId + '/' + notificationId);
+        }
         this.logout = function () {
             sessionStorage.setItem('user', null);
             return $http.get('/logout');
