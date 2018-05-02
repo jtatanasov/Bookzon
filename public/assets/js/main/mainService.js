@@ -8,6 +8,7 @@
             sessionStorage.setItem('user', JSON.stringify(updatedUser));
         }
         this.getLoggedUser = function () {
+            console.log(sessionStorage.getItem('user'));
             if(sessionStorage.getItem('user') != 'null') {
                 return JSON.parse(sessionStorage.getItem('user'));
             } 

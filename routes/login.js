@@ -49,7 +49,8 @@ router.post('/', function (req, res, next) {
                     name: doc[0].name,
                     email: doc[0].email,
                     isAdmin: doc[0].isAdmin,
-                    address: doc[0].address
+                    address: doc[0].address,
+                    mobileNumber: doc[0].mobileNumber
                 }
                 res.json(tmpUser);
             }

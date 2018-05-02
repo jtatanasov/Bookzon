@@ -521,7 +521,8 @@ body {
     #edit-profile,
     #add-new-book-form,
     #my-cart,
-    #single-order {
+    #single-order,
+    #all-orders {
         width: 90%;
     }
 }
@@ -529,7 +530,8 @@ body {
 @media screen and (max-width: 350px) {
     .option,
     #edit-address,
-    #single-order  {
+    #single-order,
+    #all-orders  {
         width: 90%;
     }
 
