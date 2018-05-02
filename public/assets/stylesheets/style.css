@@ -228,7 +228,8 @@ body {
 #edit-profile,
 #add-new-book-form,
 #my-cart,
-#single-order {
+#single-order,
+#all-orders {
     width:40%;
     margin: 0 auto;
     margin-top: 1em;
@@ -237,14 +238,16 @@ body {
 #edit-profile > div,
 #add-new-book-form > div,
 #my-cart > div,
-#single-order > div{
+#single-order > div,
+#all-orders > div{
     margin-bottom: 1em;
 }
 
 #edit-profile > div > h2
 #add-new-book-form > div > h2,
 #my-cart > div > h2,
-#single-order > h2 {
+#single-order > h2,
+#all-orders > h2 {
     margin-top: 1em;
 }
 
@@ -256,16 +259,22 @@ body {
 #edit-profile-form,
 #address-form,
 #add-new-book-form,
-#order-info {
+#order-info,
+#user-orders {
     border: 1px solid #E6BB9D;
     border-radius: 0.25rem;
 }
 
 #address-form > div,
 #add-new-book-form > div,
-#order-info > div {
+#order-info > div,
+#user-orders > div {
     padding: 0.5em;
     padding-bottom: 1.5em;
+}
+
+#user-orders > div {
+    border-bottom: 1px solid #E6BB9D;
 }
 
 #order-info > div > h3 {

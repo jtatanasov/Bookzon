@@ -58,12 +58,16 @@
                     vm.wrongCreditCardInfo = false;
                 }
             }
-            
+
+            var date = new Date();
+            date = date.toString().split(' ');
+            date = date[2] + ' ' + date[1] + ' ' + date[3];
+            vm.tmpOrder.date = date;
             OrdersService.order(vm.user._id, vm.tmpOrder)
             .then(resp => {
                 CartService.removeAllFromCart(vm.user._id)
                 .then(resp => {
-                    $location.path('/orders');
+                    $location.path('/profile/orders');
                 })
                 .catch(err => console.log(err));
             })

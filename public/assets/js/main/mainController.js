@@ -41,6 +41,10 @@
             $location.path('/profile/cart');
         }
 
+        vm.goToOrders = function($event) {
+            $event.preventDefault();
+            $location.path('/profile/orders');
+        }
         vm.logOut = function ($event) {
             $event.preventDefault();
             MainService.logout()

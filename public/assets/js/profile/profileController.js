@@ -20,5 +20,8 @@
         vm.goToCart = function () {
             $location.path('/profile/cart');
         }
+        vm.goToOrders = function() {
+            $location.path('/profile/orders');
+        }
     }
 })();

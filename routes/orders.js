@@ -6,6 +6,18 @@ function Orders(userId) {
     this.orders = [];
 }
 
+router.get('/:id', function(req,res, next) {
+    var ordersCollection = req.db.get('orders');
+    var userId = req.params.id;
+
+    ordersCollection.find({userId: userId}, {}, (err, docs) => {
+        if(err) throw err;
+        else {
+            res.status(200);
+            res.json(docs[0]);
+        }
+    })
+});
 router.post('/:id', function(req,res,next) {
     var ordersCollection = req.db.get('orders');
     var booksCollection = req.db.get('books');

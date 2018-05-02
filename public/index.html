@@ -35,6 +35,7 @@
     <script src="assets/js/cart/cartService.js"></script>
 
     <script src="assets/js/orders/singleOrder/orderController.js"></script>
+    <script src="assets/js/orders/allOrders/allOrdersController.js"></script>
     <script src="assets/js/orders/ordersService.js"></script>
 
     <script src="assets/js/directives/fileModel.js"></script>
@@ -88,7 +89,7 @@
                         <img class='nav-icon' src='assets/images/icons/books.png' />
                         <a href="#" class="nav-link">Add new books</a>
                     </li>
-                    <li ng-show="user.loggedUser && !user.isAdmin" class="ng-hide nav-item"> 
+                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToOrders($event)' class="ng-hide nav-item"> 
                         <img class='nav-icon' src='assets/images/icons/orders.png' />
                         <a href="#" class="nav-link">Orders</a>
                     </li>

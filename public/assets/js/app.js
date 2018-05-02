@@ -34,6 +34,11 @@ mainApp.config(function ($routeProvider) {
             controller: 'EditProfileController',
             controllerAs: 'profile',
         })
+        .when('/profile/orders', {
+            templateUrl: 'assets/js/orders/allOrders/orders.htm',
+            controller: 'AllOrdersController',
+            controllerAs: 'orders'
+        })
         .when('/profile/cart', {
             templateUrl: 'assets/js/cart/cart.htm',
             controller: 'CartController',
