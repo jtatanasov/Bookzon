@@ -169,10 +169,10 @@ body {
 .nav-item:last-of-type {
     z-index:2;
 }
-
+/* 
 .nav-item:last-of-type > a {
     padding: 0.2rem .5rem;
-}
+} */
 
 #amazon-profile-user-name {
     padding-bottom: 0.5em;
