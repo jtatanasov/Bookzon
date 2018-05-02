@@ -16,7 +16,12 @@
 
 
         this.addReview = function (data) {
-
+            return $http({
+                url: '/api/reviews',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            })
         }
 
         this.deleteReview = function(reviewId) {

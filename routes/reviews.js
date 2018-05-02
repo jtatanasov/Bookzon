@@ -32,8 +32,20 @@ router.get('/:bookId', function (req, res, next) {
             res.status(500);
             res.json(err);
         } else {
-            res.status(200);
-            res.json(docs);
+            var usersCollection = req.db.get('users');
+            usersCollection.find({}, "_id name", function (err, users) {
+                if (err) {
+                    res.status(500);
+                    res.json(err);
+                } else {
+                    docs.map(d => {
+                        var name = users.find(u => u._id == d.userId).name;
+                        d.username = name || "unknown";
+                    });
+                    res.status(200);
+                    res.json(docs);
+                }
+            });
         }
     });
 });
@@ -76,7 +88,7 @@ router.post('/', function (req, res, next) {
             res.json(err);
         } else {
             res.status(200);
-            res.json({ id: review._id });
+            res.json(docs);
         }
     });
 });
@@ -116,7 +128,7 @@ router.put('/review/:id', function (req, res, next) {
                     res.json(err);
                 } else {
                     res.status(200);
-                    res.json({ id: reviewId });
+                    res.json(docs);
                 }
             });
         }

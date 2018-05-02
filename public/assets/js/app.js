@@ -1,4 +1,4 @@
-var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap']);
+var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages']);
 var loginApp = angular.module('loginApp', []);
 
 mainApp.config(function ($routeProvider) {
