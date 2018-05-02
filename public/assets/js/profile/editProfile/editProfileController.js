@@ -3,7 +3,7 @@
 
     mainApp.controller('EditProfileController', EditProfileController);
 
-    function EditProfileController($rootScope, ProfileService) {
+    function EditProfileController($rootScope, ProfileService, MainService) {
         var vm = this;
         vm.editNameMode = false;
         vm.wrongName = false;
@@ -46,9 +46,13 @@
             $event.preventDefault();
             if(validator.isValidString(vm.name)) {
                 ProfileService.changeName(vm.name)
-                .catch(function(err) {
-                    vm.wrongName = true;
+                .then(resp => {
+                    MainService.updateUser(resp.data);                
                 })
+                .catch(err => {
+                    vm.wrongName = true;
+                });
+                
                 vm.editNameMode = false;
                 vm.wrongName = false;
             } else {
@@ -64,6 +68,9 @@
             $event.preventDefault();
             if(validator.isValidMail(vm.email)) {
                 ProfileService.changeEmail(vm.email)
+                .then(resp => {
+                    MainService.updateUser(resp.data);                
+                })
                 .catch(function(err) {
                     vm.wrongEmail = true;
                 });
@@ -85,6 +92,9 @@
             $event.preventDefault();
             if(validator.isValidPhoneNumber(vm.mobileNumber)) {
                 ProfileService.changePhoneNumber(vm.mobileNumber)
+                .then(resp => {
+                    MainService.updateUser(resp.data);                
+                })
                 .catch(function(err) {
                     vm.wrongMobileNumber = true;
                 });
@@ -103,6 +113,9 @@
             $event.preventDefault();
             if(validator.isValidPassword(vm.password) && vm.password == vm.confirmPassword) {
                 ProfileService.changePassword(vm.password)
+                .then(resp => {
+                    MainService.updateUser(resp.data);                
+                })
                 .catch(function(err) {
                     vm.wrongPassword = true;
                 });
@@ -124,6 +137,9 @@
             $event.preventDefault();
             if(validator.isValidString(vm.address)) {
                 ProfileService.changeAddress(vm.address)
+                .then(resp => {
+                    MainService.updateUser(resp.data);                
+                })
                 .catch(function(err) {
                     vm.wrongAddress = true;
                 });

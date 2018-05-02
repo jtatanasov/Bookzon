@@ -17,6 +17,7 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var reviewsRouter = require('./routes/reviews');
 var cartsRouter = require('./routes/carts');
+var ordersRouter = require('./routes/orders');
 
 
 var storage = multer.diskStorage({
@@ -69,7 +70,8 @@ app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 app.use('/api/books', booksRouter);
 app.use('/api/reviews', reviewsRouter);
-app.use('/carts/', cartsRouter);
+app.use('/carts', cartsRouter);
+app.use('/orders', ordersRouter);
 app.use('/logout',  function (req, res, next) {
     req.session.destroy();
     res.status(200);

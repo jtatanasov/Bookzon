@@ -1,1 +1,107 @@
-ORDER
+<div id='single-order' class="ng-cloak">
+        <div class='profile-nav'>
+            <a href="#!profile">Profile</a>
+            <span>&#8250;</span>
+            <a href="#!profile/cart">Cart</a>
+            <span>&#8250;</span>
+            <span>Order</span>
+        </div>
+    
+        <h2>Order</h2>
+        <div id='order-info'>
+            <div>
+                <h3>Account info</h3>
+                <label>Name:
+                    <span ng-show='order.user.name' class='acc-info-values'>{{order.user.name}}</span>
+                </label>
+                <br/>
+                <label>Mobile number:
+                    <span ng-show='order.user.mobileNumber' class='acc-info-values'>{{order.user.mobileNumber}}</span>
+                    <span ng-show='!order.user.mobileNumber' class='errors'>Not filled</span>
+                </label>
+                <br/>
+                <label for="shipping-address">Shipping address:
+                    <span ng-show='order.user.address' class='acc-info-values'>{{order.user.address}}</span>
+                    <span ng-show='!order.user.address' class='errors'>Not filled</span>
+                </label>
+                <br/>
+                <hr ng-show='!order.user.address || !order.user.name || !order.user.mobileNumber' class="mt-0" />
+                <p id='not-filled' ng-show='!order.user.address || !order.user.name || !order.user.mobileNumber'>You have not filled out all the necessary data. You can do it from
+                    <a href='#!profile/edit-profile'>here.</a>
+                </p>
+            </div>
+            <div>
+                <h3>Payment methods</h3>
+                <div>
+                    <input ng-model='order.tmpOrder.cashPayment' ng-value="true" type="radio" name="payment-method" id="cash-on-delivery" />
+                    <label for="cash-on-delivery">Cash on delivery</label>
+                </div>
+                <div>
+                    <input ng-model="order.tmpOrder.cashPayment" ng-value="false" type="radio" name="payment-method" id="card-payment" />
+                    <label for="card-payment">Pay with credit card</label>
+                </div>
+                <div id='credit-card-info'>
+    
+                    <div ng-show='!order.tmpOrder.cashPayment'>
+                        <h5 class="pay-title">Credit Card Info</h5>
+                        <p>All fields are required!</p>
+                        <form>
+                            <div class="tab-for">
+                                <h6>Name on card</h6>
+                                <input ng-model='order.creditCard.name' id='credit-card-info-name' placeholder='eg. John Doe'class='form-inputs ' type="text" value="" required>
+                                <h6>Card number</h6>
+                                <input ng-model='order.creditCard.cardNumber' id='credit-card-info-card-number' class="form-inputs pay-logo" type="number" placeholder="XXXX-XXXX-XXXX-XXXX" required="">
+                            </div>
+                            <div class="transaction">
+                                <div class="tab-form-left user-form">
+                                    <h6>Expiration</h6>
+                                    <input ng-model='order.creditCard.expirationDate' id='credit-card-date' type="date" class="form-inputs text-box" name="" required>
+                                </div>
+                                <div>
+                                    <h6>CVV number</h6>
+                                    <input ng-model='order.creditCard.cvvNumber' id='credit-card-info-cvv-number' class='form-inputs' type="number" placeholder="XXX" required="">
+                                </div>
+    
+                            </div>
+                            <p id='error-credit-card' class='errors' ng-show='order.wrongCreditCardInfo' >Invalid credit card info</p>
+                            
+                        </form>
+                        <button ng-click='order.saveCardInfo($event)' id='save-card-info-btn' class='buttons'>Save</button>
+                        
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h3>Order info</h3>
+                <div id='order-prices' class="ng-cloak">
+                        <table>
+                            <tr>
+                                <td>
+                                    <b>Price: </b>
+                                </td>
+                                <td>${{order.cart.price}} 
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Delivery price: </b>
+                                </td>
+                                <td ng-show='!order.isDeliveryFree'>${{order.cart.deliveryPrice}}</td>
+                                <td class='free-delivery' ng-show='order.isDeliveryFree'>FREE</td>                        
+                            </tr>
+                            <tr>
+                                <td>
+                                    <b>Total price: </b>
+                                </td>
+                                <td>${{order.cart.totalPrice}}</td>
+                            </tr>
+                        </table>
+                        <button id='order-button-order' ng-click='order.order()' class='buttons'>Order</button>
+                        <p class='errors' ng-show='order.wrongAccInfo'>Please fill out all account info fields</p>
+                    </div>
+            </div>
+        </div>
+    
+    
+    
+    </div>

@@ -133,6 +133,9 @@ router.put('/:id', function (req, res, next) {
                 return;
             } else {
                 res.status(200);
+                updateObj._id = idToSearch;
+                delete updateObj.password;
+                res.json(updateObj);
             }
     
         });
