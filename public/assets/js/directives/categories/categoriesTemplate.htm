@@ -1,8 +1,8 @@
 <h3>Shop by category</h3>
 <div class="card-deck-wrapper categories mb-4">
     <div class="card-deck">
-        <a href="#!books/category/{{category.link}}" class="card mb-3" ng-repeat="category in info">
-            <img class="card-img-top" ng-src="{{category.imgUrl}}" alt="Card image cap">
+        <a href="#!books/category/{{category.link}}" class="card mb-3" ng-repeat="category in info" ng-class="{ true: 'active'}[category.title == active]">
+            <img class="card-img-top" ng-src="{{category.imgUrl}}" alt="{{category.title}}">
             <div class="card-body p-0 pb-1">
                 <p class="card-text text-center"><small>{{category.title}}</small></p>
             </div>

@@ -7,15 +7,17 @@
     /* width: 5rem; */
 }
 
-.categories .card-deck .card:hover {
-    border-color: #331500;
-}
-
 .categories .card-deck .card img.card-img-top {
     opacity: 0.6;
 }
 
-.categories .card-deck .card:hover img.card-img-top {
+.categories .card-deck .card:hover,
+.categories .card-deck .card.active {
+    border-color: #331500;
+}
+
+.categories .card-deck .card:hover img.card-img-top,
+.categories .card-deck .card.active img.card-img-top {
     opacity: 1;
 }
 

@@ -1,7 +1,7 @@
 <div class="container-fluid p-3">
     <h1 class="text-center mb-4">Books at Bookzon</h1>
     <div ng-controller="CategoriesController as cat">
-        <categories info="cat.categories"></categories>
+        <categories info="cat.categories" active="cat.activeCategory"></categories>
         <h2 class="mt-5 mb-5 text-center">{{cat.activeCategory}}</h2>
     </div>
 

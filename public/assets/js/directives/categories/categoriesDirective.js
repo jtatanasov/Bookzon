@@ -3,7 +3,8 @@ mainApp.directive('categories', function() {
         templateUrl: 'assets/js/directives/categories/categoriesTemplate.htm',
         restrict: 'E',
         scope: {
-            info: '='
+            info: '=',
+            active: '='
         }
     };
 });
