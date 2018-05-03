@@ -66,7 +66,7 @@
 </head>
 </head>
 
-<body ng-app='mainApp' class='ng-cloak' ng-controller='MainController as user'>
+<body ng-app='mainApp' class='ng-cloak' ng-class='modal-open' ng-controller='MainController as user'>
 
     <nav id="main-navbar" class="navbar navbar-dark navbar-expand-md">
         <div class="container container-fluid">
@@ -149,7 +149,6 @@
     </div>
     </div>
     <main ng-view></main>
-    <div id='help-modal-div'></div>
 </body>
 
 </html>

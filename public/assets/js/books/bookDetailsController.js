@@ -11,6 +11,18 @@
         vm.isLogged = false;
         vm.addedToCart = false;
 
+        vm.showModal = false;
+        vm.showView = false;
+        vm.counter = 1;
+        vm.toggleDialog = function () {
+            vm.showModal = !this.showModal;
+        }
+        vm.toggleView = function () {
+            vm.showView = !this.showView;
+        }
+        vm.changeDisplay = function () {
+            vm.counter++;
+        }
 
         BooksService.getBookById(bookId).then(function (response) {
             if (!$rootScope.user) {
@@ -26,14 +38,10 @@
             } else {
                 vm.isAvailable = true;
             }
-            // temporarily using google books averageRating
-            // vm.rating.rate = vm.bookDetails.volumeInfo.rating ? vm.bookDetails.volumeInfo.rating : vm.bookDetails.volumeInfo.averageRating;
-            // vm.rating.rate = 4;
         }).catch(function (err) {
             console.log(err);
         });
 
-       //adding to cart + modal dialog
         vm.addToCart = function () {
             CartService.addToCart(vm.userId, vm.bookDetails)
                 .then(resp => {
@@ -42,29 +50,13 @@
                     } else {
                         vm.addedToCart = false;
                     }
-                    angular.element('#show-modal-dialog').addClass('show');
-                    angular.element('#show-modal-dialog').css('display', 'block');
-                    angular.element('#show-modal-dialog').css('padding-right', '17px');
-                    angular.element('body').addClass('modal-open');
-                    angular.element('body').append("<div id='help-div' class='modal-backdrop fade show'></div>");
                 })
                 .catch(err => {
                     console.log(err);
                 })
         }
-
-        function closeModalDialog() {
-            angular.element('#show-modal-dialog').removeClass('show');
-            angular.element('#show-modal-dialog').css('display', 'none');
-            angular.element('#show-modal-dialog').css('padding-right', '17px');
-            angular.element('body').removeClass('modal-open');
-            angular.element('#help-div').remove();
-        }
-        vm.closeModal = function () {
-            closeModalDialog();
-        }
-        vm.goToCart = function() {
-            closeModalDialog();
+      
+        vm.goToCart = function() { 
             $location.path('/profile/cart');
         }
     }
