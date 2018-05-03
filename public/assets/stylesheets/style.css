@@ -191,35 +191,28 @@ body {
     text-align: center;
 }
 
-.option {
-    display: inline-block;
-    width: 20em;
-    height: 6em;
-    vertical-align: top;
+
+
+.option-card {
+    width:25%;
     border: 1px solid #E6BB9D;
-    border-radius: 5px;
-    padding: 1em;
-    margin: 0.5rem;
-    text-align: left;
+    display:inline-block;
+    margin: auto 0.5rem;
+    color: #331500;
 }
 
-.option:hover {
+@media screen and (max-width:350px) {
+    .option-card {
+        width:90%;
+    }
+}
+.option-card:hover {
     cursor: pointer;
     background-color: #FFE4D1;
-    
 }
-
-
-
-.option-description {
-    font-size: 0.7rem;
-}
-.option-icons {
-    width: 4em;
-}
-
-.option-icon-container {
-    padding-right: 0.5rem;
+.option-imgs {
+    width:4em;
+    height: 4em;
 }
 
 .profile-nav {
@@ -273,6 +266,10 @@ body {
     padding-bottom: 1.5em;
 }
 
+#edit-profile-form > div:last-of-type {
+    display: inline-block;
+    width: 100%;
+}
 #user-orders > div {
     border-bottom: 1px solid #E6BB9D;
 }
@@ -332,17 +329,11 @@ body {
 }
 
 .buttons {
-    float: right;
-    color: #fff;
-    background-color: #331500;
-    border-color: #331500;
-    padding: 0.1em 0.5em;
-    border-radius: 5px;
+    color: #331500;
 }
 
-.buttons:hover {
-    background-color: #7C4823;
-    border-color: #7C4823;
+.edit-profile-btn {
+    float: right;
 }
 
 .delete-book-btns {

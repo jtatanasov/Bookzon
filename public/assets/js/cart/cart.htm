@@ -11,7 +11,7 @@
         <div id='empty-cart' ng-show='cartCtrl.emptyCart'>You don't have any products in your cart!</div>
         <div id='books-in-cart' ng-show='!cartCtrl.emptyCart'>
             <div id='remove-all-from-cart'>
-                <button ng-click='cartCtrl.removeAllFromCart()' class='buttons'>Remove all books from cart</button>
+                <button ng-click='cartCtrl.removeAllFromCart()' class='btn buttons btn-md btn-warning'>Remove all books from cart</button>
             </div>
 
             <table>
@@ -30,7 +30,7 @@
                         <td class='book-in-cart-price'>
                             <div class='price'>${{book.price}}</div>
                             <div>
-                                <button ng-click='cartCtrl.removeBookFromCart(book.bookId)' class='buttons'>Remove</button>
+                                <button ng-click='cartCtrl.removeBookFromCart(book.bookId)' class='btn buttons btn-sm btn-warning'>Remove</button>
                             </div>
                         </td>
 
@@ -61,7 +61,7 @@
                         <td>${{cartCtrl.cart.totalPrice}}</td>
                     </tr>
                 </table>
-                <button id='order-button' ng-click='cartCtrl.order()' class='buttons'>Order</button>
+                <button id='order-button' ng-click='cartCtrl.order()' class='btn buttons btn-lg buttons btn-warning'>Order</button>
             </div>
 
         </div>

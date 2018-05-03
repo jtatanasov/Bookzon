@@ -1,51 +1,32 @@
 <div id='amazon-profile' class='ng-cloak'>
-<!-- <div id='amazon-profile' ng-controller='ProfileController as profile' ng-cloak> -->
+    <!-- <div id='amazon-profile' ng-controller='ProfileController as profile' ng-cloak> -->
     <h1 id='amazon-profile-user-name' class="text-center mb-4">{{profile.firstName}}'s Bookzon</h1>
 
-    <section id='profile-options' class=''>
+    <div class="card-deck-wrapper mb-4">
+        <div class="option-card card-deck card mb-3 pt-2" ng-click='profile.editProfile()'>
 
-        <div class='option' ng-click='profile.editProfile()'>
-            <table>
-                <tr>
-                    <td class='option-icon-container'>
-                        <img class='option-icons' src='assets/images/icons/edit-profile.png' />
-                    </td>
-                    <td>
-                        <p>Edit profile</p>
-                        <p class='option-description'>Edit login, name, mobile number, address</p>
-                    </td>
-                </tr>
-            </table>
-
+            <img class='option-imgs card-img' src='assets/images/icons/edit-profile.png' />
+            <div class='card-body p-0 pb-1'>
+                <h5 class='card-title text-center'>Edit profile</h5>
+                <h6 class='card-text text-center'><small>Edit login, name, mobile number, address</small></h6>
+            </div>
         </div>
+        <div class="option-card card-deck card mb-3 pt-2" ng-click='profile.goToOrders()'>
 
-        <div class='option' ng-click='profile.goToOrders()'>
-            <table>
-                <tr>
-                    <td class='option-icon-container'>
-                        <img class='option-icons' src='assets/images/icons/orders.png' />
-                    </td>
-                    <td>
-                        <p>Your orders</p>
-                        <p class='option-description'>View your orders</p>
-                    </td>
-                </tr>
-            </table>
+            <img class='option-imgs card-img' src='assets/images/icons/orders.png' />
+            <div class='card-body p-0 pb-1'>
+                <h5 class='card-title text-center'>Your orders</h5>
+                <h6 class='card-text text-center'><small>View your orders</small></h6>
+            </div>
         </div>
+        <div class="option-card card-deck card mb-3 mr-0 pt-2" ng-click='profile.goToCart()'>
 
-        <div class='option' ng-click='profile.goToCart()'>
-            <table>
-                <tr>
-                    <td class='option-icon-container'>
-
-                        <img class='option-icons' src='assets/images/icons/cart.png' />
-                    </td>
-                    <td>
-                        <p>Your cart</p>
-                        <p class='option-description'>View Items in your cart</p>
-                    </td>
-                </tr>
-            </table>
+            <img class='option-imgs card-img' src='assets/images/icons/cart.png' />
+            <div class='card-body p-0 pb-1'>
+                <h5 class='card-title text-center'>Your cart</h5>
+                <h6 class='card-text text-center'><small>View Items in your cart</small></h6>
+            </div>
         </div>
-    </section>
+    </div>
+
 </div>

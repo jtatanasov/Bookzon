@@ -32,7 +32,7 @@
                     <p><b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
                     <hr class="mt-0"/>
                     <p ng-show='ctrl.isLogged && ctrl.isAvailable'>
-                        <button ng-click='ctrl.addToCart()' id='add-to-cart-btn' class='buttons'>
+                        <button ng-click='ctrl.addToCart()' id='add-to-cart-btn' class='btn btn-md btn-warning'>
                             <img src='assets/images/icons/cart.png'/>Add to cart</button>
                     </p>
                     <p class='not-available-product' ng-show='!ctrl.isAvailable'>This book is currently out of stock!</p>
@@ -152,8 +152,8 @@
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" ng-click='ctrl.closeModal()' class="buttons btn btn-default" focus-element="autofocus" data-dismiss="modal">Close</button>
-                                <button ng-click='ctrl.goToCart()' type="button" class="buttons btn btn-primary"><img width='30em' src="assets/images/icons/cart.png" alt=""/> Go to cart</button>
+                                <button type="button" ng-click='ctrl.closeModal()' class="buttons btn btn-sm btn-default" focus-element="autofocus" data-dismiss="modal">Close</button>
+                                <button ng-click='ctrl.goToCart()' type="button" class="buttons btn btn-md btn-warning"><img width='30em' src="assets/images/icons/cart.png" alt=""/> Go to cart</button>
                             </div>
                         </div>
                     </div>
