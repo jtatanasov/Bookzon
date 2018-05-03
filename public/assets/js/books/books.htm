@@ -1,36 +1,41 @@
-<h1 class="text-center mb-4">Books at Bookzon</h1>
+<div class="container-fluid p-3">
+    <h1 class="text-center mb-4">Books at Bookzon</h1>
+    <div ng-controller="CategoriesController as cat">
+        <categories info="cat.categories"></categories>
+        <h2 class="mt-5 mb-5 text-center">{{cat.activeCategory}}</h2>
+    </div>
 
-<section id="booksSection" ng-controller="BooksController as booksCtr">
-
-    <img id="mySpinner" src="http://www.fivestarfireplaces.com.au/album/images/loading.gif" ng-show="booksCtr.loading" class="loader" />
-    <!-- books listing -->
-    <div class="card-deck-wrapper">
-        <div class="card-deck">
-            <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books">
-                <!-- Admin's delete book btn -->
-                <button class='buttons delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
-                <!--  -->
-                <a href="#!books/{{book._id}}" class="text-center">
-                    <img class="mw-100" ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" on-error-src='assets/images/no-cover.png' alt="{{book.volumeInfo.title}}">
-                </a>
-
-                <div class="card-footer bg-white border-top-0 text-muted p-1 text-left" style="height: 2 rem;">
-                    <a href="#!books/{{book._id}}" class="card-link">
-                        <small>{{book.volumeInfo.title}}</small>
+    <section id="booksSection" ng-controller="BooksController as booksCtr">
+        <img id="mySpinner" src="http://www.fivestarfireplaces.com.au/album/images/loading.gif" ng-show="booksCtr.loading" class="loader" />
+        <!-- books listing -->
+        <div class="card-deck-wrapper">
+            <div class="card-deck">
+                <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books">
+                    <!-- Admin's delete book btn -->
+                    <button class='buttons delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
+                    <!--  -->
+                    <a href="#!books/{{book._id}}" class="text-center">
+                        <img class="mw-100" ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" on-error-src='assets/images/no-cover.png' alt="{{book.volumeInfo.title}}">
                     </a>
-                    <br/>
-                    <small ng-repeat="author in book.volumeInfo.authors">{{author}}, </small>
-                    <br/>
-                    <div ng-if="book.volumeInfo.averageRating > 0" class="mt-1 mb-1">
-                        <small>
-                            <!-- temporarily using google books averageRating -->
-                            <span class="text-warning" uib-rating ng-model="book.volumeInfo.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
-                            <span class="label">{{book.volumeInfo.ratingsCount}}</span>
-                        </small>
+
+                    <div class="card-footer bg-white border-top-0 text-muted p-1 text-left" style="height: 2 rem;">
+                        <a href="#!books/{{book._id}}" class="card-link">
+                            <small>{{book.volumeInfo.title}}</small>
+                        </a>
+                        <br/>
+                        <small ng-repeat="author in book.volumeInfo.authors">{{author}}, </small>
+                        <br/>
+                        <div ng-if="book.volumeInfo.averageRating > 0" class="mt-1 mb-1">
+                            <small>
+                                <!-- temporarily using google books averageRating -->
+                                <span class="text-warning" uib-rating ng-model="book.volumeInfo.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                                <span class="label">{{book.volumeInfo.ratingsCount}}</span>
+                            </small>
+                        </div>
+                        <p class="mt-2 mb-0">${{book.volumeInfo.price}}</p>
                     </div>
-                    <p class="mt-2 mb-0">${{book.volumeInfo.price}}</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

@@ -10,6 +10,10 @@
             return $http.get('/api/books');
         }
 
+        this.getBooksByCategory = function (categories) {
+            return $http.get('/api/books/category/' + categories);
+        }
+
         this.getBookById = function (bookId) {
             return $http.get('/api/books/' + bookId);
         }

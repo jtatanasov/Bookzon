@@ -3,16 +3,17 @@
 
     mainApp.controller('ReviewsController', ReviewsController);
 
-    function ReviewsController(ReviewsService, $filter, $routeParams, $rootScope, $window) {
+    function ReviewsController(ReviewsService, $filter, $routeParams, $rootScope, $window, $location, $anchorScroll, $timeout) {
         var vm = this;
         vm.reviews = [];
         vm.review = {
             title: "",
-            text: ""
+            text: "",
+            rating: 1 // rating is required
         };
         vm.review.bookId = $routeParams.bookId;
-        vm.rating = 0;
-        vm.isCollapsed = true;
+        vm.avgRating = 0;
+        vm.addReviewCollapsed = true;
 
         /* get reviews for current book */
         ReviewsService.getBookReviews(vm.review.bookId).then(function (response) {
@@ -21,12 +22,13 @@
             /* calculate book rating */
             if (vm.reviews.length > 0) {
                 var s = vm.reviews.reduce((sum, review) => sum + review.rating, 0);
-                vm.rating = Math.round(s / vm.reviews.length);
+                vm.avgRating = (s / vm.reviews.length).toFixed(1);
             }
         }).catch(function (err) {
             console.log(err);
         });
-        
+
+        /* Add Review Section */
         /* show/hide ReviewForm */
         vm.toggleReviewForm = function($event) {
             if (!$rootScope.user) {
@@ -36,9 +38,29 @@
             }
 
             // todo: add limit - 1 review per book per user
-            vm.isCollapsed = !vm.isCollapsed;
+            $timeout(function() {vm.scrollTo('addReviewBtn')}, 0);
+            vm.addReviewCollapsed = !vm.addReviewCollapsed;
+            
         }
 
+        /* Rating stars */
+        vm.addRating = {
+            titles: ["I hate it", "I don't like it", "It's ok", "I like it", "I love it"]
+        };
+
+        vm.addRating.hoveringOver = function(value) {
+            vm.addRating.overStar = value;
+            vm.addRating.percent = 100 * (value / 5);
+            vm.addRating.caption = vm.addRating.titles[Number(value) - 1];
+        };
+        
+        vm.addRating.hoveringOut = function() { 
+            vm.addRating.overStar = null;
+            vm.addRating.caption = null;
+        }
+
+
+        /* submit review */
         vm.addReview = function($event) {
             $event.preventDefault();
 
@@ -51,8 +73,8 @@
             vm.review.userId = $rootScope.user._id;
 
             ReviewsService.addReview(vm.review).then(function(response) {
-                vm.isCollapsed = true;
-                // insert user name
+                vm.addReviewCollapsed = true;
+                // get user name:
                 response.data.username = $rootScope.user.name;
                 vm.reviews.push(response.data);
             })
@@ -62,5 +84,14 @@
         }
 
         // todo: update own review, delete own review
+
+        /* Scroll to Customer Reviews Section */
+        vm.scrollTo = function (id) {
+            var old = $location.hash();
+            $location.hash(id);
+            $anchorScroll();
+            //reset to old to keep any additional routing logic from kicking in
+            $location.hash(old);
+        }
     }
 })();

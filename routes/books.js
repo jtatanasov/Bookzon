@@ -83,7 +83,7 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-
+/* Get all books */
 router.get('/', function (req, res, next) {
     var booksCollection = req.db.get('books');
 
@@ -100,6 +100,7 @@ router.get('/', function (req, res, next) {
 
 });
 
+/* Get single book */
 router.get('/:id', function (req, res, next) {
     var booksCollection = req.db.get('books');
 
@@ -114,6 +115,38 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
+/* Get books by one or more categories */
+router.get('/category/:categories', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    var categories = req.params.categories.split("&");
 
+    booksCollection.find( {"volumeInfo.category" : { $in: categories }}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    })
+});
+
+/* Get some random books for home page */
+router.get('/random/:num', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    var num = +req.params.num;
+    var limit = (num >= 1 && num <= 20) ? num : 10;
+
+    // tesitng with averageRating
+    booksCollection.find( {"volumeInfo.averageRating": { $gt: 4 }}, {limit: num}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    })
+});
 
 module.exports = router;

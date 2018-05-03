@@ -3,11 +3,12 @@
 
     mainApp.controller('BooksController', BooksController);
 
-    function BooksController($http, $rootScope, $location, BooksService) {
+    function BooksController($http, $rootScope, $location, $routeParams, BooksService) {
         var vm = this;
         vm.books = [];
         vm.loading = true;
-        loadBooks();
+        var categories = $routeParams.category;
+        loadBooks(categories);
 
         vm.isAdmin = false;
 
@@ -19,9 +20,8 @@
             }
         }
 
-        function loadBooks() {
-            BooksService.getBooks().
-                then(function (response) {
+        function loadBooks(categories) {
+            BooksService.getBooksByCategory(categories).then(function (response) {
                     vm.books = response.data;
                 }).catch(function (err) {
                     console.log(err)

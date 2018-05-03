@@ -33,18 +33,7 @@
             console.log(err);
         });
 
-        /* Scroll to Customer Reviews Section */
-        vm.scrollTo = function (id) {
-            var old = $location.hash();
-            $location.hash(id);
-            $anchorScroll();
-            //reset to old to keep any additional routing logic from kicking in
-            $location.hash(old);
-        }
-
-
-
-        //adding to cart + modal dialog
+       //adding to cart + modal dialog
         vm.addToCart = function () {
             CartService.addToCart(vm.userId, vm.bookDetails)
                 .then(resp => {

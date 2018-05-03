@@ -1,24 +1,25 @@
 <div class="container container-fluid" ng-controller="BookDetailsController as ctrl">
     <div ng-controller="ReviewsController as rCtrl">
+        <!-- Book details -->
         <section id="bookDetailsSection" class="container container-fluid p-3">
             <a class="btn btn-link mb-3 p-0" ng-href="#!books"><span class="text-bigger">&#171;</span> All books</a>
             <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)' ng-show='booksCtr.isAdmin'>Delete book</button>
             <div class="media">
-                <img class="mr-3" width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
-                <img class="mr-3" width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png" alt="{{ctrl.bookDetails.volumeInfo.title}}">
-                <div class="media-body">
+                <img width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                <img width='130px' ng-if='!ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' src="assets/images/no-cover.png" alt="{{ctrl.bookDetails.volumeInfo.title}}">
+                <div class="media-body pl-3">
                     <div class="book-heading">
                         <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
                         <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
                     </div>
                     <div class="rating">
-                        <div class="mt-2 mb-2" ng-if="rCtrl.rating">
-                            <a ng-click="ctrl.scrollTo('reviewsSection')" href="">
-                                <span class="text-warning" uib-rating ng-model="rCtrl.rating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
-                                <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span>
+                        <div class="mt-2 mb-2" ng-if="rCtrl.avgRating">
+                            <a ng-click="rCtrl.scrollTo('reviewsSection')" href="">
+                                <span class="text-warning" uib-rating ng-model="rCtrl.avgRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                                <span class="label text-primary">{{rCtrl.reviews.length}} customer {{(rCtrl.reviews.length == 1 ? "review" : "reviews")}}</span>
                             </a>
                         </div>
-                        <a class="btn btn-link p-0" ng-if="!ctrl.rating.rate" ng-click="ctrl.scrollTo('reviewsSection')" href=""><small>Be the first to review this book</small></a>
+                        <a class="btn btn-link p-0" ng-if="!rCtrl.avgRating" ng-click="rCtrl.scrollTo('reviewsSection')" href=""><small>Be the first to review this book</small></a>
                     </div>
                     <hr class="mt-0"/>
                     <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
@@ -42,24 +43,32 @@
 
         <section id="reviewsSection" class="container container-fluid p-3">
             <h4>Customer Reviews</h4>
+            <!-- Average star rating -->
             <div class="rating mt-3 mb-2">
-                <div ng-if="rCtrl.rating">
-                    <span class="text-warning" uib-rating ng-model="rCtrl.rating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
-                    <!-- <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span> -->
-                    <span class="label text-primary">{{rCtrl.reviews.length}} customer {{(rCtrl.reviews.length == 1 ? "review" : "reviews")}}</span>
-                    </a>
+                <div ng-if="rCtrl.avgRating">
+                    <div>
+                        <span class="text-warning" uib-rating ng-model="rCtrl.avgRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                        <!-- <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span> -->
+                        <span class="label text-primary">{{rCtrl.reviews.length}} customer {{(rCtrl.reviews.length == 1 ? "review" : "reviews")}}</span>
+                    </div>
+                    <div class="text-muted mt-1"><small>{{rCtrl.avgRating}} out of 5 stars</small></div>
                 </div>
-                <div ng-if="!rCtrl.rating">
+                <div ng-if="!rCtrl.avgRating">
                     <p class="font-wight-bold">There are no customer reviews yet.</p>
                 </div>
             </div>
             <hr class="mt-0"/>
+
+            <!-- Add review -->
             <div id="addReview" class="mb-2">
                 <p>Share your thoughts with other customers</p>
                 <a class="btn btn-warning" href="" ng-click="rCtrl.toggleReviewForm()">Write a customer review</a>
-                <form ng-hide="rCtrl.isCollapsed" name="ReviewForm" class="mt-4 p-4 border border-warning rounded" novalidate>
+                <form ng-hide="rCtrl.addReviewCollapsed" name="ReviewForm" class="mt-4 p-4 border border-warning rounded animate-show-hide" novalidate>
                     <div class="form-group">
-                        <span class="text-warning" uib-rating ng-model="rCtrl.review.rating" max="5" read-only="false" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1" ng-click="rCtrl.setRating()"></span>
+                        <h4>
+                            <span class="text-warning" name="rating" uib-rating ng-model="rCtrl.review.rating" max="5" enable-reset="false" read-only="false" state-on="'fas fa-star'" state-off="'far fa-star'" on-hover="rCtrl.addRating.hoveringOver(value)" on-leave="rCtrl.addRating.hoveringOut()" aria-labelledby="custom-icons-1" ng-click="rCtrl.addRating.setRating()" required></span>
+                            <small class="label" ng-class="{'text-danger': rCtrl.addRating.percent<50, 'text-warning': rCtrl.addRating.percent==60, 'text-success': rCtrl.addRating.percent>=70}" ng-show="rCtrl.addRating.overStar">{{rCtrl.addRating.caption}}</small>
+                        </h4>
                     </div>
 
                     <div class="form-group">
@@ -79,12 +88,13 @@
                     
                     <p class="text-danger" ng-hide="ctrl.isLogged"><small>Only logged users can write a review. Please <a href="login.html">login</a>.</small></p>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-warning" ng-click='rCtrl.addReview($event)' ng-disabled="ReviewForm.$invalid">Submit</button>
+                        <button type="submit" id="addReviewBtn" class="btn btn-warning" ng-click='rCtrl.addReview($event)' ng-disabled="ReviewForm.$invalid">Submit</button>
                     </div>
                 </form>
                 <hr />
             </div>
     
+            <!-- All reviews for this book -->
             <div id="reviews">
                 <div class="media" ng-repeat="r in rCtrl.reviews">
                     <div class="media-body">
@@ -98,10 +108,9 @@
                 </div>
             </div>
         </section>
-        
     </div>
-
-        <!-- Modal dialog after adding to cart -->
+    
+    <!-- Modal dialog after adding to cart -->
     <div>
         <div class="modal-bg">
             <div class="dialog">

@@ -1,0 +1,55 @@
+[{
+    "title": "Arts & Photography",
+    "link": "art&photography",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-02.jpg"
+},
+{
+    "title": "Biographies & Memoirs",
+    "link": "biographies&memoirs",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img15/books/icon/27400_icon_140x140_02.png"
+},
+{
+    "title": "Business & Investing",
+    "link": "business&investing",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-07.jpg"
+},
+{
+    "title": "Children's Books",
+    "link": "children",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-04.jpg"
+},
+{
+    "title": "Cookbooks, Food & Wine",
+    "link": "cooking&food&wine",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-03.jpg"
+},
+{
+    "title": "History",
+    "link": "history",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-06.jpg"
+},
+{
+    "title": "Literature & Fiction",
+    "link": "literature&fiction",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-01.jpg"
+},
+{
+    "title": "Mystery & Suspense",
+    "link": "mystery&suspense",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-10.jpg"
+},
+{
+    "title": "Romance",
+    "link": "romance",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img15/books/icon/27400_icon_140x140_04.png"
+},
+{
+    "title": "Sci-Fi & Fantasy",
+    "link": "sci-fi&fantasy",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img15/books/icon/27400_icon_140x140_05.png"
+},
+{
+    "title": "Teens & Young Adult",
+    "link": "teens&young-adult",
+    "imgUrl": "https://m.media-amazon.com/images/G/01/img14/books/icons/11753_books_holiday-branding-icon-evergreen-09.jpg"
+}]

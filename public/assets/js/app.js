@@ -1,4 +1,4 @@
-var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages']);
+var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages','ngAnimate']);
 var loginApp = angular.module('loginApp', []);
 
 mainApp.config(function ($routeProvider) {
@@ -8,6 +8,9 @@ mainApp.config(function ($routeProvider) {
         //     controller: "HomeController",
         //     controllerAs: "home"
         // })
+        .when('/books/category/:category', {
+            templateUrl: 'assets/js/books/books.htm',
+        })
         .when('/books', {
             templateUrl: 'assets/js/books/books.htm',
         })
