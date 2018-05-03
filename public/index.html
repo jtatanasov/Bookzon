@@ -108,13 +108,13 @@
                         <img class='nav-icon' src='assets/images/icons/logout.png' />
                         <a href="#" class="nav-link">Log Out</a>
                     </li>
-                    <li ng-show="!user.loggedUser" class="ng-hide nav-item">
+                    <li ng-click="user.goToLoginPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/login.png' />
-                        <a href="" ng-click="user.goToLoginPage($event)" class="nav-link">Login</a>
+                        <a href=""  class="nav-link">Login</a>
                     </li>
-                    <li ng-show="!user.loggedUser" class="ng-hide nav-item">
+                    <li ng-click="user.goToSignUpPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/signup.png' />
-                        <a href="" ng-click="user.goToSignUpPage($event)" class="nav-link">Sign Up</a>
+                        <a href=""  class="nav-link">Sign Up</a>
                     </li>
 
                 </ul>
