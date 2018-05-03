@@ -48,7 +48,9 @@ router.post('/', function (req, res, next) {
                     _id: doc[0]._id,
                     name: doc[0].name,
                     email: doc[0].email,
-                    isAdmin: doc[0].isAdmin
+                    isAdmin: doc[0].isAdmin,
+                    address: doc[0].address,
+                    mobileNumber: doc[0].mobileNumber
                 }
                 res.json(tmpUser);
             }

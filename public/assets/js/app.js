@@ -22,6 +22,11 @@ mainApp.config(function ($routeProvider) {
             controller: 'ProfileController',
             controllerAs: 'profile',
         })
+        .when('/order', {
+            templateUrl: 'assets/js/orders/singleOrder/order.htm',
+            controller: 'OrderController',
+            controllerAs: 'order'
+        })
         .when('/add-book', {
             templateUrl: 'assets/js/admin/addBook.htm',
             controller: 'AdminController',
@@ -31,6 +36,11 @@ mainApp.config(function ($routeProvider) {
             templateUrl: 'assets/js/profile/editProfile/editProfile.htm',
             controller: 'EditProfileController',
             controllerAs: 'profile',
+        })
+        .when('/profile/orders', {
+            templateUrl: 'assets/js/orders/allOrders/orders.htm',
+            controller: 'AllOrdersController',
+            controllerAs: 'orders'
         })
         .when('/profile/cart', {
             templateUrl: 'assets/js/cart/cart.htm',

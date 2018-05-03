@@ -3,7 +3,7 @@
 
     mainApp.controller('CartController', CartController);
 
-    function CartController($rootScope, CartService) {
+    function CartController($location, $rootScope, CartService) {
         var vm = this;
         vm.cart = {};
         vm.emptyCart = true;
@@ -58,6 +58,10 @@
                 .catch(err => {
                     console.log(err);
                 });
+        }
+
+        vm.order = function() {
+            $location.path('/order');
         }
     }
 })();

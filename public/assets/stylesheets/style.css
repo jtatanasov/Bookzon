@@ -169,10 +169,10 @@ body {
 .nav-item:last-of-type {
     z-index:2;
 }
-
+/* 
 .nav-item:last-of-type > a {
     padding: 0.2rem .5rem;
-}
+} */
 
 #amazon-profile-user-name {
     padding-bottom: 0.5em;
@@ -227,7 +227,9 @@ body {
 }
 #edit-profile,
 #add-new-book-form,
-#my-cart {
+#my-cart,
+#single-order,
+#all-orders {
     width:40%;
     margin: 0 auto;
     margin-top: 1em;
@@ -235,13 +237,17 @@ body {
 
 #edit-profile > div,
 #add-new-book-form > div,
-#my-cart > div {
+#my-cart > div,
+#single-order > div,
+#all-orders > div{
     margin-bottom: 1em;
 }
 
 #edit-profile > div > h2
 #add-new-book-form > div > h2,
-#my-cart > div > h2 {
+#my-cart > div > h2,
+#single-order > h2,
+#all-orders > h2 {
     margin-top: 1em;
 }
 
@@ -252,15 +258,33 @@ body {
 
 #edit-profile-form,
 #address-form,
-#add-new-book-form {
+#add-new-book-form,
+#order-info,
+#user-orders {
     border: 1px solid #E6BB9D;
     border-radius: 0.25rem;
 }
 
 #address-form > div,
-#add-new-book-form > div {
+#add-new-book-form > div,
+#order-info > div,
+#user-orders > div {
     padding: 0.5em;
     padding-bottom: 1.5em;
+}
+
+#user-orders > div {
+    border-bottom: 1px solid #E6BB9D;
+}
+
+#order-info > div > h3 {
+    margin-bottom: 1em;
+}
+
+#order-info > div label {
+    font-size: 1.1em;
+    color: #331500;
+    font-weight: bold;
 }
 
 #empty-cart {
@@ -271,7 +295,8 @@ body {
 }
 
 #edit-profile-form > div,
-#add-new-book-form > div {
+#add-new-book-form > div,
+#order-info > div {
     border-bottom: 1px solid #E6BB9D;
     padding: 0.5em;
     padding-bottom: 1.5em;
@@ -331,8 +356,6 @@ body {
 #edit-address {
     width: 20em;
 }
-
-
 
 #address-form {
     margin-bottom: 2em;
@@ -432,32 +455,99 @@ body {
     font-size: 1em;
 }
 
+#credit-card-info {
+    display: inline-block;
+}
+#credit-card-info h6 {
+    margin-top: 1em;
+}
+#credit-card-info-name {
+    width: 80%;
+}
+#credit-card-info-card-number {
+    width: 70%;
+}
+#credit-card-info-date, {
+    width: 45%;
+}
 
+#credit-card-info-cvv-number {
+    width: 70px;
+}
+
+#save-card-info-btn {
+    margin-top: 1em;
+    float: left;
+    font-size: 1.1em
+}
+
+.transaction > div {
+    display:inline-block;
+    width:45%;
+}
+
+.transaction > div:first-of-type {
+    display:inline-block;
+    margin-right: 2em;
+}
+#not-filled {
+    color: #331500;  
+}
+
+#order-info div #error-credit-card {
+    color: red;
+    font-weight: normal;
+    margin-top:1em;
+    margin-bottom: 1em;
+    font-size: 1em;
+}
+
+.acc-info-values {
+    font-weight: normal;
+}
+
+#order-prices {
+    font-size: 1.2em;
+    margin: 1em;
+    width: 40%;
+}
+
+#order-prices > button {
+    float:none;
+    margin-top: 0.5em;
+    font-size: 1.2em;
+}
+
+.single-notification {
+    display:inline-block;
+    border-bottom: 1px solid #E6BB9D;
+    padding-bottom: 1em;
+}
+#seenMessage {
+    width: 10em;
+}
+#seenMessage:hover {
+    cursor: pointer;
+}
 @media screen and (max-width:500px) {
-    #edit-profile {
-        width: 90%;
-    }
-
-    #add-new-book-form {
-        width: 90%;
-    }
-
-    #my-cart {
+    #edit-profile,
+    #add-new-book-form,
+    #my-cart,
+    #single-order,
+    #all-orders {
         width: 90%;
     }
 }
 
 @media screen and (max-width: 350px) {
-    .option {
-        width: 90%;
-    }
-
-    #edit-address {
+    .option,
+    #edit-address,
+    #single-order,
+    #all-orders  {
         width: 90%;
     }
 
     #add-to-cart-btn {
         font-size: 1em;
     }
-
 }

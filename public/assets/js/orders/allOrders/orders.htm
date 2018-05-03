@@ -1,0 +1,58 @@
+<div id='all-orders' class="ng-cloak">
+    <div class='profile-nav'>
+        <a href="#!profile">Profile</a>
+        <span>&#8250;</span>
+        <span>Orders</span>
+    </div>
+
+    <h2>{{orders.userName}}'s Orders</h2>
+    <div id='user-orders'>
+        <div id='empty-cart' ng-show='orders.noOrders'>You don't have any orders yet!</div>
+        <div class='simple-order' ng-repeat="order in orders.orders">
+            <table>
+                <tbody>
+                    <tr ng-repeat="book in order.books">
+                        <td class='book-in-cart-img'>
+                            <a href='#!books/{{book.bookId}}'>
+                                <img ng-src="{{book.photoUrl}}" alt="">
+                            </a>
+                        </td>
+                        <td class='book-in-cart-name'>
+                            <a href='#!books/{{book.bookId}}'>{{book.name}}</a>
+                            <br/>
+                            <small>by </small>
+                            <small ng-repeat="author in book.authors">{{author}}, </small>
+                        </td>
+                        <td class='book-in-cart-price'>
+                            <div class='price'>${{book.price}}</div>
+
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <b>Date: </b>
+                            </p>
+                        </td>
+                        <td>
+                            {{order.date}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Total price: </b>
+                        </td>
+                        <td>${{order.totalPrice}}
+                            <span ng-show='order.cashPayment'>(Paid cash)</span>
+                            <span ng-show='!order.cashPayment'>(Paid with credit card)</span>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
