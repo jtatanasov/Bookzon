@@ -18,12 +18,7 @@
         /* get reviews for current book */
         ReviewsService.getBookReviews(vm.review.bookId).then(function (response) {
             vm.reviews = response.data;
-            
-            /* calculate book rating */
-            if (vm.reviews.length > 0) {
-                var s = vm.reviews.reduce((sum, review) => sum + review.rating, 0);
-                vm.avgRating = (s / vm.reviews.length).toFixed(1);
-            }
+            calcAvgRating();
         }).catch(function (err) {
             console.log(err);
         });
@@ -77,6 +72,7 @@
                 // get user name:
                 response.data.username = $rootScope.user.name;
                 vm.reviews.push(response.data);
+                calcAvgRating();
             })
             .catch(function(err) {
                 console.log(err);
@@ -92,6 +88,14 @@
             $anchorScroll();
             //reset to old to keep any additional routing logic from kicking in
             $location.hash(old);
+        }
+
+        /* calculate book rating */
+        function calcAvgRating() {
+            if (vm.reviews.length > 0) {
+                var s = vm.reviews.reduce((sum, review) => sum + review.rating, 0);
+                vm.avgRating = (s / vm.reviews.length).toFixed(1);
+            }
         }
     }
 })();
