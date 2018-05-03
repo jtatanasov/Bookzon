@@ -5,21 +5,21 @@
             <p>
                 <label class='captions'>Title*</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.title' id='title' type="text" name='title' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.title' id='title' type="text" name='title' />
             <p ng-show='admin.wrongTitle' class='errors'>Invalid title</p>
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Author*</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.author' id='author' type="text" name='author' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.author' id='author' type="text" name='author' />
             <p ng-show='admin.wrongAuthor' class='errors'>Invalid author</p>
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Category*</label>
             </p>
-            <select class='form-inputs' ng-model='admin.newBook.category' id='category' type="text" name='category'>
+            <select class='form-inputs form-control' ng-model='admin.newBook.category' id='category' type="text" name='category'>
                 <option value="art">Art</option>
                 <option value="photography">Photography</option>
                 <option value="biographies">Biographies</option>
@@ -46,64 +46,63 @@
             <p>
                 <label class='captions'>Description</label>
             </p>
-            <textarea class='form-inputs' ng-model='admin.newBook.description' id='description' type="text" name='description'></textarea>
+            <textarea class='form-inputs form-control' ng-model='admin.newBook.description' id='description' type="text" name='description'></textarea>
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Page Count</label>
             </p>
-            <input min="1" class='form-inputs' ng-model='admin.newBook.pages' id='pages' type="number" name='pages' />
+            <input min="1" class='form-inputs form-control' ng-model='admin.newBook.pages' id='pages' type="number" name='pages' />
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>ISBN-10</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.isbn10' id='isbn10' type="number" name='isbn10' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.isbn10' id='isbn10' type="number" name='isbn10' />
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>ISBN-13</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.isbn13' id='isbn13' type="number" name='isbn13' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.isbn13' id='isbn13' type="number" name='isbn13' />
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Publisher*</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.publisher' id='publisher' type="text" name='publisher' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.publisher' id='publisher' type="text" name='publisher' />
             <p ng-show='admin.wrongPublisher' class='errors'>Invalid publisher</p>
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Publication Date*</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.publishedDate' id='publishedDate' type="date" name='publishedDate' />
+            <input class='form-inputs form-control' ng-model='admin.newBook.publishedDate' id='publishedDate' type="date" name='publishedDate' />
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Price &#36; *</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.price' id='price' type="number" name='price' min="1" />
+            <input class='form-inputs form-control' ng-model='admin.newBook.price' id='price' type="number" name='price' min="1" />
             <p ng-show='admin.wrongPrice' class='errors'>Invalid price</p>
         </div>
         <div class='form-group'>
             <p>
                 <label class='captions'>Quantity*</label>
             </p>
-            <input class='form-inputs' ng-model='admin.newBook.quantity' id='quantity' type="number" name='quantity' min="0" />
+            <input class='form-inputs form-control' ng-model='admin.newBook.quantity' id='quantity' type="number" name='quantity' min="0" />
             <p ng-show='admin.wrongQuantity' class='errors'>Invalid quantity</p>
         </div>
         <div class='form-group'>
             <p>
-                <label class='captions'>Select image for thumbnail</label>
+                <label class='captions '>Select image for thumbnail</label>
             </p>
-
-            <input type="file" name="bookImage" id='file' file-model='admin.newBook.file'>
+            <input class='form-control' type="file" name="bookImage" id='file' file-model='admin.newBook.file'>
             <p ng-show='admin.wrongFile' class='errors'>Please select thumbnail*</p>
         </div>
         <div class='form-group'>
 
-            <button class='buttons' type='submit' ng-click='admin.addNewBook()'>Upload</button>
+            <button class='btn btn-warning btn-md' type='submit' ng-click='admin.addNewBook()'>Upload</button>
         </div>
     </form>
 </div>

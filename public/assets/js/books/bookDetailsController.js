@@ -11,19 +11,6 @@
         vm.isLogged = false;
         vm.addedToCart = false;
 
-        vm.showModal = false;
-        vm.showView = false;
-        vm.counter = 1;
-        vm.toggleDialog = function () {
-            vm.showModal = !this.showModal;
-        }
-        vm.toggleView = function () {
-            vm.showView = !this.showView;
-        }
-        vm.changeDisplay = function () {
-            vm.counter++;
-        }
-
         BooksService.getBookById(bookId).then(function (response) {
             if (!$rootScope.user) {
                 vm.isLogged = false;
@@ -56,7 +43,7 @@
                 })
         }
       
-        vm.goToCart = function() { 
+        vm.goToCart = function() {
             $location.path('/profile/cart');
         }
     }

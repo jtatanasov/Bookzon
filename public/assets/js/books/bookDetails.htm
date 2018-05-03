@@ -4,7 +4,7 @@
         <section id="bookDetailsSection" class="container container-fluid p-3">
             <a class="btn btn-link mb-3 p-0" ng-href="#!books">
                 <span class="text-bigger">&#171;</span> All books</a>
-            <button class='buttons delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)'
+            <button class='btn btn-danger btn-md delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)'
                 ng-show='booksCtr.isAdmin'>Delete book</button>
             <div class="media">
                 <img width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"

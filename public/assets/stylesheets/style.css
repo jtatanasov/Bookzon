@@ -337,6 +337,7 @@ body {
 }
 
 .delete-book-btns {
+    float: right;
     width: 7em;
     margin: 0 auto 1em auto;
 }
@@ -353,11 +354,8 @@ body {
 }
 
 .form-inputs {
-    padding: 0.2em 0.6em;
-    border-radius: 5px;
-    border: 1px solid #331500;
-    outline: none;
-    height: 2em;
+    width: 20em;
+    display:inline-block;
 }
 
 .form-inputs:focus {

@@ -12,7 +12,7 @@
             <div class="card-deck">
                 <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books">
                     <!-- Admin's delete book btn -->
-                    <button class='buttons delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
+                    <button class='btn btn-danger btn-sm delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
                     <!--  -->
                     <a href="#!books/{{book._id}}" class="text-center">
                         <img class="mw-100" ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" on-error-src='assets/images/no-cover.png' alt="{{book.volumeInfo.title}}">
