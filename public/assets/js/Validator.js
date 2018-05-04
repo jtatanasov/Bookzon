@@ -1,4 +1,5 @@
 var validator = (function () {
+    const PASSWORD_MIN_LENGTH = 6;
     return {
         isValidMail: function (email) {
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -14,7 +15,7 @@ var validator = (function () {
         },
 
         isValidPassword: function (pass) {
-            return (typeof pass === 'string' && pass.length >= 6 && this.hasNumber(pass))
+            return (typeof pass === 'string' && pass.length >= PASSWORD_MIN_LENGTH && this.hasNumber(pass))
         },
 
         isValidPhoneNumber: function (phone) {

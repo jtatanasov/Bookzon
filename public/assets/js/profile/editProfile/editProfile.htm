@@ -5,69 +5,136 @@
         <span>Edit profile</span>
     </div>
 
-    <div >
+    <div>
         <h2>Login and Security</h2>
-        <form id='edit-profile-form' action="">
+        <form id='edit-profile-form' name='EditProfileForm' action="">
             <div>
                 <p>
                     <label class='captions' for="edit-name">Name</label>
                 </p>
                 <label ng-show='!profile.editNameMode' for='edit-name'>{{profile.name}}</label>
-                <input class='form-inputs form-control' ng-show='profile.editNameMode' type="text" id='edit-name' ng-model='profile.name' />
+                <input class='form-inputs form-control' name='name' ng-show='profile.editNameMode' type="text" id='edit-name' ng-model='profile.name'
+                    ng-minlength="3" ng-maxlength="30" required ng-class="{'is-invalid': EditProfileForm.name.$invalid && EditProfileForm.name.$touched}">
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editNameMode' ng-click='profile.editName($event)'>Edit</button>
-                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editNameMode' ng-click='profile.saveName($event)'>Save</button>
-                <p ng-show='profile.wrongName' class='errors'>Invalid name</p>
+                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-disabled="EditProfileForm.name.$invalid" ng-show='profile.editNameMode'
+                    ng-click='profile.saveName($event)'>Save</button>
+                <div class="help-block" ng-messages="EditProfileForm.name.$error" ng-if="EditProfileForm.name.$touched">
+                    <p class="text-danger" ng-message="required">
+                        <small>Name is required.</small>
+                    </p>
+                    <p class="text-danger" ng-message="minlength">
+                        <small>Name is too short.</small>
+                    </p>
+                    <p class="text-danger" ng-message="maxlength">
+                        <small>Name is too long.</small>
+                    </p>
+                </div>
             </div>
             <div>
                 <p>
                     <label class='captions' for="edit-email">Email</label>
                 </p>
                 <label ng-show='!profile.editEmailMode' for="edit-email">{{profile.email}}</label>
-                <input class='form-inputs form-control' ng-show='profile.editEmailMode' ng-model='profile.email' type="email" id='edit-email' />
+                <input name='email' class='form-inputs form-control' ng-show='profile.editEmailMode' ng-model='profile.email' type="email"
+                    id='edit-email' ng-minlength="5" ng-maxlength="20" ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                    required ng-class="{'is-invalid': EditProfileForm.email.$invalid && EditProfileForm.email.$touched}" />
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editEmailMode' ng-click='profile.editEmail($event)'>Edit</button>
-                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editEmailMode' ng-click='profile.saveEmail($event)'>Save</button>
-                <p ng-show='profile.wrongEmail' class='errors'>Invalid email</p>
+                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-disabled="EditProfileForm.email.$invalid" ng-show='profile.editEmailMode'
+                    ng-click='profile.saveEmail($event)'>Save</button>
+                <div class="help-block" ng-messages="EditProfileForm.email.$error" ng-if="EditProfileForm.email.$touched">
+                    <p class="text-danger" ng-message="required">
+                        <small>Email is required.</small>
+                    </p>
+                    <p class="text-danger" ng-message="minlength">
+                        <small>Email is too short.</small>
+                    </p>
+                    <p class="text-danger" ng-message="maxlength">
+                        <small>Email is too long.</small>
+                    </p>
+                    <p class="text-danger" ng-message="pattern">
+                        <small>This needs to be a valid email.</small>
+                    </p>
+                </div>
             </div>
             <div>
                 <p>
                     <label class='captions' for="edit-mobile-number">Mobile phone number</label>
                 </p>
                 <label ng-show='!profile.editPhoneNumber' for="edit-mobile-number">{{profile.mobileNumber}}</label>
-                <input class='form-inputs form-control' ng-show='profile.editPhoneNumber' ng-model='profile.mobileNumber' type="text" id='edit-mobile-number' />
+                <input name='mobileNumber' class='form-inputs form-control' ng-show='profile.editPhoneNumber' ng-model='profile.mobileNumber'
+                    type="text" id='edit-mobile-number' required ng-class="{'is-invalid': EditProfileForm.mobileNumber.$invalid && EditProfileForm.mobileNumber.$touched}"
+                    ng-pattern="/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im" />
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editPhoneNumber' ng-click='profile.editPhone($event)'>Edit</button>
-                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editPhoneNumber' ng-click='profile.savePhone($event)'>Save</button>
-                <p ng-show='profile.wrongMobileNumber' class='errors'>Invalid phone number</p>
+                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-disabled="EditProfileForm.mobileNumber.$invalid" ng-show='profile.editPhoneNumber'
+                    ng-click='profile.savePhone($event)'>Save</button>
+                <div class="help-block" ng-messages="EditProfileForm.mobileNumber.$error" ng-if="EditProfileForm.mobileNumber.$touched">
+                    <p class="text-danger" ng-message="pattern">
+                        <small>This needs to be a valid mobile number.</small>
+                    </p>
+                </div>
             </div>
             <div>
                 <p>
                     <label class='captions' for="edit-password">Password</label>
                 </p>
                 <p id='password-conditions'>
-                    <label ng-show='profile.editPasswordMode'>Password must contain at least 6 symbols and at least 1 digit</label>
+                    <label ng-show='profile.editPasswordMode'>Password must contain at least 6 symbols (at least 1 letter and 1 digit)</label>
                 </p>
                 <p>
-                    <input class='form-inputs form-control' placeholder='Enter password' ng-model='profile.password' ng-show='profile.editPasswordMode' type="password" id='edit-password' />
+                    <input name='password' class='form-inputs form-control' placeholder='Enter password' ng-model='profile.password' ng-show='profile.editPasswordMode'
+                        type="password" id='edit-password' required ng-class="{'is-invalid': EditProfileForm.password.$invalid && EditProfileForm.password.$touched}"
+                        ng-pattern="/^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/" minlength="6" />
+                    <div class="help-block" ng-messages="EditProfileForm.password.$error" ng-if="EditProfileForm.password.$touched">
+                        <p class="text-danger" ng-message="minlength">
+                            <small>Password must be at least 6 symbols.</small>
+                        </p>
+                        <p class="text-danger" ng-message="pattern">
+                            <small>This is not a valid password</small>
+                        </p>
+                    </div>
                 </p>
                 <p>
-                    <input class='form-inputs form-control' placeholder='Repeat password' ng-show='profile.editPasswordMode' ng-model='profile.confirmPassword' type="password" />
+                    <input required name='confirmPassword' class='form-inputs form-control' placeholder='Repeat password' ng-show='profile.editPasswordMode'
+                        ng-model='profile.confirmPassword' type="password" ng-minlength="6" ng-pattern="{{profile.password}}"
+                        ng-class="{'is-invalid': EditProfileForm.confirmPassword.$invalid && EditProfileForm.confirmPassword.$touched}"
+                    />
+                    <div class="help-block" ng-messages="EditProfileForm.confirmPassword.$error" ng-if="EditProfileForm.confirmPassword.$touched">
+                        <p class="text-danger" ng-message="minlength">
+                            <small>Password is too short.</small>
+                        </p>
+                        <p class="text-danger" ng-message="pattern">
+                            <small>Invalid password confirmation.</small>
+                        </p>
+                    </div>
                 </p>
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editPasswordMode' ng-click='profile.editPassword($event)'>Edit</button>
-                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editPasswordMode' ng-click='profile.savePassword($event)'>Save</button>
-                <p ng-show='profile.wrongPassword' class='errors'>Invalid password or confirmation</p>
+                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-disabled="EditProfileForm.password.$invalid || EditProfileForm.confirmPassword.$invalid"
+                    ng-show='profile.editPasswordMode' ng-click='profile.savePassword($event)'>Save</button>
+
             </div>
         </form>
 
         <h2>Address</h2>
-        <form id='address-form'>
+        <form name='AddressForm' id='address-form'>
             <div>
                 <p>
                     <label class='captions' for="edit-address">Change address</label>
                 </p>
-                <label ng-show='!profile.editAddressMode' for="edit-address">{{profile.address}}</label> 
-                <input class='form-inputs form-control' ng-show='profile.editAddressMode' ng-model='profile.address' type="text" id='edit-address' />
+                <label ng-show='!profile.editAddressMode' for="edit-address">{{profile.address}}</label>
+                <input name='address' class='form-inputs form-control' ng-show='profile.editAddressMode' ng-model='profile.address' type="text"
+                    id='edit-address' required ng-minlength="10" ng-maxlength="40" ng-class="{'is-invalid': AddressForm.address.$invalid && AddressForm.address.$touched}"
+                />
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editAddressMode' ng-click='profile.editAddress($event)'>Edit</button>
-                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editAddressMode' ng-click='profile.saveAddress($event)'>Save</button>
-                <p ng-show='profile.wrongAddress' class='errors'>Invalid phone number</p>
+                <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='profile.editAddressMode' ng-click='profile.saveAddress($event)'
+                    ng-disabled="AddressForm.$invalid">Save</button>
+                <div class="help-block" ng-messages="AddressForm.address.$error" ng-if="AddressForm.address.$touched">
+                    <p class="text-danger" ng-message="minlength">
+                        <small>Address is too short.</small>
+                    </p>
+                    <p class="text-danger" ng-message="maxlength">
+                        <small>Address is too long.</small>
+                    </p>
+                </div>
             </div>
         </form>
     </div>
