@@ -22,6 +22,7 @@
     <script src="assets/js/app.js"></script>
     <script src="assets/js/Validator.js"></script>
 
+    <script src="assets/js/notifications/modalController.js"></script>
     <script src="assets/js/main/mainController.js"></script>
     <script src="assets/js/main/mainService.js"></script>
 
@@ -44,7 +45,7 @@
     <script src="assets/js/directives/categories/categoriesDirective.js"></script>
     <script src="assets/js/directives/categories/categoriesService.js"></script>
     <script src="assets/js/directives/categories/categoriesController.js"></script>
-    
+
     <script src="assets/js/directives/onErrorSrc.js"></script>
     <script src="assets/js/books/booksService.js"></script>
     <script src="assets/js/books/booksController.js"></script>
@@ -110,11 +111,11 @@
                     </li>
                     <li ng-click="user.goToLoginPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/login.png' />
-                        <a href=""  class="nav-link">Login</a>
+                        <a href="" class="nav-link">Login</a>
                     </li>
                     <li ng-click="user.goToSignUpPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/signup.png' />
-                        <a href=""  class="nav-link">Sign Up</a>
+                        <a href="" class="nav-link">Sign Up</a>
                     </li>
 
                 </ul>
@@ -122,31 +123,10 @@
             </div>
         </div>
     </nav>
-    <div class="modal-bg">
-        <div class="dialog">
-            <!-- Large modal -->
 
-            <div id='notification-modal-dialog' class="modal fade bs-example-modal-lg" focus-group focus-group-head="loop" focus-group-tail="loop"
-                focus-stacktabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Notifications</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class='single-notification' ng-repeat="notification in user.notifications">
-                                <p>{{notification.text}}</p>
-                                <button class='buttons' id='seenMessage' ng-click='user.seenMessage(notification.id)'>Okey</button>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button ng-click='user.closeModal()' type="button" class="buttons btn btn-default" focus-element="autofocus" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <div ng-controller="ModalController as mCtrl" id='notifications-modal'>
+        <div ng-show="mCtrl.selected">Selection from a modal: {{ selected }}</div>
     </div>
     <main ng-view></main>
 </body>

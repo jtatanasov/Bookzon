@@ -507,17 +507,40 @@ body {
     font-size: 1.2em;
 }
 
-.single-notification {
+.single-notification {    
+    padding: 1em;
+    border-bottom: 1px solid #e9ecef;
     display:inline-block;
-    border-bottom: 1px solid #E6BB9D;
-    padding-bottom: 1em;
+    width: 100%;
 }
-#seenMessage {
-    width: 10em;
+
+.single-notification:last-of-type {
+    border-bottom: none;
 }
-#seenMessage:hover {
-    cursor: pointer;
+.notification-text {
+    display: inline-block;
 }
+
+.notification-button {
+    float: right;
+}
+.fade.in {
+    opacity: 1;
+}
+.modal.in .modal-dialog {
+    -webkit-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+  
+.modal-backdrop .fade .in {
+    opacity: 0.5 !important;
+}
+  
+  
+  .modal-backdrop.fade {
+      opacity: 0.5 !important;
+  }
 @media screen and (max-width:500px) {
     #edit-profile,
     #add-new-book-form,
