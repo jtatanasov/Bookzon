@@ -1,18 +1,6 @@
 loginApp.service('loginAndRegisterService', function ($http) {
     this.register = function (user) {
-        return new Promise(function (resolve, reject) {
-            $http.post('/register', user)
-                .then(function (response) {
-                    if (response.data.id) {
-                        resolve(response.data.id);
-                    } else {
-                        resolve(null);
-                    }
-                })
-                .catch(function (err) {
-                    reject(err);
-                });
-        });
+        return $http.post('/register', user)
     }
 
     this.login = function (user) {

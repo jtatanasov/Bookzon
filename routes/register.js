@@ -25,7 +25,6 @@ router.post('/', function (req, res, next) {
     res.setHeader('content-type', 'application/json');
     var usersCollection = req.db.get('users');
     var newUser = req.body;
-
     if (!isValidMail(newUser.email) || !(isValidString(newUser.name)) || !(isValidPassword(newUser.password))) {
         res.status(200);
         res.json({ message: "Invalid input data" });

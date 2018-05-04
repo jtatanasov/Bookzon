@@ -1,5 +1,5 @@
 var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages','ngAnimate', 'ui.bootstrap.modal']);
-var loginApp = angular.module('loginApp', []);
+var loginApp = angular.module('loginApp', ['ngMessages']);
 
 mainApp.config(function ($routeProvider) {
     $routeProvider

@@ -8,7 +8,7 @@
     <title>Bookzon Login</title>
 
     <!-- Styles -->
-    
+
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/bookzon-favicon.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
@@ -25,6 +25,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.js"></script>
     <script src="assets/js/app.js"></script>
 
 
@@ -39,7 +40,9 @@
     <div class="container" ng-controller="LoginAndRegisterController">
 
         <header>
-            <h1>Welcome to <a id='link-to-home' href='/'>Bookzon</a></h1>
+            <h1>Welcome to
+                <a id='link-to-home' href='/'>Bookzon</a>
+            </h1>
 
         </header>
         <section>
@@ -48,19 +51,41 @@
                 <a class="hiddenanchor" id="tologin"></a>
                 <div id="wrapper">
                     <div id="login" class="animate form">
-                        <form action="" autocomplete="on">
+                        <form action="" name='LoginForm'>
                             <h1>Log in to Bookzon</h1>
                             <p>
                                 <label for="email" class="youmail"> Your email</label>
-                                <input id="email" ng-model='attemptingUser.email' name="email" required="required" type="email" placeholder="mymail@mail.com"
-                                />
-                                <p ng-show='wrongEmail' class='ng-hide error'>Invalid email</p>
+                                <input id="email" ng-model='attemptingUser.email' name="email" type="email" placeholder="mymail@mail.com" required ng-minlength="5"
+                                    ng-maxlength="20" ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                                    ng-class="{'is-invalid': LoginForm.email.$invalid && LoginForm.email.$touched}" />
+                                <div class="help-block" ng-messages="LoginForm.email.$error" ng-if="LoginForm.email.$touched">
+                                    <p class="text-danger" ng-message="required">
+                                        <small>Email is required.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Email is too short.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="maxlength">
+                                        <small>Email is too long.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                        <small>This needs to be a valid email.</small>
+                                    </p>
+                                </div>
                             </p>
                             <p>
                                 <label for="password" class="youpasswd"> Your password </label>
-                                <input id="password" ng-model='attemptingUser.password' name="password" required="required" type="password" placeholder="eg. X8df!90EO"
-                                />
-                                <p ng-show='wrongPassword' class='error ng-hide'>Invalid password</p>
+                                <input id="password" ng-model='attemptingUser.password' name="password" required="required" type="password" placeholder="eg. X8df!  90EO"
+                                    required ng-class="{'is-invalid': LoginForm.password.$invalid && LoginForm.password.$touched}"
+                                    ng-pattern="/^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/" ng-minlength="6" />
+                                <div class="help-block" ng-messages="LoginForm.password.$error" ng-if="LoginForm.password.$touched">
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Password must be at least 6 symbols.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                        <small>Password must contain at least 6 symbols (at least 1 letter and 1 digit)</small>
+                                    </p>
+                                </div>
                                 <p ng-show='noUser' class='ng-hide error'>There is no user with this email/password!</p>
                             </p>
                             <p ng-click='userLogin($event)' class="login button">
@@ -75,32 +100,75 @@
                     </div>
 
                     <div id="register" class="animate form">
-                        <form action="" autocomplete="on">
+                        <form action="" name='RegisterForm' autocomplete="on">
                             <h1>Sign up</h1>
                             <p>
                                 <label for="namesignup" class="name"> Your name</label>
-                                <input ng-model='newUser.name' id="namesignup" name="namesignup" required="required" type="text" placeholder="eg. John Doe"
+                                <input ng-model='newUser.name' id="namesignup" name="namesignup" requiredtype="text" placeholder="eg. John Doe" ng-minlength="3"
+                                    ng-maxlength="30" required ng-class="{'is-invalid': RegisterForm.namesignup.$invalid && RegisterForm.namesignup.$touched}"
                                 />
-                                <p ng-show='wrongSignUpName' class='ng-hide error'>Invalid name</p>
+                                <div class="help-block" ng-messages="RegisterForm.namesignup.$error" ng-if="RegisterForm.namesignup.$touched">
+                                    <p class="text-danger" ng-message="required">
+                                        <small>Name is required.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Name is too short.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="maxlength">
+                                        <small>Name is too long.</small>
+                                    </p>
+                                </div>
                             </p>
                             <p>
                                 <label for="emailsignup" class="youmail"> Your email</label>
-                                <input ng-model='newUser.email' id="emailsignup" name="emailsignup" required="required" type="email" placeholder="mysupermail@mail.com"/>
-                                <p ng-show='wrongSignUpEmail' class='ng-hide error'>Invalid email</p>
+                                <input ng-model='newUser.email' id="emailsignup" name="emailsignup" type="email" placeholder="mysupermail@mail.com" required
+                                    ng-minlength="5" ng-maxlength="20" ng-pattern='/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
+                                    ng-class="{'is-invalid': RegisterForm.emailsignup.$invalid && RegisterForm.emailsignup.$touched}"
+                                />
+                                <div class="help-block" ng-messages="RegisterForm.emailsignup.$error" ng-if="RegisterForm.emailsignup.$touched">
+                                    <p class="text-danger" ng-message="required">
+                                        <small>Email is required.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Email is too short.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="maxlength">
+                                        <small>Email is too long.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                        <small>This needs to be a valid email.</small>
+                                    </p>
+                                </div>
                             </p>
                             <p>
                                 <label for="passwordsignup" class="youpasswd">Your password </label>
-                                <input ng-model='newUser.password' id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="eg. X8df!90EO"
-                                />
-                                <p ng-show='wrongSignUpPassword' class='ng-hide error'>Invalid password</p>
+                                <input ng-model='newUser.password' id="passwordsignup" name="passwordsignup" type="password" placeholder="eg. X8df!90EO"
+                                    required ng-class="{'is-invalid': RegisterForm.passwordsignup.$invalid && RegisterForm.passwordsignup.$touched}"
+                                    ng-pattern="/^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/" ng-minlength="6" />
+                                <div class="help-block" ng-messages="RegisterForm.passwordsignup.$error" ng-if="RegisterForm.passwordsignup.$touched">
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Password must be at least 6 symbols.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                        <small>Password must contain at least 6 symbols (at least 1 letter and 1 digit)</small>
+                                    </p>
+                                </div>
                             </p>
                             <p>
                                 <label for="passwordsignup_confirm" class="youpasswd">Please confirm your password </label>
                                 <input ng-model='newUser.confirmPassword' id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password"
-                                    placeholder="eg. X8df!90EO">
-                                <p ng-show='wrongSignUpConfirmPassword' class='ng-hide error'>Invalid confirm password</p>
+                                    placeholder="eg. X8df!90EO" type="password" ng-minlength="6" ng-pattern="{{newUser.password}}"
+                                    ng-class="{'is-invalid': RegisterForm.passwordsignup_confirm.$invalid && RegisterForm.passwordsignup_confirm.$touched}">
+                                <div class="help-block" ng-messages="RegisterForm.passwordsignup_confirm.$error" ng-if="RegisterForm.passwordsignup_confirm.$touched">
+                                    <p class="text-danger" ng-message="minlength">
+                                        <small>Password is too short.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                        <small>Invalid password confirmation.</small>
+                                    </p>
+                                </div>
                                 <p ng-show='alreadyRegistered' class='ng-hide error'>There is registered user with this email</p>
-                                
+
                             </p>
                             <p ng-click='userRegister($event)' class="signin button">
                                 <input type="submit" value="Sign up" />

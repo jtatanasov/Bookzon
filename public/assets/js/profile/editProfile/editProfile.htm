@@ -14,7 +14,7 @@
                 </p>
                 <label ng-show='!profile.editNameMode' for='edit-name'>{{profile.name}}</label>
                 <input class='form-inputs form-control' name='name' ng-show='profile.editNameMode' type="text" id='edit-name' ng-model='profile.name'
-                    ng-minlength="3" ng-maxlength="30" required ng-class="{'is-invalid': EditProfileForm.name.$invalid && EditProfileForm.name.$touched}">
+                    ng-minlength="3" ng-maxlength="30" required ng-class="{'is-invalid': EditProfileForm.name.$invalid && EditProfileForm.name.$touched}" />
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-show='!profile.editNameMode' ng-click='profile.editName($event)'>Edit</button>
                 <button class='btn edit-profile-btn buttons btn-sm btn-warning' ng-disabled="EditProfileForm.name.$invalid" ng-show='profile.editNameMode'
                     ng-click='profile.saveName($event)'>Save</button>
@@ -83,7 +83,7 @@
                 <p>
                     <input name='password' class='form-inputs form-control' placeholder='Enter password' ng-model='profile.password' ng-show='profile.editPasswordMode'
                         type="password" id='edit-password' required ng-class="{'is-invalid': EditProfileForm.password.$invalid && EditProfileForm.password.$touched}"
-                        ng-pattern="/^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/" minlength="6" />
+                        ng-pattern="/^(?=.*[A-Za-z])(?=.*[0-9]).{6,}$/" ng-minlength="6" />
                     <div class="help-block" ng-messages="EditProfileForm.password.$error" ng-if="EditProfileForm.password.$touched">
                         <p class="text-danger" ng-message="minlength">
                             <small>Password must be at least 6 symbols.</small>
