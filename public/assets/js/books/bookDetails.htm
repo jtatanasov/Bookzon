@@ -13,7 +13,7 @@
                 <div class="media-body pl-3">
                     <div class="book-heading">
                         <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
-                        <small>by {{ctrl.bookDetails.volumeInfo.authors[0]}} (Author)</small>
+                        <small ng-if="ctrl.bookDetails.volumeInfo.authors.length > 0">by {{ctrl.bookDetails.volumeInfo.authors.join(", ")}} ({{ctrl.bookDetails.volumeInfo.authors.length == 1 ? "Author" : "Authors"}})</small>
                     </div>
                     <div class="rating">
                         <div class="mt-2 mb-2" ng-if="rCtrl.avgRating">

@@ -10,7 +10,7 @@
         <!-- books listing -->
         <div class="card-deck-wrapper">
             <div class="card-deck">
-                <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books">
+                <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books | filter: user.searchKeyword ">
                     <!-- Admin's delete book btn -->
                     <button class='btn btn-danger btn-sm delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
                     <!--  -->
@@ -23,7 +23,7 @@
                             <small>{{book.volumeInfo.title}}</small>
                         </a>
                         <br/>
-                        <small ng-repeat="author in book.volumeInfo.authors">{{author}}, </small>
+                        <small>{{book.volumeInfo.authors.join(", ")}}</small>
                         <br/>
                         <div ng-if="book.volumeInfo.averageRating > 0" class="mt-1 mb-1">
                             <small>
