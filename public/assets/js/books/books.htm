@@ -6,13 +6,15 @@
     </div>
 
     <section id="booksSection" ng-controller="BooksController as booksCtr">
+        <h2 class="mt-5 mb-5 text-center">{{booksCtr.heading}}</h2>
         <img id="mySpinner" src="http://www.fivestarfireplaces.com.au/album/images/loading.gif" ng-show="booksCtr.loading" class="loader" />
         <!-- books listing -->
+        <p class="alert alert-warning text-center" ng-if="booksCtr.books.length == 0 && !booksCtr.loading">No books found</p>
         <div class="card-deck-wrapper">
             <div class="card-deck">
                 <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books | filter: user.searchKeyword ">
                     <!-- Admin's delete book btn -->
-                    <button class='btn btn-danger btn-sm delete-book-btns' ng-click='booksCtr.deleteBook(book._id, false)' ng-show='booksCtr.isAdmin'>Delete book</button>
+                    <button class='btn btn-danger btn-sm delete-book-btns' ng-click='booksCtr.showConfirm($event, book._id, false)' ng-show='user.isAdmin'>Delete book</button>
                     <!--  -->
                     <a href="#!books/{{book._id}}" class="text-center">
                         <img class="mw-100" ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" on-error-src='assets/images/no-cover.png' alt="{{book.volumeInfo.title}}">

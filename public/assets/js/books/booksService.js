@@ -14,6 +14,10 @@
             return $http.get('/api/books/category/' + categories);
         }
 
+        this.getBooksByKeyword = function(keyword) {
+            return $http.get('api/books/search?q=' + keyword);
+        }
+        
         this.getBookById = function (bookId) {
             return $http.get('/api/books/' + bookId);
         }

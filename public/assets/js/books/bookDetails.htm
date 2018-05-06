@@ -2,10 +2,10 @@
     <div ng-controller="ReviewsController as rCtrl">
         <!-- Book details -->
         <section id="bookDetailsSection" class="container container-fluid p-3">
-            <a class="btn btn-link mb-3 p-0" ng-href="#!books">
+            <a class="btn btn-link mb-3 p-0" ng-href="#">
                 <span class="text-bigger">&#171;</span> All books</a>
-            <button class='btn btn-danger btn-md delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.deleteBook(ctrl.bookDetails._id, true)'
-                ng-show='booksCtr.isAdmin'>Delete book</button>
+            <button class='btn btn-danger btn-md delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.showConfirm($event, book._id, true)'
+                ng-show='user.isAdmin'>Delete book</button>
             <div class="media">
                 <img width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
                     alt="{{ctrl.bookDetails.volumeInfo.title}}">
