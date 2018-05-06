@@ -67,5 +67,10 @@
             $event.preventDefault();
             $location.path('/add-book');
         }
+
+        vm.getPendingOrders = function($event) {
+            $event.preventDefault();
+            $location.path('/pending-orders');
+        }
     }
 })();

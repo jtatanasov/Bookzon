@@ -1,6 +1,7 @@
-(function() {
+(function () {
     'use strict'
-
+    const ACCEPTED_ORDER = 'Shipping';
+    const DELIVERED_ORDER = 'Delivered';
     mainApp.controller('AllOrdersController', AllOrdersController);
 
     function AllOrdersController($rootScope, OrdersService) {
@@ -11,12 +12,37 @@
         } else {
             vm.user = $rootScope.user;
             vm.userName = vm.user.name.split(' ')[0];
-            OrdersService.getOrders(vm.user._id)
+            getOrders();
+            function getOrders() {
+                OrdersService.getOrders(vm.user._id)
+                    .then(resp => {
+                        vm.orders = resp.data;
+                        if (vm.orders.length == 0) {
+                            vm.noOrders = true;
+                        } else {
+                            vm.orders.forEach(o => {
+                                if(o.status == DELIVERED_ORDER) {
+                                    o.shipping = false;
+                                    o.delievered = true;
+                                }
+                                if (o.status == ACCEPTED_ORDER) {
+                                    o.shipping = true;
+                                }
+                            })
+                        }
+                    })
+                    .catch(err => console.log(err));
+            }
+        }
+
+        vm.markAsDelivered = function (orderId) {
+            OrdersService.markAsDelivered(orderId)
                 .then(resp => {
-                    vm.orders = resp.data.orders;
-                    vm.noOrders = (typeof vm.orders == 'undefined');
+                    getOrders();
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    console.log(err);
+                })
         }
     }
 })();

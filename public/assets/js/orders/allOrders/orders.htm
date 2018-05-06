@@ -8,7 +8,7 @@
     <h2>{{orders.userName}}'s Orders</h2>
     <div id='user-orders'>
         <div id='empty-cart' ng-show='orders.noOrders'>You don't have any orders yet!</div>
-        <div class='simple-order' ng-repeat="order in orders.orders">
+        <div ng-show='!orders.noOrders'class='simple-order' ng-repeat="order in orders.orders">
             <table>
                 <tbody>
                     <tr ng-repeat="book in order.books">
@@ -44,11 +44,26 @@
                             <b>Total price: </b>
                         </td>
                         <td>${{order.totalPrice}}
-                            <span ng-show='order.cashPayment'>(Paid cash)</span>
-                            <span ng-show='!order.cashPayment'>(Paid with credit card)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Payment: </b>
                         </td>
                         <td>
+                            <span ng-show='order.cashPayment'>Cash</span>
+                            <span ng-show='!order.cashPayment'>With credit card</span>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <b>Status:</b>
+                        </td>
+                        <td>
+                            {{order.status}}
+                        </td>
+                        <td ng-show='order.shipping'><button ng-click='orders.markAsDelivered(order._id)' class='btn btn-warning btn-sm'>Mark as delivered</button></td>
+                    </tr>
                     </tr>
                 </tbody>
             </table>

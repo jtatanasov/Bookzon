@@ -34,16 +34,21 @@ router.post('/', function (req, res, next) {
         usersCollection.find({ email: attemptingUser.email, password: attemptingUser.password }, {}, function (err, doc) {
             if (err) {
                 res.status(500);
-                res.json({err: err});
+                res.json({ err: err });
             }
             if (doc.length === 0) {
                 res.status(404);
-                res.json({message: "Wrong username or password"});
+                res.json({ message: "Wrong username or password" });
             } else {
                 res.status(200);
                 var tmpUser = doc[0];
                 delete tmpUser.password;
                 req.session.user = tmpUser;
+                req.session.save((err) => {
+                    if (err) {
+                        console.log(err);
+                    } 
+                });
                 tmpUser = {
                     _id: doc[0]._id,
                     name: doc[0].name,

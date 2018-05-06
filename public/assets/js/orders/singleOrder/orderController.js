@@ -1,12 +1,14 @@
 (function () {
     'use strict'
 
+    const PENDING_ORDER = 'Pending'
     mainApp.controller('OrderController', OrderController);
 
     function OrderController($rootScope, $location, OrdersService, CartService) {
         var vm = this;
         vm.tmpOrder = {
-            cashPayment: true
+            cashPayment: true,
+            status: PENDING_ORDER
         }
         vm.creditCard = {};
         vm.wrongCreditCardInfo = false;

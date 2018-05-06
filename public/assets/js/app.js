@@ -32,6 +32,11 @@ mainApp.config(function ($routeProvider) {
             controller: 'AdminController',
             controllerAs: 'admin'
         })
+        .when('/pending-orders', {
+            templateUrl: 'assets/js/admin/pendingOrders.htm',
+            controller: 'AdminController',
+            controllerAs: 'admin'
+        })
         .when('/profile/edit-profile', {
             templateUrl: 'assets/js/profile/editProfile/editProfile.htm',
             controller: 'EditProfileController',

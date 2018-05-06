@@ -21,7 +21,6 @@ router.put('/:userId/:notificationId', function(req, res,next) {
 router.get('/:id', function(req, res, next) {
     var notificationsCollection = req.db.get('notifications');
     var userId = req.params.id;
-    
     notificationsCollection.find({userId: userId}, {}, (err, docs) => {
         if(err) throw err;
         else {

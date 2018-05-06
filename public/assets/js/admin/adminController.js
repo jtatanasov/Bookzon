@@ -3,7 +3,7 @@
 
     mainApp.controller('AdminController', AdminController);
 
-    function AdminController($rootScope, $timeout, $location, BooksService) {
+    function AdminController($rootScope, $timeout, $location, BooksService, OrdersService) {
         var vm = this;
         vm.newBook = {};
         vm.wrongTitle = false;
@@ -86,5 +86,36 @@
                 .catch(err => console.log(err));
         }
 
+        getPendingOrders();
+        function getPendingOrders() {
+            OrdersService.getPendingOrders()
+                .then(resp => {
+                    vm.pendingOrders = resp.data;
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+
+        vm.acceptOrder = function (orderId) {
+            OrdersService.acceptOrder(orderId)
+                .then(resp => {
+                    getPendingOrders();
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
+
+
+        vm.declineOrder = function (orderId) {
+            OrdersService.declineOrder(orderId)
+            .then(resp => {
+                getPendingOrders();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
 })();

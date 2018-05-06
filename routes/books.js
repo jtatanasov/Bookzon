@@ -103,7 +103,7 @@ router.get('/', function (req, res, next) {
 /* Get single book */
 router.get('/:id', function (req, res, next) {
     var booksCollection = req.db.get('books');
-
+    
     booksCollection.find({ _id: req.params.id }, {}, function (err, docs) {
         if (err) {
             res.status(500);

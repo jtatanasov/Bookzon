@@ -8,7 +8,24 @@
             return $http.get('/orders/' + userId);
         }
         this.order = function (userId, newOrder) {
-            return $http.post('/orders/' + userId, newOrder);
+            newOrder.userId = userId;
+            return $http.post('/orders', newOrder);
+        }
+
+        this.getPendingOrders = function() {
+            return $http.get('/orders/pending');
+        }
+
+        this.acceptOrder = function(orderId) {
+            return $http.put('/orders/accept/' +orderId);
+        }
+
+        this.declineOrder = function(orderId) {
+            return $http.delete('/orders/decline/' + orderId);
+        }
+
+        this.markAsDelivered = function(orderId) {
+            return $http.put('/orders/delivered/' + orderId);
         }
     }
 })();

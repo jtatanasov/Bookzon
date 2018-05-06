@@ -9,6 +9,13 @@
         }
         this.getLoggedUser = function () {  
             if(sessionStorage.getItem('user') != 'null') {
+                $http.post('/users/session', JSON.parse(sessionStorage.getItem('user')))
+                .then(resp => {
+                    
+                })
+                .catch(err => {
+                    console.log(err);
+                })
                 return JSON.parse(sessionStorage.getItem('user'));
             } 
         }
