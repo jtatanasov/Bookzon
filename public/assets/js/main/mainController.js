@@ -72,5 +72,10 @@
         vm.search = function() {
             $location.path('/books/search').search({q: vm.keyword});
         }
+        
+        vm.getPendingOrders = function($event) {
+            $event.preventDefault();
+            $location.path('/pending-orders');
+        }
     }
 })();

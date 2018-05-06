@@ -51,6 +51,7 @@ app.use(session({
     secret: 'abcd1234',
     resave: true,
     saveUninitialized: true,
+    cookie: { maxAge: 600000000, secure: false }
 }));
 app.use(function (req, res, next) {
     req.db = db;

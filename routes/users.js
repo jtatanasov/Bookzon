@@ -36,7 +36,7 @@ function isValidPhoneNumber(phone) {
 
 router.get('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
-    
+
     usersCollection.find({}, {}, function (err, docs) {
         if (err) {
             res.status(500);
@@ -68,7 +68,6 @@ router.get('/:id', function (req, res, next) {
 router.put('/:id', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var idToSearch = req.params.id;
-
     var updateObj = {};
     usersCollection.find({ _id: idToSearch }, {}, function (err, docs) {
         var user = docs[0];
@@ -99,8 +98,8 @@ router.put('/:id', function (req, res, next) {
                 res.json({ message: 'Invalid mobile number' });
             }
             updateObj.mobileNumber = req.body.mobileNumber;
-        }else {
-            if(user.mobileNumber != undefined)
+        } else {
+            if (user.mobileNumber != undefined)
                 updateObj.mobileNumber = user.mobileNumber;
         }
         if (req.body.password) {
@@ -113,19 +112,19 @@ router.put('/:id', function (req, res, next) {
         } else {
             updateObj.password = user.password;
         }
-        if( req.body.address) {
-            if(!isValidString(req.body.address)) {
+        if (req.body.address) {
+            if (!isValidString(req.body.address)) {
                 res.status(412);
-                res.json({message: 'Invalid address'});
+                res.json({ message: 'Invalid address' });
                 return;
             }
             updateObj.address = req.body.address;
         } else {
-            if(user.address != undefined) {
+            if (user.address != undefined) {
                 updateObj.address = user.address;
             }
         }
-        
+
         usersCollection.update({ _id: idToSearch }, updateObj, function (err, docs) {
             if (err) {
                 res.json({ message: 'No such user' });
@@ -137,14 +136,17 @@ router.put('/:id', function (req, res, next) {
                 delete updateObj.password;
                 res.json(updateObj);
             }
-    
+
         });
     });
-
-    
-
-
 });
+
+router.post('/session', (req, res, next) => {
+    req.session.user = req.body;
+    //req.session.save();
+    res.status(200);
+    res.json({ user: req.session.user });
+})
 
 
 module.exports = router;

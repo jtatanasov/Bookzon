@@ -1,0 +1,61 @@
+<div id='pending-orders-container'>
+    <h2>Pending Orders</h2>
+    <div ng-repeat="order in admin.pendingOrders">
+        <table>
+            <tbody>
+                <tr ng-repeat="book in order.books">
+                    <td class='book-in-cart-img'>
+                        <a href='#!books/{{book.bookId}}'>
+                            <img ng-src="{{book.photoUrl}}" alt="">
+                        </a>
+                    </td>
+                    <td class='book-in-cart-name'>
+                        <a href='#!books/{{book.bookId}}'>{{book.name}}</a>
+                        <br/>
+                        <small>by </small>
+                        <small ng-repeat="author in book.authors">{{author}} </small>
+                    </td>
+                    <td class='book-in-cart-price'>
+                        <div class='price'>${{book.price}}</div>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <b>Date: </b>
+                        </p>
+                    </td>
+                    <td>
+                        {{order.date}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Total price: </b>
+                    </td>
+                    <td>${{order.totalPrice}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Payment: </b>
+                    </td>
+                    <td>
+                        <span ng-show='order.cashPayment'>Cash</span>
+                        <span ng-show='!order.cashPayment'>With credit card</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td id='admin-buttons'>
+                        <button ng-click='admin.acceptOrder(order._id)' class='btn btn-success btn-sm'>Accept</button>
+                        
+                        <button ng-click='admin.declineOrder(order._id)' class='btn btn-danger btn-sm'>Decline</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
