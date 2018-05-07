@@ -98,7 +98,7 @@
                         <a href="#" class="nav-link">Add new books</a>
                     </li>
                     <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.getPendingOrders($event)' class="ng-hide nav-item">
-                            <img class='nav-icon' src='assets/images/icons/books.png' />
+                            <img class='nav-icon' src='assets/images/icons/pending-orders.png' />
                             <a href="#" class="nav-link">Pending orders</a>
                     </li>
                     <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToOrders($event)' class="ng-hide nav-item">

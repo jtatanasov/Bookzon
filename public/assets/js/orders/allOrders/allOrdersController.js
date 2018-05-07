@@ -21,7 +21,7 @@
                             vm.noOrders = true;
                         } else {
                             vm.orders.forEach(o => {
-                                if(o.status == DELIVERED_ORDER) {
+                                if (o.status == DELIVERED_ORDER) {
                                     o.shipping = false;
                                     o.delievered = true;
                                 }
@@ -38,6 +38,11 @@
         vm.markAsDelivered = function (orderId) {
             OrdersService.markAsDelivered(orderId)
                 .then(resp => {
+                    var order = vm.orders.find(o => o._id == orderId)
+                    order.status = DELIVERED_ORDER;
+                    order.shipping = false;
+                    order.delievered = true;
+
                     getOrders();
                 })
                 .catch(err => {

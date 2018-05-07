@@ -548,6 +548,14 @@ body {
   .modal-backdrop.fade {
       opacity: 0.5 !important;
   }
+
+.delete-review-btn {
+    width: 20px;
+}
+
+.delete-review-btn:hover {
+    cursor: pointer;
+}
 @media screen and (max-width:500px) {
     .option,
     #edit-address,
