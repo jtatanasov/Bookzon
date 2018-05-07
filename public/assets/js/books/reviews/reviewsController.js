@@ -25,6 +25,9 @@
 
         /* Add Review Section */
         /* show/hide ReviewForm */
+        if($rootScope.user) {
+            vm.userId = $rootScope.user._id;
+        }
         vm.toggleReviewForm = function($event) {
             if (!$rootScope.user) {
                 console.log("Only logged users can write a review.");

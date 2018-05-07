@@ -1,0 +1,82 @@
+{
+  "_from": "angular-jk-carousel",
+  "_id": "angular-jk-carousel@0.5.0",
+  "_inBundle": false,
+  "_integrity": "sha1-T2YqTwJ4DQ+02Tdz8KZEwsN8W50=",
+  "_location": "/angular-jk-carousel",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "angular-jk-carousel",
+    "name": "angular-jk-carousel",
+    "escapedName": "angular-jk-carousel",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-jk-carousel/-/angular-jk-carousel-0.5.0.tgz",
+  "_shasum": "4f662a4f02780d0fb4d93773f0a644c2c37c5b9d",
+  "_spec": "angular-jk-carousel",
+  "_where": "D:\\ITTalents\\Bookzon",
+  "author": {
+    "name": "Juan Carlos Morales Mora",
+    "email": "juank.memphis@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/juank11memphis/angular-jk-carousel/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Pablo Gonzalez",
+      "email": "pablohgm@gmail.com"
+    }
+  ],
+  "deprecated": false,
+  "description": "Amazing carousel for angular material",
+  "devDependencies": {
+    "del": "2.2.0",
+    "gulp": "3.9.0",
+    "gulp-angular-templatecache": "1.8.0",
+    "gulp-autoprefixer": "3.1.0",
+    "gulp-cache": "0.4.1",
+    "gulp-concat": "2.6.0",
+    "gulp-csso": "1.0.1",
+    "gulp-jshint": "1.10.0",
+    "gulp-rename": "1.2.2",
+    "gulp-sass": "2.1.1",
+    "gulp-size": "2.0.0",
+    "gulp-uglify": "1.5.1",
+    "gulp-util": "3.0.7",
+    "jshint-stylish": "2.1.0",
+    "require-dir": "0.3.0",
+    "run-sequence": "1.1.5",
+    "systemjs-builder": "0.14.15",
+    "uglify-save-license": "0.4.1"
+  },
+  "homepage": "https://github.com/juank11memphis/angular-jk-carousel#readme",
+  "keywords": [
+    "angular",
+    "angular-material",
+    "carousel",
+    "slider"
+  ],
+  "license": "MIT",
+  "main": "dist/jk-carousel.js",
+  "name": "angular-jk-carousel",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/juank11memphis/angular-jk-carousel.git"
+  },
+  "scripts": {
+    "prepublish": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "style": "./dist/jk-carousel.css",
+  "version": "0.5.0"
+}
