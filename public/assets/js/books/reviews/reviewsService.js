@@ -21,11 +21,20 @@
                 method: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(data)
-            })
+            });
         }
 
-        this.deleteReview = function(reviewId) {
-            return $http.delete('/api/reviews/review/' + reviewId)
+        this.editReview = function (review) {
+            return $http({
+                url: '/api/reviews/review/' + review._id,
+                method: 'PUT',
+                contentType: 'application/json',
+                data: angular.toJson(review)
+            });
+        }
+
+        this.deleteReview = function(reviewId, userId, bookId, isAdmin) {
+            return $http.delete('/api/reviews/review/' + reviewId + '/' + userId + '/' + bookId + '/' + isAdmin)
         }
     }
 })();

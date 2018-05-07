@@ -65,11 +65,46 @@ router.get('/review/:reviewId', function (req, res, next) {
     })
 });
 
+/* update book when adding/editing/deleting a review */
+function updateBook(bookId, req) {
+    var booksCollection = req.db.get('books');
+    var reviewsCollection = req.db.get('reviews');
+    
+    reviewsCollection.find({ bookId: bookId }, function(err, docs) {
+        if (err) throw err;
+
+        var reviews = docs;
+        var averageRating = 0;
+        var ratingsCount = 0;
+
+
+        if (reviews.length > 0) {
+            var s = reviews.reduce((sum, review) => sum + review.rating, 0);
+            averageRating = (s / reviews.length).toFixed(1);
+            ratingsCount = reviews.length;
+        }
+
+        booksCollection.find({_id: bookId}, {}, (err, docs) => {
+            if(err) {
+                throw err;
+            } else {
+                booksCollection.update({_id: bookId}, {$set: {"volumeInfo.averageRating": averageRating, "volumeInfo.ratingsCount": ratingsCount}}, (err, resp) => {
+                    if(err) {
+                        throw err;
+                    } else {
+                    }
+                })
+            }
+        })
+        
+    });
+}
+
 /* add review */
 router.post('/', function (req, res, next) {
     var reviewsCollection = req.db.get('reviews');
     var review = req.body;
-  
+  console.log(req.body)
     if (!review.userId) {
         res.status(412);
         res.json({error: "no user"});
@@ -81,15 +116,17 @@ router.post('/', function (req, res, next) {
         res.json({error: "no such book"});
         return;
     }
-  
+
     reviewsCollection.insert(review, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
         } else {
+            updateBook(review.bookId, req);
             res.status(200);
             res.json(docs);
         }
+
     });
 });
 
@@ -127,37 +164,41 @@ router.put('/review/:id', function (req, res, next) {
                     res.status(500);
                     res.json(err);
                 } else {
+                    updateBook(review.bookId, req);
                     res.status(200);
-                    res.json(docs);
+                    res.json(review);
                 }
             });
         }
     });
 });
 
-router.delete('/review/:id', function (req, res, next) {
+router.delete('/review/:id/:userId/:bookId/:isAdmin', function (req, res, next) {
     var reviewId = req.params.id;
+    var userId = req.params.userId;
+    var bookId = req.params.bookId;
+    var isAdmin = req.params.isAdmin;
     var reviewsCollection = req.db.get('reviews');
-    var review = req.body;
   
     reviewsCollection.find({ _id: reviewId }, {}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
         } else {
-            if (!review.userId || review.userId !== docs[0].userId) {
+            if (!userId || (userId !== docs[0].userId && !isAdmin)) {
                 res.status(412);
                 res.json({error: "wrong user"});
                 return;
             }
         
-            if (!review.bookId || review.bookId !== docs[0].bookId) {
+            if (!bookId || bookId !== docs[0].bookId) {
                 res.status(412);
                 res.json({error: "wrong book"});
                 return;
             }
 
             reviewsCollection.remove({ _id: reviewId }, {}, function (err, data) {
+                updateBook(bookId, req);
                 res.status(200);
                 res.json({ message: "success" });
             });

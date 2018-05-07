@@ -9,6 +9,10 @@
         this.getBooks = function () {
             return $http.get('/api/books');
         }
+       
+        this.getBookRating = function (bookId) {
+            return $http.get('/api/books/rating/' + bookId);
+        }
 
         this.getBooksByCategory = function (categories) {
             return $http.get('/api/books/category/' + categories);
@@ -21,7 +25,6 @@
         this.getBookById = function (bookId) {
             return $http.get('/api/books/' + bookId);
         }
-
 
         this.addBook = function (data) {
             var fd = new FormData();
@@ -37,20 +40,9 @@
         this.editBook = function(bookId, obj) {
             return $http.put('/api/books/' + bookId, obj);
         }
+        
         this.deleteBook = function(bookId) {
             return $http.delete('/api/books/' + bookId)
         }
-
-
-        // function getBooks() {
-        //     return new Promise(function (resolve, reject) {
-        //         $http.get('/api/books').then(function(response) {
-        //             books = response;
-        //             resolve(response.data);
-        //         }).catch(function (err) {
-        //             reject(err);;
-        //         });
-        //     });
-        // }
     }
 })();

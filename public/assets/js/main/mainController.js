@@ -3,7 +3,7 @@
 
     mainApp.controller('MainController', MainController);
 
-    function MainController($scope, $location, $rootScope, $routeParams, MainService, CartService) {
+    function MainController($scope, $location, $rootScope, $routeParams, $mdDialog, MainService, CartService) {
         var vm = this;
         vm.loggedUser = false;
         vm.isAdmin = false;
@@ -77,5 +77,30 @@
             $event.preventDefault();
             $location.path('/pending-orders');
         }
+
+        vm.deleteBook = function (id, isBookDetailsPage) {
+            BooksService.deleteBook(id)
+                .then(resp => {
+                    if (isBookDetailsPage) {
+                         // home page
+                        $location.path('/');
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+
+        vm.showConfirm = function(ev, bookId, isBookDetailsPage) {
+            var confirm = $mdDialog.confirm()
+                  .title('Would you like to delete this book?')
+                  .targetEvent(ev)
+                  .ok('Yes')
+                  .cancel('Cancel');
+        
+            $mdDialog.show(confirm).then(function() {
+                vm.deleteBook(bookId, isBookDetailsPage);
+            });
+        };
     }
 })();

@@ -130,6 +130,23 @@ router.get('/category/:categories', function (req, res, next) {
     })
 });
 
+/* Get book rating */
+router.get('/rating/:bookId', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    var bookId = req.params.bookId;
+
+    booksCollection.find( {_id : bookId}, {"volumeInfo.averageRating": 1, "volumeInfo.ratingsCount": 1}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            console.log(docs)
+            res.json(docs);
+        }
+    })
+});
+
 /* Get books by keyword */
 router.get('/search', function (req, res, next) {
     var booksCollection = req.db.get('books');

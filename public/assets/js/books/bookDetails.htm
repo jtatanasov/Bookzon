@@ -4,7 +4,7 @@
         <section id="bookDetailsSection" class="container container-fluid p-3">
             <a class="btn btn-link mb-3 p-0" ng-href="#">
                 <span class="text-bigger">&#171;</span> All books</a>
-            <button class='btn btn-danger btn-md delete-book-btns' ng-controller='BooksController as booksCtr' ng-click='booksCtr.showConfirm($event, book._id, true)'
+            <button class='btn btn-danger btn-md delete-book-btns' ng-click='user.showConfirm($event, ctrl.bookDetails._id, true)'
                 ng-show='user.isAdmin'>Delete book</button>
             <div class="media">
                 <img width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
@@ -17,14 +17,14 @@
                             == 1 ? "Author" : "Authors"}})</small>
                     </div>
                     <div class="rating">
-                        <div class="mt-2 mb-2" ng-if="rCtrl.avgRating">
+                        <div class="mt-2 mb-2" ng-if="rCtrl.bookRating.averageRating">
                             <a ng-click="rCtrl.scrollTo('reviewsSection')" href="">
-                                <span class="text-warning" uib-rating ng-model="rCtrl.avgRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
+                                <span class="text-warning" uib-rating ng-model="rCtrl.bookRating.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
                                     aria-labelledby="custom-icons-1"></span>
                                 <span class="label text-primary">{{rCtrl.reviews.length}} customer {{(rCtrl.reviews.length == 1 ? "review" : "reviews")}}</span>
                             </a>
                         </div>
-                        <a class="btn btn-link p-0" ng-if="!rCtrl.avgRating" ng-click="rCtrl.scrollTo('reviewsSection')" href="">
+                        <a class="btn btn-link p-0" ng-if="!rCtrl.bookRating.averageRating" ng-click="rCtrl.scrollTo('reviewsSection')" href="">
                             <small>Be the first to review this book</small>
                         </a>
                     </div>
@@ -33,9 +33,9 @@
                     <p>
                         <b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
                     <p>
-                        <b>ISBN-10: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
+                        <b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].type}}: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
                     <p>
-                        <b>ISBN-13: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
+                        <b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].type}}: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
                     <p>
                         <b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>
                     <p>
@@ -112,18 +112,18 @@
             <h4>Customer Reviews</h4>
             <!-- Average star rating -->
             <div class="rating mt-3 mb-2">
-                <div ng-if="rCtrl.avgRating">
+                <div ng-if="rCtrl.bookRating.averageRating">
                     <div>
-                        <span class="text-warning" uib-rating ng-model="rCtrl.avgRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
+                        <span class="text-warning" uib-rating ng-model="rCtrl.bookRating.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
                             aria-labelledby="custom-icons-1"></span>
                         <!-- <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span> -->
-                        <span class="label text-primary">{{rCtrl.reviews.length}} customer {{(rCtrl.reviews.length == 1 ? "review" : "reviews")}}</span>
+                        <span class="label text-primary">{{rCtrl.bookRating.ratingsCount}} customer {{(rCtrl.bookRating.ratingsCount == 1 ? "review" : "reviews")}}</span>
                     </div>
                     <div class="text-muted mt-1">
-                        <small>{{rCtrl.avgRating}} out of 5 stars</small>
+                        <small>{{rCtrl.bookRating.averageRating}} out of 5 stars</small>
                     </div>
                 </div>
-                <div ng-if="!rCtrl.avgRating">
+                <div ng-if="!rCtrl.bookRating.averageRating">
                     <p class="font-wight-bold">There are no customer reviews yet.</p>
                 </div>
             </div>
@@ -135,6 +135,7 @@
                 <a class="btn btn-warning" href="" ng-click="rCtrl.toggleReviewForm()">Write a customer review</a>
                 <form ng-hide="rCtrl.addReviewCollapsed" name="ReviewForm" class="mt-4 p-4 border border-warning rounded animate-show-hide"
                     novalidate>
+                    <p ng-if="rCtrl.user._id == rCtrl.review.userId" class="text-muted">You have already reviewed this book. You can edit your review below.</p>
                     <div class="form-group">
                         <h4>
                             <span class="text-warning" name="rating" uib-rating ng-model="rCtrl.review.rating" max="5" enable-reset="false" read-only="false"
@@ -181,7 +182,7 @@
 
             <!-- All reviews for this book -->
             <div id="reviews">
-                <div class="media" ng-repeat="r in rCtrl.reviews">
+                <div class="media mb-4" ng-repeat="r in rCtrl.reviews">
                     <div class="media-body">
                         <h6 class="mb-0 font-weight-bold">
                             <small class="text-warning" uib-rating ng-model="r.rating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
@@ -192,6 +193,10 @@
                             <small class="text-muted">By {{r.username}} on {{r.date}}</small>
                         </p>
                         <p>{{r.text}}</p>
+                        <div ng-if="rCtrl.user._id == r.userId || user.isAdmin">
+                            <button ng-if="rCtrl.user._id == r.userId" class='btn btn-sm btn-outline-warning' ng-click='rCtrl.toggleReviewForm()'>Edit</button>
+                            <button class='btn btn-sm btn-outline-danger' ng-click='rCtrl.showConfirm($event, r._id)'>Delete</button>
+                        </div>
                     </div>
                     <!-- <img ng-show='user.isAdmin' class='delete-review-btn' ng-click='rCtrl.deleteReview()' src="assets/images/icons/delete.png" title='Delete review' alt="Delete review"/> -->
                 </div>

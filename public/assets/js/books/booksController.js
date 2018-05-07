@@ -3,7 +3,7 @@
 
     mainApp.controller('BooksController', BooksController);
 
-    function BooksController($http, $rootScope, $location, $routeParams, $scope, $mdDialog, BooksService) {
+    function BooksController($http, $rootScope, $location, $routeParams, $scope, BooksService) {
         var vm = this;
         vm.books = [];
         vm.loading = true;
@@ -11,8 +11,6 @@
         vm.keyword = $routeParams.q || "";
         $scope.user.keyword = vm.keyword;
         loadBooks();
-
-        /* mahnah isAdmin, zashtoto mojem da go vzimame direktno ot main controller-a -> user.isAdmin */
 
         function loadBooks() {
             /* Get books by category */
@@ -34,8 +32,8 @@
                     }).finally(function () {
                         vm.loading = false;
                     });   
-            } else {
-                /* get all books (just in case) */
+            } else if (vm.keyword == "") {
+                /* get all books (search without a keyword) */
                 BooksService.getBooks().then(function (response) {
                     vm.books = response.data;
                     vm.heading = 'All books';
@@ -46,33 +44,5 @@
                 });
             }
         }
-
-        vm.deleteBook = function (id, isBookDetailsPage) {
-            BooksService.deleteBook(id)
-                .then(resp => {
-                    if (isBookDetailsPage) {
-                        $location.path('/books');
-                    }
-                    loadBooks();
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
-
-        vm.showConfirm = function(ev, bookId, isBookDetailsPage) {
-            // Appending dialog to document.body to cover sidenav in docs app
-            var confirm = $mdDialog.confirm()
-                  .title('Would you like to delete this book?')
-                //   .textContent('All of the banks have agreed to forgive you your debts.')
-                //   .ariaLabel('Lucky day')
-                  .targetEvent(ev)
-                  .ok('Yes')
-                  .cancel('Cancel');
-        
-            $mdDialog.show(confirm).then(function() {
-                vm.deleteBook(bookId, isBookDetailsPage);
-            });
-          };
     }
 })();
