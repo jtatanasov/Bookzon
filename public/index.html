@@ -15,9 +15,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
 
-
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.5/angular-material.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- <script src="assets/vendor/angular-ui-carousel/dist/ui-carousel.min.js"></script>
+    <link rel="stylesheet" href="assets/vendor/angular-ui-carousel/dist/ui-carousel.min.css"> -->
+    <script src="assets/vendor/angular-jk-carousel/dist/jk-carousel.min.js"></script>
+    <link rel="stylesheet" href="assets/vendor/angular-jk-carousel/dist/jk-carousel.min.css">
 
     <script src="assets/js/app.js"></script>
     <script src="assets/js/Validator.js"></script>
@@ -25,6 +29,8 @@
     <script src="assets/js/notifications/modalController.js"></script>
     <script src="assets/js/main/mainController.js"></script>
     <script src="assets/js/main/mainService.js"></script>
+
+    <script src="assets/js/carousel/carouselController.js"></script>
 
     <script src="assets/js/home/homeController.js"></script>
 
@@ -102,8 +108,8 @@
                         <a href="#" class="nav-link">Add new books</a>
                     </li>
                     <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.getPendingOrders($event)' class="ng-hide nav-item">
-                            <img class='nav-icon' src='assets/images/icons/pending-orders.png' />
-                            <a href="#" class="nav-link">Pending orders</a>
+                        <img class='nav-icon' src='assets/images/icons/pending-orders.png' />
+                        <a href="#" class="nav-link">Pending orders</a>
                     </li>
                     <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToOrders($event)' class="ng-hide nav-item">
                         <img class='nav-icon' src='assets/images/icons/orders.png' />
@@ -131,8 +137,8 @@
             </div>
         </div>
     </nav>
-
-
+   
+    
     <div ng-controller="ModalController as mCtrl" id='notifications-modal'>
         <div ng-show="mCtrl.selected">Selection from a modal: {{ selected }}</div>
     </div>

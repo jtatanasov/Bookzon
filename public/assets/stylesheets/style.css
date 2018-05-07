@@ -87,16 +87,25 @@ body {
 #search-input {
     width: 17em;
 }
+@media screen and (max-width: 850px) {
+    #search-input {
+        width: 10em;
+    }
+}
 
 @media screen and (max-width: 650px) {
     #search-form {
         margin-bottom: 0.5em;
     }
-
+    #search-input {
+        width: 14em;
+    }
     #navbar-collapse-3 {
         margin-bottom: 0.5em;
     }
 }
+
+
 .nav-link {
     display: inline-block;
 }

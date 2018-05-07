@@ -198,7 +198,8 @@
                             <button class='btn btn-sm btn-outline-danger' ng-click='rCtrl.showConfirm($event, r._id)'>Delete</button>
                         </div>
                     </div>
-                    <!-- <img ng-show='user.isAdmin' class='delete-review-btn' ng-click='rCtrl.deleteReview()' src="assets/images/icons/delete.png" title='Delete review' alt="Delete review"/> -->
+                    <img class='edit-btn mr-2' ng-if='r.userId == rCtrl.userId || user.isAdmin' src="assets/images/icons/edit.png" alt="Edit review" title='Edit review'/>
+                    <img ng-show='r.userId == rCtrl.userId || user.isAdmin' class='delete-review-btn' ng-click='rCtrl.deleteReview()' src="assets/images/icons/delete.png" title='Delete review' alt="Delete review"/>
                 </div>
             </div>
         </section>
