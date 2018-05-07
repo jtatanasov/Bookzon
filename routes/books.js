@@ -83,37 +83,6 @@ router.delete('/:id', function (req, res, next) {
     });
 });
 
-/* Get all books */
-router.get('/', function (req, res, next) {
-    var booksCollection = req.db.get('books');
-
-    booksCollection.find({}, {}, function (err, docs) {
-        // booksCollection.find({"volumeInfo.category" : "art"},  {} , function(err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            res.status(200);
-            res.json(docs);
-        }
-    });
-
-});
-
-/* Get single book */
-router.get('/:id', function (req, res, next) {
-    var booksCollection = req.db.get('books');
-    
-    booksCollection.find({ _id: req.params.id }, {}, function (err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            res.status(200);
-            res.json(docs[0]);
-        }
-    })
-});
 
 /* Get books by one or more categories */
 router.get('/category/:categories', function (req, res, next) {
@@ -131,7 +100,32 @@ router.get('/category/:categories', function (req, res, next) {
     })
 });
 
-/* Get some random books for home page */
+/* Get books by keyword */
+router.get('/search', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    var keyword = req.query['q'];
+    
+    if (!keyword) {
+        getAllBooks(req, res, next);
+    } else {
+        var regularExpression = new RegExp(keyword.replace(/[, ]+/g, " ").trim().replace(/ /g, "|"), "i");
+       
+        /* full word search with mongodb text index in title and authors */
+        // booksCollection.find( { $text: { $search: keyword } }, {}, function (err, docs) {
+        /* parial search with regular expression */
+        booksCollection.find( { $or: [ { "volumeInfo.title": { "$regex": regularExpression } }, { "volumeInfo.authors": { "$regex": regularExpression }} ] }, {}, function (err, docs) {
+            if (err) {
+                res.status(500);
+                res.json(err);
+            } else {
+                res.status(200);
+                res.json(docs);
+            }
+        })
+    }
+});
+
+/* Get some 'random' books for home page */
 router.get('/random/:num', function (req, res, next) {
     var booksCollection = req.db.get('books');
     var num = +req.params.num;
@@ -148,5 +142,37 @@ router.get('/random/:num', function (req, res, next) {
         }
     })
 });
+
+/* Get single book */
+router.get('/:id', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+
+    booksCollection.find({ _id: req.params.id }, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs[0]);
+        }
+    })
+});
+
+/* Get all books */
+router.get('/', getAllBooks);
+function getAllBooks(req, res, next) {
+    var booksCollection = req.db.get('books');
+
+    booksCollection.find({}, {}, function (err, docs) {
+        // booksCollection.find({"volumeInfo.category" : "art"},  {} , function(err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+}
 
 module.exports = router;

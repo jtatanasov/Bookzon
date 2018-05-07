@@ -3,7 +3,7 @@
 
     mainApp.controller('MainController', MainController);
 
-    function MainController($scope, $location, $rootScope, MainService, CartService) {
+    function MainController($scope, $location, $rootScope, $routeParams, MainService, CartService) {
         var vm = this;
         vm.loggedUser = false;
         vm.isAdmin = false;
@@ -68,6 +68,11 @@
             $location.path('/add-book');
         }
 
+        // search
+        vm.search = function() {
+            $location.path('/books/search').search({q: vm.keyword});
+        }
+        
         vm.getPendingOrders = function($event) {
             $event.preventDefault();
             $location.path('/pending-orders');

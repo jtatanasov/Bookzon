@@ -54,6 +54,8 @@
     <script src="assets/js/books/reviews/reviewsService.js"></script>
     <script src="assets/js/books/reviews/reviewsController.js"></script>
 
+    <script src="assets/js/directives/onEnter.js"></script>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
@@ -73,18 +75,20 @@
         <div class="container container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <a herf="#">
-
                 <img style="width:80px" id="bookzon-logo" src="assets/images/bookzon-logo.png">
-
             </a>
-
             <a id="bookzon-title" class="navbar-brand" href="#">Bookzon</a>
             <button id="button-collapse-navbar" type="button" class="btn navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#navbar-collapse-3">
                 <span class="sr-only">Toggle navigation</span>
                 &#x2630;</button>
             <form id='search-form' class="form-inline mr-auto" role="search">
-                <div class="form-group">
-                    <input id='search-input' type="text" class="form-control" placeholder="Search" ng-model="user.searchKeyword">
+                <div class="input-group">
+                    <input id='search-input' type="text" class="form-control" placeholder="Search Bookzon" ng-model="user.keyword" my-enter="user.search()">
+                    <span class="input-group-append">
+                        <button class="btn" type="button" ng-click="user.search()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
                 </div>
             </form>
             <div class="collapse navbar-collapse" id="navbar-collapse-3">

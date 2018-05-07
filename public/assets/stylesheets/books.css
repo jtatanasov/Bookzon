@@ -93,3 +93,9 @@ img.loader {
 #addReview .ng-hide {
     opacity: 0;
 }
+
+/* search field*/
+#search-form .form-control:focus {
+    border-color: orange;
+    box-shadow: none;
+  }

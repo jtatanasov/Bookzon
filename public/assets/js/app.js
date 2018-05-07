@@ -1,17 +1,20 @@
-var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages','ngAnimate', 'ui.bootstrap.modal']);
+var mainApp = angular.module('mainApp', ['ngRoute','ui.bootstrap','ngMessages','ngAnimate', 'ui.bootstrap.modal', 'ngMaterial']);
 var loginApp = angular.module('loginApp', ['ngMessages']);
 
 mainApp.config(function ($routeProvider) {
     $routeProvider
-        // .when('/', {
-        //     templateUrl: 'assets/js/home/home.htm',
-        //     controller: "HomeController",
-        //     controllerAs: "home"
-        // })
-        .when('/books/category/:category', {
-            templateUrl: 'assets/js/books/books.htm',
+        .when('/', {
+            templateUrl: 'assets/js/home/home.htm',
+            controller: "HomeController",
+            controllerAs: "home"
         })
         .when('/books', {
+            templateUrl: 'assets/js/books/books.htm',
+        })
+        .when('/books/search', {
+            templateUrl: 'assets/js/books/books.htm',
+        })
+        .when('/books/category/:category', {
             templateUrl: 'assets/js/books/books.htm',
         })
         .when('/books/:bookId', {
