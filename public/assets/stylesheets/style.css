@@ -549,6 +549,14 @@ body {
       opacity: 0.5 !important;
   }
 
+.edit-btn {
+    margin-left: 1em;
+    width: 20px;
+}
+
+.edit-btn:hover {
+    cursor: pointer;
+}
 .delete-review-btn {
     width: 20px;
 }

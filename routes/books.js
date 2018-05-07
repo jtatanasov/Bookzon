@@ -10,6 +10,36 @@ function isValidNumber(num) {
     return (typeof num == 'number' && num > 0);
 }
 
+router.put('/:bookId', function(req, res, next) {
+    var booksCollection = req.db.get('books');
+    var bookId = req.params.bookId;
+    var newParams = req.body;
+
+    booksCollection.find({_id: bookId}, {}, (err, docs) => {
+        if(err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            var book = docs[0];
+            if(newParams.quantity) {
+                book.volumeInfo.quantity = newParams.quantity;
+            }
+            if(newParams.price) {
+                book.volumeInfo.price = newParams.price;
+            }
+            booksCollection.update({_id: bookId}, book, (err, resp) => {
+                if(err) {
+                    res.status(500);
+                    res.json(err);
+                } else {
+                    res.status(200);
+                    res.json({message: 'success'});
+                }
+
+            })
+        }
+    })
+}); 
 router.post('/', function (req, res, next) {
     // console.log(req.body);
     // console.log(req.files);

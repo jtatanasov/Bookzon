@@ -34,6 +34,9 @@
             });
         }
 
+        this.editBook = function(bookId, obj) {
+            return $http.put('/api/books/' + bookId, obj);
+        }
         this.deleteBook = function(bookId) {
             return $http.delete('/api/books/' + bookId)
         }

@@ -10,6 +10,8 @@
         vm.isAvailable = true;
         vm.isLogged = false;
         vm.addedToCart = false;
+        vm.editQuantity = false;
+        vm.editPrice = false;
 
         BooksService.getBookById(bookId).then(function (response) {
             if (!$rootScope.user) {
@@ -45,6 +47,36 @@
       
         vm.goToCart = function() {
             $location.path('/profile/cart');
+        }
+
+        vm.editBookQuantity = function() {
+            vm.editQuantity = true;
+        }
+
+        vm.editBookPrice = function() {
+            vm.editPrice = true;
+        }
+
+        vm.saveBookQuantity = function($event, bookId, newQuantity) {
+            $event.preventDefault();
+            BooksService.editBook(bookId, {quantity: newQuantity})
+            .then(resp => {
+                vm.editQuantity = false;
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+
+        vm.saveBookPrice = function($event, bookId, newPrice) {
+            $event.preventDefault();
+            BooksService.editBook(bookId, {price: newPrice})
+            .then(resp => {
+                vm.editPrice = false;
+            })
+            .catch(err => {
+                console.log(err);
+            })
         }
     }
 })(); 

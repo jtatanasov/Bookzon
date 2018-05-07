@@ -13,7 +13,8 @@
                 <div class="media-body pl-3">
                     <div class="book-heading">
                         <h3 class="mt-0">{{ctrl.bookDetails.volumeInfo.title}}</h3>
-                        <small ng-if="ctrl.bookDetails.volumeInfo.authors.length > 0">by {{ctrl.bookDetails.volumeInfo.authors.join(", ")}} ({{ctrl.bookDetails.volumeInfo.authors.length == 1 ? "Author" : "Authors"}})</small>
+                        <small ng-if="ctrl.bookDetails.volumeInfo.authors.length > 0">by {{ctrl.bookDetails.volumeInfo.authors.join(", ")}} ({{ctrl.bookDetails.volumeInfo.authors.length
+                            == 1 ? "Author" : "Authors"}})</small>
                     </div>
                     <div class="rating">
                         <div class="mt-2 mb-2" ng-if="rCtrl.avgRating">
@@ -40,16 +41,69 @@
                     <p>
                         <b>Publication Date: </b>{{ctrl.bookDetails.volumeInfo.publishedDate}}</p>
                     <hr class="mt-0" />
-                    <p>
-                        <b>Price: </b>${{ctrl.bookDetails.volumeInfo.price}}</p>
+                    <p style='display:inline-block'>
+                        <b>Price: </b>
+                        <label ng-show='!ctrl.editPrice' for="">${{ctrl.bookDetails.volumeInfo.price}}</label>
+                        <img ng-show='!ctrl.editPrice && user.isAdmin' class='edit-btn' ng-click='ctrl.editBookPrice()' src="assets/images/icons/edit.png" title='Edit price'
+                            alt="Edit price" />
+                        <form ng-show='ctrl.editPrice && user.isAdmin' class='ml-1' name='EditPrice' style='display:inline-block' >
+                            <div class='form-group'>
+                                <input style='width:7em' class='form-inputs form-control' id='price' type="text" ng-pattern="/^\-?\d+((\.|\,)\d+)?$/" name='price' min='1' ng-min="1"
+                                    ng-model='ctrl.bookDetails.volumeInfo.price' required ng-class="{'is-invalid': EditPrice.price.$invalid && EditPrice.price.$touched}"
+                                />
+                                <div style='display:inline-block' class="help-block" ng-messages="EditPrice.price.$error" ng-if="EditPrice.price.$touched">
+                                    <p class="text-danger" ng-message="required">
+                                        <small>Price is required.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="pattern">
+                                            <small>Price must be a valid number</small>
+                                        </p>
+                                    <p class="text-danger" ng-message="min">
+                                        <small>Price cannot be a negative number.</small>
+                                    </p>
+                                </div>
+                                <button ng-disabled='EditPrice.$invalid' ng-click='ctrl.saveBookPrice($event, ctrl.bookDetails._id, ctrl.bookDetails.volumeInfo.price)'
+                                    class='ml-1 btn btn-warning btn-md'>Save</button>
+                            </div>
+
+                        </form>
+                    </p>
+                    <hr ng-if='user.isAdmin' class='mt-0' />
+                    <p style='display:inline-block' ng-if='user.isAdmin'>
+                        <b>Quantity: </b>
+                        <label ng-show='!ctrl.editQuantity' for="">{{ctrl.bookDetails.volumeInfo.quantity}}</label>
+                        <img ng-show='!ctrl.editQuantity' class='edit-btn' ng-click='ctrl.editBookQuantity()' src="assets/images/icons/edit.png"
+                            title='Edit quantity' alt="Edit quantity" />
+
+                        <form ng-show='ctrl.editQuantity' class='ml-1' name='EditQuantity' style='display:inline-block'>
+                            <div class='form-group'>
+                                <input style='width:5em' class='form-inputs form-control' id='quantity' type="number" name='quantity' min='0' ng-min="0"
+                                    ng-model='ctrl.bookDetails.volumeInfo.quantity' required ng-class="{'is-invalid': EditQuantity.quantity.$invalid && EditQuantity.quantity.$touched}"
+                                />
+                                <div style='display:inline-block' class="help-block" ng-messages="EditQuantity.quantity.$error" ng-if="EditQuantity.quantity.$touched">
+                                    <p class="text-danger" ng-message="required">
+                                        <small>Quantity is required.</small>
+                                    </p>
+                                    <p class="text-danger" ng-message="min">
+                                        <small>Quantity cannot be a negative number.</small>
+                                    </p>
+                                </div>
+                                <button ng-disabled='EditQuantity.$invalid' ng-click='ctrl.saveBookQuantity($event, ctrl.bookDetails._id, ctrl.bookDetails.volumeInfo.quantity)'
+                                    class='ml-1 btn btn-warning btn-md'>Save</button>
+                            </div>
+
+                        </form>
+
+                    </p>
                     <hr class="mt-0" />
-                    <p ng-show='ctrl.isLogged && ctrl.isAvailable'>
+                    <p ng-show='ctrl.isLogged && ctrl.isAvailable && !user.isAdmin'>
                         <button data-toggle="modal" focus-element="autofocus" data-target="#cart-dialog" ng-click='ctrl.addToCart()' id='add-to-cart-btn'
                             class='btn btn-md btn-warning'>
                             <img src='assets/images/icons/cart.png' />Add to cart</button>
                     </p>
+
                     <p class='not-available-product' ng-show='!ctrl.isAvailable'>This book is currently out of stock!</p>
-                    <hr ng-show='ctrl.isLogged && ctrl.isAvailable' class="mt-0" />
+                    <hr ng-show='ctrl.isLogged && ctrl.isAvailable && !user.isAdmin' class="mt-0" />
                 </div>
             </div>
         </section>
@@ -139,7 +193,7 @@
                         </p>
                         <p>{{r.text}}</p>
                     </div>
-                <!-- <img ng-show='user.isAdmin' class='delete-review-btn' ng-click='rCtrl.deleteReview()' src="assets/images/icons/delete.png" title='Delete review' alt="Delete review"/> -->
+                    <!-- <img ng-show='user.isAdmin' class='delete-review-btn' ng-click='rCtrl.deleteReview()' src="assets/images/icons/delete.png" title='Delete review' alt="Delete review"/> -->
                 </div>
             </div>
         </section>
