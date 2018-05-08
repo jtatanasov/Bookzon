@@ -2,8 +2,8 @@
 
 .categories .card-deck .card {
     /* margin: 0 auto; */
-    max-width: 8rem;
-    min-width: 8rem;
+    max-width: 6.4rem;
+    min-width: 6.4rem;
     /* width: 5rem; */
 }
 
@@ -30,6 +30,7 @@
 /* BOOKS */
 .categories .card-deck,
  #booksSection .card-deck {
+    margin-left: 0 !important; /* bootstrap bug fix horizontal scroller*/
     margin-right: 0 !important; /* bootstrap bug fix horizontal scroller*/
 
 }
@@ -75,8 +76,7 @@
 }
 
 img.loader {
-    display: block;
-    margin: 0 auto;
+    margin-bottom: 30rem;
 }
 
 /* RATING */
@@ -94,8 +94,63 @@ img.loader {
     opacity: 0;
 }
 
+
+/* PAGINATION styles (uib-pagination works with Bootstrap 3)*/
+.pagination .pagination-prev a,
+.pagination .pagination-next a,
+.pagination .pagination-page a {
+    position: relative;
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.pagination .pagination-page.active a {
+    z-index: 1;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.pagination .pagination-prev a:hover,
+.pagination .pagination-next a:hover,
+.pagination .pagination-page a:hover {
+    color: #0056b3;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.pagination .pagination-prev.disabled a,
+.pagination .pagination-next.disabled a {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.pagination .pagination-prev:first-child a,
+.pagination .pagination-next:first-child a,
+.pagination .pagination-page:first-child a {
+    margin-left: 0;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
+}
+
+.pagination .pagination-prev:last-child a,
+.pagination .pagination-next:last-child a,
+.pagination .pagination-page:last-child a {
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
 /* search field*/
 #search-form .form-control:focus {
     border-color: orange;
     box-shadow: none;
-  }
+}

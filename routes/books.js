@@ -185,6 +185,32 @@ router.get('/search', function (req, res, next) {
     }
 });
 
+/* Get top-rated books for home page */
+router.get('/top-rated', function (req, res, next) {
+    var booksCollection = req.db.get('books');
+    const LIMIT = 6;
+    var fields = {
+        _id: 1,
+        "volumeInfo.title": 1,
+        "volumeInfo.authors": 1,
+        "volumeInfo.category": 1,
+        "volumeInfo.price": 1,
+        "volumeInfo.averageRating": 1,
+        "volumeInfo.ratingsCount": 1,
+        "volumeInfo.imageLinks.smallThumbnail": 1
+    }
+
+    booksCollection.find( {}, {fields: fields , sort: {"volumeInfo.averageRating": -1, "volumeInfo.ratingsCount": -1}, limit: LIMIT}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    })
+});
+
 /* Get some 'random' books for home page */
 router.get('/random/:num', function (req, res, next) {
     var booksCollection = req.db.get('books');

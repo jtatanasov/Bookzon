@@ -1,6 +1,11 @@
 body {
     line-height: 1.1;
 }
+
+.footer {
+    background-color: #331500;
+}
+
 .navbar-brand { position: relative; z-index: 2; color: #fff }
 
 .navbar-nav.navbar-right .btn { position: relative; z-index: 2; padding: 4px 20px; margin: 10px auto; transition: transform 0.3s; }
@@ -140,7 +145,8 @@ body {
     background-color: #331500;
 }
 
-.navbar a,li {
+.navbar a,
+.navbar li {
     color: #fff;
     padding-left:0.2em;
     padding-right:0.2em;
@@ -572,6 +578,12 @@ body {
 
 .delete-review-btn:hover {
     cursor: pointer;
+}
+
+#slides-control {
+    position: relative;
+    overflow: hidden;
+    min-height: 250px;
 }
 
 #carousel-container {

@@ -31,6 +31,7 @@
 
     <script src="assets/js/carousel/carouselController.js"></script>
 
+    <script src="assets/js/home/homeService.js"></script>
     <script src="assets/js/home/homeController.js"></script>
 
     <script src="assets/js/profile/profileController.js"></script>
@@ -80,7 +81,7 @@
     <nav id="main-navbar" class="navbar navbar-dark navbar-expand-md">
         <div class="container container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <a herf="#">
+            <a href="#">
                 <img style="width:80px" id="bookzon-logo" src="assets/images/bookzon-logo.png">
             </a>
             <a id="bookzon-title" class="navbar-brand" href="#">Bookzon</a>
@@ -143,6 +144,9 @@
         <div ng-show="mCtrl.selected">Selection from a modal: {{ selected }}</div>
     </div>
     <main ng-view></main>
+    <footer class="container-fluid footer text-center text-white p-2">
+        <small>Copyright &copy; 2018, Bookzon.com</small>
+    </footer>
 </body>
 
 </html>

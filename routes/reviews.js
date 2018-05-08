@@ -80,7 +80,7 @@ function updateBook(bookId, req) {
 
         if (reviews.length > 0) {
             var s = reviews.reduce((sum, review) => sum + review.rating, 0);
-            averageRating = (s / reviews.length).toFixed(1);
+            averageRating = Number((s / reviews.length).toFixed(1));
             ratingsCount = reviews.length;
         }
 

@@ -1,4 +1,4 @@
-<div class="container-fluid p-5">
+<div class="container-fluid p-4">
     <h1 class="text-center">Welcome to Bookzon</h1>
     <div ng-controller='CarouselController as carous' id='slides-control'>
         <div id='carousel-container'>
@@ -12,7 +12,7 @@
                         <a href='#!books/{{slide.bookId1}}'>{{slide.title1}}</a>
                     </div>
                     <div class='slide-book-container'>
-                        <a href="#!books/{{slide.bookId1}}">
+                        <a href="#!books/{{slide.bookId2}}">
                             <img ng-src="{{slide.image2}}" title='{{slide.title2}}' alt={{slide.title2}} />
                         </a>
                         <br/>
@@ -30,8 +30,36 @@
         </div>
     </div>
     <!-- categories directive -->
-    <div ng-controller="CategoriesController as cat">
-        <categories info="cat.categories"></categories>
-        <h2 class="text-center">{{cat.activeCategory}}</h2>
+    <div ng-controller="CategoriesController as cat" class="mt-4 text-center">
+        <categories info="cat.categories" class="d-inline-block"></categories>
     </div>
+
+    <section id="booksSection" class="text-center">
+        <h3 class="mb-4">Top rated books</h3>
+        <div class="card-deck-wrapper d-inline-block">
+            <div class="card-deck">
+                <div class="card mb-3 p-3" ng-repeat="book in home.topRatedBooks">
+                    <a href="#!books/{{book._id}}" class="text-center">
+                        <img class="mw-100" ng-src="{{book.volumeInfo.imageLinks.smallThumbnail}}" on-error-src='assets/images/no-cover.png' alt="{{book.volumeInfo.title}}">
+                    </a>
+
+                    <div class="card-footer bg-white border-top-0 text-muted p-1 text-left" style="height: 2 rem;">
+                        <a href="#!books/{{book._id}}" class="card-link">
+                            <small>{{book.volumeInfo.title}}</small>
+                        </a>
+                        <br/>
+                        <small>{{book.volumeInfo.authors.join(", ")}}</small>
+                        <br/>
+                        <div ng-if="book.volumeInfo.averageRating > 0" class="mt-1 mb-1">
+                            <small>
+                                <span class="text-warning" uib-rating ng-model="book.volumeInfo.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'" aria-labelledby="custom-icons-1"></span>      
+                                <span class="label">{{book.volumeInfo.ratingsCount}}</span>
+                            </small>
+                        </div>
+                        <p class="mt-2 mb-0">${{book.volumeInfo.price}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

@@ -3,7 +3,7 @@
 
     mainApp.controller('BookDetailsController', BookDetailsController);
 
-    function BookDetailsController($routeParams, BooksService, CartService, $rootScope, $scope, $location, $anchorScroll) {
+    function BookDetailsController(BooksService, CartService, $routeParams, $rootScope, $location, $scope) {
         var vm = this;
         var bookId = $routeParams.bookId;
         vm.rating = {};
@@ -12,6 +12,7 @@
         vm.addedToCart = false;
         vm.editQuantity = false;
         vm.editPrice = false;
+        $scope.user.keyword = "";
 
         BooksService.getBookById(bookId).then(function (response) {
             if (!$rootScope.user) {

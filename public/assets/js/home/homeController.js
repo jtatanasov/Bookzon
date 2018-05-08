@@ -3,9 +3,19 @@
 
     mainApp.controller('HomeController', HomeController);
 
-    function HomeController(BooksService) {
+    function HomeController(HomeService, $scope) {
         var vm = this;
+        vm.topRatedBooks = [];
+        loadTopRated();
+        $scope.user.keyword = "";
                
-        vm.message = "hello";
+        function loadTopRated() {
+            HomeService.getTopRatedBooks().then(function (response) {
+                vm.topRatedBooks = response.data;
+            }).catch(function (err) {
+                console.log(err);
+            });
+        }
+
     }
 })();
