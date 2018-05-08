@@ -35,15 +35,6 @@
                 .catch(err => console.log(err));
         }
 
-        vm.saveCardInfo = function ($event) {
-            $event.preventDefault();
-            if (!validator.isCreditCardInfoValid(vm.creditCard)) {
-                vm.wrongCreditCardInfo = true;
-            } else {
-                vm.wrongCreditCardInfo = false;
-            }
-        }
-
         vm.order = function () {
             vm.tmpOrder.books = vm.cart.books;
             vm.tmpOrder.totalPrice = vm.cart.totalPrice;
@@ -52,6 +43,7 @@
                 return;
             }
             if (!vm.tmpOrder.cashPayment) {
+                console.log(vm.creditCard);
                 if (!validator.isCreditCardInfoValid(vm.creditCard)) {
                     vm.wrongCreditCardInfo = true;
                     return;
