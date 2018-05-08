@@ -573,6 +573,44 @@ body {
 .delete-review-btn:hover {
     cursor: pointer;
 }
+
+#carousel-container {
+    margin: 2em auto;
+}
+
+.carousel-indicators {
+    bottom: -30px;
+}
+
+.carousel-indicators .active {
+    background-color: #331500;
+}
+.carousel-indicators > li {
+    background-color: #AA6839
+}
+.item img {
+    width: 12em;
+    padding: 0 2em;
+    margin-bottom: 1em;
+}
+.item:not(.active) {
+    display:none;
+}
+
+.right.carousel-control, .left.carousel-control {
+    display: inline;
+}
+
+.slide-book-container {
+    display:inline-block;
+    padding: 0.5em;
+}
+
+.slide-book-container > a {
+    margin-top: 0.2em;
+    color: #331500;
+}
+
 @media screen and (max-width:500px) {
     .option,
     #edit-address,

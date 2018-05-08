@@ -1,7 +1,33 @@
 <div class="container-fluid p-5">
     <h1 class="text-center">Welcome to Bookzon</h1>
     <div ng-controller='CarouselController as carous' id='slides-control'>
-        <!-- TODO -->
+        <div id='carousel-container'>
+            <div uib-carousel active="carous.active" interval="carous.myInterval" no-wrap="carous.noWrapSlides">
+                <div class='carousel-slide' uib-slide ng-repeat="slide in carous.slides track by slide.id" index="slide.id">
+                    <div class='slide-book-container'>
+                        <a href='#!books/{{slide.bookId1}}'>
+                            <img ng-src="{{slide.image1}}" title='{{slide.title1}}' alt={{slide.title1}} />
+                        </a>
+                        <br/>
+                        <a href='#!books/{{slide.bookId1}}'>{{slide.title1}}</a>
+                    </div>
+                    <div class='slide-book-container'>
+                        <a href="#!books/{{slide.bookId1}}">
+                            <img ng-src="{{slide.image2}}" title='{{slide.title2}}' alt={{slide.title2}} />
+                        </a>
+                        <br/>
+                        <a href="#!books/{{slide.bookId2}}">{{slide.title2}}</a>
+                    </div>
+                    <div class='slide-book-container'>
+                        <a href="#!books/{{slide.bookId3}}">
+                            <img ng-src="{{slide.image3}}" title='{{slide.title3}}' alt={{slide.title3}} />
+                            <br/>
+                        </a>
+                        <a href="#!books/{{slide.bookId3}}">{{slide.title3}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- categories directive -->
     <div ng-controller="CategoriesController as cat">

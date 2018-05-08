@@ -40,9 +40,22 @@ router.put('/:bookId', function(req, res, next) {
         }
     })
 }); 
+
+router.get('/lastBooks/:numberOfBooks', function(req, res, next) {
+    var booksCollection = req.db.get('books');
+    var numberOfBooks = +req.params.numberOfBooks;
+
+    booksCollection.find({}, {sort: {_id: -1}, limit: numberOfBooks }, (err, docs) => {
+        if(err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    })
+});
 router.post('/', function (req, res, next) {
-    // console.log(req.body);
-    // console.log(req.files);
     var book = req.body;
 
     if (!isValidString(book.title) || !isValidString(book.author) ||

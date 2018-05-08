@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-
+    const LAST_BOOKS_NUMBER = 15;
+    
     mainApp.service('BooksService', BooksService);
 
     function BooksService($http) {
@@ -24,6 +25,10 @@
         
         this.getBookById = function (bookId) {
             return $http.get('/api/books/' + bookId);
+        }
+
+        this.getLastBooks = function() {
+            return $http.get('/api/books/lastBooks/' + LAST_BOOKS_NUMBER);
         }
 
         this.addBook = function (data) {

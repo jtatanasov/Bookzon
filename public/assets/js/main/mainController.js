@@ -3,7 +3,7 @@
 
     mainApp.controller('MainController', MainController);
 
-    function MainController($scope, $location, $rootScope, $routeParams, $mdDialog, MainService, CartService) {
+    function MainController($scope, $location, $rootScope, $routeParams, $mdDialog, MainService, CartService, BooksService) {
         var vm = this;
         vm.loggedUser = false;
         vm.isAdmin = false;
