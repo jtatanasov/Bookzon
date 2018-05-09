@@ -61,7 +61,7 @@ router.put('/accept/:orderId', function (req, res, next) {
                                     var foundBook = cart.books.find(b => b.bookId == book.bookId);
                                     if (foundBook) {
                                         var userToNotifyId = cart.userId;
-                                        var text = 'Book in your cart (' + foundBook.name + ') has been deleted or is out of stock! For more information contact Admin!';
+                                        var text = 'Book in your cart (' + foundBook.name + ') has been deleted or is out of stock. We apologize for the inconvenience!';
                                         var notifcation = new Notification(text, foundBook.bookId);
 
                                         notificationCollection.find({ userId: userToNotifyId }, {}, (err, docs) => {
@@ -111,7 +111,7 @@ router.delete('/decline/:orderId', function (req, res, next) {
             ordersCollection.remove({ _id: orderToSearchId }, (err, docs) => {
                 if (err) throw err;
                 else {
-                    var text = 'Your last order has been declined. For more information contact Admin!';
+                    var text = 'Your last order has been declined. We apologize for the inconvenience!';
                     var notification = new Notification(text, 1);
                     notificationCollection.find({ userId: userToNotifyId }, {}, (err, docs) => {
                         if (err) throw err;

@@ -6,7 +6,7 @@
                 <label class='captions'>Title*</label>
             </p>
             <input class='form-inputs form-control' ng-model='admin.newBook.title' id='title' type="text" name='title' ng-minlength="3"
-                ng-maxlength="30" required ng-class="{'is-invalid': AddBookForm.title.$invalid && AddBookForm.title.$touched}"
+                ng-maxlength="60" required ng-class="{'is-invalid': AddBookForm.title.$invalid && AddBookForm.title.$touched}"
             />
             <div class="help-block" ng-messages="AddBookForm.title.$error" ng-if="AddBookForm.title.$touched">
                 <p class="text-danger" ng-message="required">
@@ -25,7 +25,7 @@
                 <label class='captions'>Author*</label>
             </p>
             <input class='form-inputs form-control' ng-model='admin.newBook.author' id='author' type="text" name='author' ng-minlength="3"
-                ng-maxlength="30" required ng-class="{'is-invalid': AddBookForm.author.$invalid && AddBookForm.author.$touched}"
+                ng-maxlength="40" required ng-class="{'is-invalid': AddBookForm.author.$invalid && AddBookForm.author.$touched}"
             />
             <div class="help-block" ng-messages="AddBookForm.author.$error" ng-if="AddBookForm.author.$touched">
                 <p class="text-danger" ng-message="required">
@@ -72,9 +72,21 @@
         </div>
         <div class='form-group'>
             <p>
-                <label class='captions'>Description</label>
+                <label class='captions'>Description*</label>
             </p>
-            <textarea class='form-inputs form-control' ng-model='admin.newBook.description' id='description' type="text" name='description'></textarea>
+            <textarea class='form-inputs form-control' ng-model='admin.newBook.description' id='description' type="text" name='description'
+                ng-minlength="1" ng-maxlength="600" required ng-class="{'is-invalid': AddBookForm.description.$invalid && AddBookForm.description.$touched}"></textarea>
+            <div class="help-block" ng-messages="AddBookForm.description.$error" ng-if="AddBookForm.description.$touched">
+                <p class="text-danger" ng-message="required">
+                    <small>Description is required.</small>
+                </p>
+                <p class="text-danger" ng-message="minlength">
+                    <small>Description is too short.</small>
+                </p>
+                <p class="text-danger" ng-message="maxlength">
+                    <small>Description is too long.</small>
+                </p>
+            </div>
         </div>
         <div class='form-group'>
             <p>
@@ -149,12 +161,15 @@
             <p>
                 <label class='captions'>Quantity*</label>
             </p>
-            <input class='form-inputs form-control' ng-model='admin.newBook.quantity' id='quantity' type="number" name='quantity' min='0'
-                ng-min="0" required ng-class="{'is-invalid': AddBookForm.quantity.$invalid && AddBookForm.quantity.$touched}"
+            <input class='form-inputs form-control' ng-model='admin.newBook.quantity' id='quantity' type="text" name='quantity' min='0'
+                ng-min="0" ng-pattern="/^\d+$/" required ng-class="{'is-invalid': AddBookForm.quantity.$invalid && AddBookForm.quantity.$touched}"
             />
             <div class="help-block" ng-messages="AddBookForm.quantity.$error" ng-if="AddBookForm.quantity.$touched">
                 <p class="text-danger" ng-message="required">
                     <small>Quantity is required.</small>
+                </p>
+                <p class="text-danger" ng-message="pattern">
+                    <small>Quantity must be a valid number</small>
                 </p>
                 <p class="text-danger" ng-message="min">
                     <small>Quantity cannot be a negative number.</small>
@@ -163,18 +178,16 @@
         </div>
         <div class='form-group'>
             <p>
-                <label class='captions '>Select image for thumbnail</label>
+                <label class='captions ' for='file'>Select image for thumbnail</label>
             </p>
-            <input class='form-control' type="file" name="bookImage" id='file' file-model='admin.newBook.file' required ng-class="{'is-invalid': AddBookForm.file.$invalid && AddBookForm.file.$touched}"
-            />
-            <div class="help-block" ng-messages="AddBookForm.file.$error" ng-if="AddBookForm.file.$touched">
-                <p class="text-danger" ng-message="required">
-                    <small>Thumbnail is required.</small>
+            <input class='form-control' type="file" name="bookImage" id='file' file-model='admin.newBook.file' required ng-class="{'is-invalid': AddBookForm.bookImage.$invalid && AddBookForm.bookImage.$touched}" />
+            <div ng-if='admin.invalidFileType'>
+                <p class='text-danger'>
+                    <small>Invalid file-type</small>
                 </p>
             </div>
         </div>
         <div class='form-group'>
-
             <button class='btn btn-warning btn-md' ng-disabled="AddBookForm.$invalid" type='submit' ng-click='admin.addNewBook()'>Upload</button>
         </div>
     </form>

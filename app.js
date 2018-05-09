@@ -29,8 +29,11 @@ var storage = multer.diskStorage({
         var origName = file.originalname;
         origName = origName.split('.');
         var ext = origName[origName.length - 1];
-        next(null, 'bookImage-' + Date.now() + '.' + ext);
-
+        if(ext.toLocaleLowerCase() == 'png' || ext.toLocaleLowerCase == 'jpeg')
+            next(null, 'bookImage-' + Date.now() + '.' + ext);
+        else {
+            return;
+        }
     }
 });
 var upload = multer({ storage: storage });

@@ -150,7 +150,9 @@ body {
     padding-left:0.2em;
     padding-right:0.2em;
 }
-
+main {
+    min-height: 90%;
+}
 #main-navbar {
     color: #fff;
     padding:0;
@@ -373,7 +375,7 @@ body {
 }
 
 .form-inputs {
-    width: 20em;
+    width: 80%;
     display:inline-block;
 }
 
@@ -618,7 +620,7 @@ body {
     color: #331500;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:900px) {
     .option,
     #edit-address,
     #edit-profile,

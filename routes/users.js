@@ -21,19 +21,6 @@ function isValidPhoneNumber(phone) {
     return re.test(String(phone));
 }
 
-
-
-// router.delete('/:id', function (req, res, next) {
-//     var idToDelete = req.params.id;
-//     var usersCollection = req.db.get('users');
-
-//     usersCollection.remove({ _id: idToDelete }).then(function (err, d) {
-//         res.status(200);
-//         res.json({ message: 'success' });
-//     });
-
-// });
-
 router.get('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
 
@@ -143,7 +130,7 @@ router.put('/:id', function (req, res, next) {
 
 router.post('/session', (req, res, next) => {
     req.session.user = req.body;
-    //req.session.save();
+    req.session.save();
     res.status(200);
     res.json({ user: req.session.user });
 })

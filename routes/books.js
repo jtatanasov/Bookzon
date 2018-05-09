@@ -57,7 +57,12 @@ router.get('/lastBooks/:numberOfBooks', function(req, res, next) {
 });
 router.post('/', function (req, res, next) {
     var book = req.body;
-
+    var file = req.files[0];
+    if(file.mimetype.split('/')[0] != 'image') {
+        res.status(412);
+        res.json({message: 'Invalid file type'});
+        return;
+    }
     if (!isValidString(book.title) || !isValidString(book.author) ||
         !isValidString(book.description) || !isValidNumber(book.price)) {
         res.status(412);

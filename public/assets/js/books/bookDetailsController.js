@@ -21,7 +21,7 @@
                 vm.userId = $rootScope.user._id;
                 vm.isLogged = true;
             }
-
+            response.data.volumeInfo.quantity = +response.data.volumeInfo.quantity;
             vm.bookDetails = response.data;
             if (vm.bookDetails.volumeInfo.quantity == 0) {
                 vm.isAvailable = false;
