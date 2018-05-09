@@ -1,8 +1,21 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+/* sticky footer */
 body {
     line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1 0 auto;
 }
 
 .footer {
+    flex-shrink: 0;
     background-color: #331500;
 }
 
@@ -580,7 +593,7 @@ main {
 #slides-control {
     position: relative;
     overflow: hidden;
-    min-height: 250px;
+    min-height: 320px;
 }
 
 #carousel-container {
@@ -598,7 +611,7 @@ main {
     background-color: #AA6839
 }
 .item img {
-    width: 12em;
+    max-width: 12em;
     padding: 0 2em;
     margin-bottom: 1em;
 }

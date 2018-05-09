@@ -12,14 +12,16 @@
         vm.keyword = $routeParams.q || "";
         $scope.user.keyword = vm.keyword;
         vm.sorting = {
-            selectedProperty: "null",
-            propertyName: "null",
+            selectedProperty: "_id-ASC",
+            propertyName: "_id",
             reverse: false
         };
         vm.pagination = {
             currentPage: 1,
             itemsPerPage: 12,
-            totalItems: allBooks.length
+            totalItems: allBooks.length,
+            begin: 0,
+            end: 12
         };
 
         loadBooks();
@@ -79,9 +81,9 @@
         function getPaginationData() {
             vm.pagination.totalItems = allBooks.length;
             $scope.$watch(() => vm.pagination.currentPage, function (newPage) {
-                var begin = ((newPage - 1) * vm.pagination.itemsPerPage);
-                var end = begin + vm.pagination.itemsPerPage;
-                vm.pagedBooks = allBooks.slice(begin, end);
+                vm.pagination.begin = ((newPage - 1) * vm.pagination.itemsPerPage);
+                vm.pagination.end = vm.pagination.begin + vm.pagination.itemsPerPage;
+                vm.pagedBooks = allBooks.slice(vm.pagination.begin, vm.pagination.end);
             });
         }
 

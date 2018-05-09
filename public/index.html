@@ -57,8 +57,8 @@
     <script src="assets/js/books/booksController.js"></script>
     <script src="assets/js/books/bookDetailsController.js"></script>
 
-    <script src="assets/js/books/reviews/reviewsService.js"></script>
-    <script src="assets/js/books/reviews/reviewsController.js"></script>
+    <script src="assets/js/reviews/reviewsService.js"></script>
+    <script src="assets/js/reviews/reviewsController.js"></script>
 
     <script src="assets/js/directives/onEnter.js"></script>
 
@@ -77,76 +77,78 @@
 </head>
 
 <body ng-app='mainApp' class='ng-cloak' ng-class='modal-open' ng-controller='MainController as user'>
+    <div class="wrapper">
+        <nav id="main-navbar" class="navbar navbar-dark navbar-expand-md">
+            <div class="container container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a href="#">
+                    <img style="width:80px" id="bookzon-logo" src="assets/images/bookzon-logo.png">
+                </a>
+                <a id="bookzon-title" class="navbar-brand" href="#">Bookzon</a>
+                <button id="button-collapse-navbar" type="button" class="btn navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#navbar-collapse-3">
+                    <span class="sr-only">Toggle navigation</span>
+                    &#x2630;</button>
+                <form id='search-form' class="form-inline mr-auto" role="search">
+                    <div class="input-group">
+                        <input id='search-input' type="text" class="form-control" placeholder="Search Bookzon" ng-model="user.keyword" my-enter="user.search()">
+                        <span class="input-group-append">
+                            <button class="btn" type="button" ng-click="user.search()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <div class="collapse navbar-collapse" id="navbar-collapse-3">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/edit-profile.png' />
+                            <a href="#" class="nav-link">Profile</a>
+                        </li>
+                        <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.addNewBook($event)' class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/books.png' />
+                            <a href="#" class="nav-link">Add new books</a>
+                        </li>
+                        <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.getPendingOrders($event)' class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/pending-orders.png' />
+                            <a href="#" class="nav-link">Pending orders</a>
+                        </li>
+                        <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToOrders($event)' class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/orders.png' />
+                            <a href="#" class="nav-link">Orders</a>
+                        </li>
+                        <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToCart($event)' class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/cart.png' />
+                            <a href="#" class="nav-link">Cart</a>
+                        </li>
+                        <li ng-show="user.loggedUser" ng-click="user.logOut($event)" class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/logout.png' />
+                            <a href="#" class="nav-link">Log Out</a>
+                        </li>
+                        <li ng-click="user.goToLoginPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/login.png' />
+                            <a href="" class="nav-link">Login</a>
+                        </li>
+                        <li ng-click="user.goToSignUpPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
+                            <img class='nav-icon' src='assets/images/icons/signup.png' />
+                            <a href="" class="nav-link">Sign Up</a>
+                        </li>
 
-    <nav id="main-navbar" class="navbar navbar-dark navbar-expand-md">
-        <div class="container container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <a href="#">
-                <img style="width:80px" id="bookzon-logo" src="assets/images/bookzon-logo.png">
-            </a>
-            <a id="bookzon-title" class="navbar-brand" href="#">Bookzon</a>
-            <button id="button-collapse-navbar" type="button" class="btn navbar-toggler collapsed ml-auto" data-toggle="collapse" data-target="#navbar-collapse-3">
-                <span class="sr-only">Toggle navigation</span>
-                &#x2630;</button>
-            <form id='search-form' class="form-inline mr-auto" role="search">
-                <div class="input-group">
-                    <input id='search-input' type="text" class="form-control" placeholder="Search Bookzon" ng-model="user.keyword" my-enter="user.search()">
-                    <span class="input-group-append">
-                        <button class="btn" type="button" ng-click="user.search()">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </span>
+                    </ul>
+
                 </div>
-            </form>
-            <div class="collapse navbar-collapse" id="navbar-collapse-3">
-                <ul class="nav navbar-nav ml-auto">
-                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToProfilePage($event)' class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/edit-profile.png' />
-                        <a href="#" class="nav-link">Profile</a>
-                    </li>
-                    <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.addNewBook($event)' class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/books.png' />
-                        <a href="#" class="nav-link">Add new books</a>
-                    </li>
-                    <li ng-show="user.isAdmin && user.loggedUser" ng-click='user.getPendingOrders($event)' class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/pending-orders.png' />
-                        <a href="#" class="nav-link">Pending orders</a>
-                    </li>
-                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToOrders($event)' class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/orders.png' />
-                        <a href="#" class="nav-link">Orders</a>
-                    </li>
-                    <li ng-show="user.loggedUser && !user.isAdmin" ng-click='user.goToCart($event)' class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/cart.png' />
-                        <a href="#" class="nav-link">Cart</a>
-                    </li>
-                    <li ng-show="user.loggedUser" ng-click="user.logOut($event)" class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/logout.png' />
-                        <a href="#" class="nav-link">Log Out</a>
-                    </li>
-                    <li ng-click="user.goToLoginPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/login.png' />
-                        <a href="" class="nav-link">Login</a>
-                    </li>
-                    <li ng-click="user.goToSignUpPage($event)" ng-show="!user.loggedUser" class="ng-hide nav-item">
-                        <img class='nav-icon' src='assets/images/icons/signup.png' />
-                        <a href="" class="nav-link">Sign Up</a>
-                    </li>
-
-                </ul>
-
             </div>
-        </div>
-    </nav>
-   
+        </nav>
     
-    <div ng-controller="ModalController as mCtrl" id='notifications-modal'>
-        <div ng-show="mCtrl.selected">Selection from a modal: {{ selected }}</div>
+        
+        <div ng-controller="ModalController as mCtrl" id='notifications-modal'>
+            <div ng-show="mCtrl.selected">Selection from a modal: {{ selected }}</div>
+        </div>
+        <main ng-view></main>
     </div>
-    <main ng-view></main>
-    <footer class="container-fluid footer text-center text-white p-2">
-        <small>Copyright &copy; 2018, Bookzon.com</small>
+    <footer class="container-fluid footer">
+        <p class="text-center text-white mt-2 mb-2"><small>Copyright &copy; 2018, Bookzon.com</small></p>
     </footer>
+    
 </body>
 
 </html>

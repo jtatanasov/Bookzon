@@ -1,6 +1,6 @@
-<div class="container-fluid p-4">
+<div class="container-fluid p-3">
     <h1 class="text-center">Welcome to Bookzon</h1>
-    <div ng-controller='CarouselController as carous' id='slides-control'>
+    <div ng-controller='CarouselController as carous' id='slides-control' class="d-none d-md-block">
         <div id='carousel-container'>
             <div uib-carousel active="carous.active" interval="carous.myInterval" no-wrap="carous.noWrapSlides">
                 <div class='carousel-slide' uib-slide ng-repeat="slide in carous.slides track by slide.id" index="slide.id">

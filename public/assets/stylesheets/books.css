@@ -149,6 +149,12 @@ img.loader {
     border-bottom-right-radius: .25rem;
 }
 
+/* sorting */
+.sorting .custom-select {
+    vertical-align: bottom;
+    padding-top: .2rem;
+}
+
 /* search field*/
 #search-form .form-control:focus {
     border-color: orange;

@@ -3,9 +3,11 @@
 
     mainApp.controller('BookDetailsController', BookDetailsController);
 
-    function BookDetailsController(BooksService, CartService, $routeParams, $rootScope, $location, $scope) {
+    function BookDetailsController(BooksService, CartService, CategoriesService, $routeParams, $rootScope, $location, $scope) {
         var vm = this;
         var bookId = $routeParams.bookId;
+        vm.bookDetails = {};
+        vm.categoryInfo = {};
         vm.rating = {};
         vm.isAvailable = true;
         vm.isLogged = false;
@@ -14,7 +16,7 @@
         vm.editPrice = false;
         $scope.user.keyword = "";
 
-        BooksService.getBookById(bookId).then(function (response) {
+        BooksService.getBookById(bookId).then(function(response) {
             if (!$rootScope.user) {
                 vm.isLogged = false;
             } else {
@@ -23,11 +25,11 @@
             }
             response.data.volumeInfo.quantity = +response.data.volumeInfo.quantity;
             vm.bookDetails = response.data;
-            if (vm.bookDetails.volumeInfo.quantity == 0) {
-                vm.isAvailable = false;
-            } else {
-                vm.isAvailable = true;
-            }
+            vm.isAvailable = (vm.bookDetails.volumeInfo.quantity > 0);
+
+            return CategoriesService.getCategoryInfo(vm.bookDetails.volumeInfo.category);
+        }).then(function(response) {
+            vm.categoryInfo = response;
         }).catch(function (err) {
             console.log(err);
         });

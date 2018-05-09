@@ -20,5 +20,18 @@
                 }
             });
         }
+
+        this.getCategoryInfo = function(category) {
+            var categoryInfo;
+            var self = this;
+            return new Promise(function(resolve, reject) {
+                self.getCategories().then(function() {
+                        categoryInfo = categories.find(cat => cat.link.indexOf(category) != -1);
+                        resolve(categoryInfo);
+                    }).catch(function(err) {
+                        reject(err);
+                    });
+            });
+        }
     }
 })();

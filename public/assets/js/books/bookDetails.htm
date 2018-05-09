@@ -1,11 +1,14 @@
-<div class="container container-fluid" ng-controller="BookDetailsController as ctrl">
+<div class="container container-fluid pt-1" ng-controller="BookDetailsController as ctrl">
     <div ng-controller="ReviewsController as rCtrl">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#!/books/category/{{ctrl.categoryInfo.link}}">{{ctrl.categoryInfo.title}}</a></li>
+            </ol>
+        </nav>
         <!-- Book details -->
-        <section id="bookDetailsSection" class="container container-fluid p-3">
-            <a class="btn btn-link mb-3 p-0" ng-href="#">
-                <span class="text-bigger">&#171;</span> All books</a>
-            <button class='btn btn-danger btn-md delete-book-btns' ng-click='user.showConfirm($event, ctrl.bookDetails._id, true)'
-                ng-show='user.isAdmin'>Delete book</button>
+        <section id="bookDetailsSection" class="container container-fluid p-1">
+            <button class='btn btn-danger btn-md delete-book-btns' ng-click='user.showConfirm($event, ctrl.bookDetails._id, true)' ng-show='user.isAdmin'>Delete book</button>
             <div class="media">
                 <img width='130px' ng-if='ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail' ng-src="{{ctrl.bookDetails.volumeInfo.imageLinks.smallThumbnail}}"
                     alt="{{ctrl.bookDetails.volumeInfo.title}}">
@@ -30,11 +33,11 @@
                     </div>
                     <hr class="mt-0" />
                     <p>{{ctrl.bookDetails.volumeInfo.description}}</p>
-                    <p>
+                    <p ng-if="ctrl.bookDetails.volumeInfo.pageCount">
                         <b>Page Count: </b>{{ctrl.bookDetails.volumeInfo.pageCount}}</p>
-                    <p>
+                    <p ng-if="ctrl.bookDetails.volumeInfo.industryIdentifiers[0].type">
                         <b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].type}}: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[0].identifier}}</p>
-                    <p>
+                    <p ng-if="ctrl.bookDetails.volumeInfo.industryIdentifiers[1].type">
                         <b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].type}}: </b>{{ctrl.bookDetails.volumeInfo.industryIdentifiers[1].identifier}}</p>
                     <p>
                         <b>Publisher: </b>{{ctrl.bookDetails.volumeInfo.publisher}}</p>

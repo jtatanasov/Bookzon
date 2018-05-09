@@ -1,23 +1,7 @@
-// mainApp.directive('myEnter', function () {
-//     return function (scope, element, attrs) {
-//         element.bind("keydown keypress", function (event) {
-//             var keyCode = event.which || event.keyCode;
+(function () {
+  'use strict'
 
-//             // If enter key is pressed
-//             if (keyCode === 13) {
-//                 scope.$apply(function() {
-//                     console.log(attrs.myEnter)
-//                     // Evaluate the expression
-//                     scope.$eval(attrs.myEnter);
-//                 });
-
-//                 event.preventDefault();
-//             }
-//         });
-//     };
-// });
-
-mainApp.directive('myEnter', myEnter);
+  mainApp.directive('myEnter', myEnter);
 
   function myEnter() {
     return {
@@ -37,3 +21,4 @@ mainApp.directive('myEnter', myEnter);
       }
     };
   }
+})();

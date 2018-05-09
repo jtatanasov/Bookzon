@@ -10,25 +10,28 @@
         <div class="text-center" ng-show="booksCtr.loading">
             <img id="mySpinner" src="http://www.fivestarfireplaces.com.au/album/images/loading.gif"  class="loader" />
         </div>
-        <!-- books listing -->
+        
         <p class="alert alert-warning text-center" ng-if="booksCtr.books.length == 0 && !booksCtr.loading">No books found</p>
         <div class="text-center">
-            <div class="sorting alert alert-secondary">
-                <form class="form-inline text-right">
-                    <label>Sort by</label>
-                    <select class="form-control form-control-sm" ng-model="booksCtr.sorting.selectedProperty" ng-change="booksCtr.sorting.sortBy(booksCtr.sorting.selectedProperty)">
-                        <option value="null">Default</option>
+            <!-- sorting -->
+            <div class="sorting alert alert-secondary row p-1 ml-2 mr-2">
+                <div class="col text-left">
+                    <p class="mt-2 mb-0"><small>{{booksCtr.pagination.begin + 1}} - {{booksCtr.pagination.end}} of {{booksCtr.pagination.totalItems}} Books</small></p>
+                </div>
+                <div class="col text-right">
+                    <label class="d-none d-md-inline-block"><small>Sort by</small></label>
+                    <select class="form-control-sm custom-select w-auto" ng-model="booksCtr.sorting.selectedProperty" ng-change="booksCtr.sorting.sortBy(booksCtr.sorting.selectedProperty)">
+                        <option value="_id-ASC">Recently added</option>
                         <option value="volumeInfo.title-ASC">Title</option>
                         <option value="volumeInfo.price-ASC">Price: Low to High</option>
                         <option value="volumeInfo.price-DESC">Price: High to Low</option>
                         <option value="volumeInfo.averageRating-DESC">avg. Customer Review</option>
                     </select>
-                </form>
+                </div>
             </div>                
+            <!-- books listing -->
             <div class="card-deck-wrapper" class="d-inline-block">
                 <div class="card-deck">
-                    <!-- <div class="card mb-3 p-3" ng-repeat="book in booksCtr.filteredBooks | orderBy:'volumeInfo.title':'reverse'''"> -->
-                    <!-- <div class="card mb-3 p-3" ng-repeat="book in booksCtr.books | orderBy:booksCtr.propertyName:booksCtr.reverse"> -->
                     <div class="card mb-3 p-3" ng-repeat="book in booksCtr.pagedBooks">
                         <!-- Admin's delete book btn -->
                         <button class='btn btn-danger btn-sm delete-book-btns' ng-click='user.showConfirm($event, book._id, false)' ng-show='user.isAdmin'>Delete book</button>
@@ -56,6 +59,6 @@
                 </div>
             </div>
         </div>
-        <ul uib-pagination class="justify-content-center" total-items="booksCtr.pagination.totalItems" items-per-page="booksCtr.pagination.itemsPerPage" ng-model="booksCtr.pagination.currentPage" ng-change="booksCtr.pagination.pageChanged()"></ul>
+        <ul ng-hide="booksCtr.pagination.totalItems < booksCtr.pagination.itemsPerPage" uib-pagination class="justify-content-center" total-items="booksCtr.pagination.totalItems" items-per-page="booksCtr.pagination.itemsPerPage" ng-model="booksCtr.pagination.currentPage" ng-change="booksCtr.pagination.pageChanged()"></ul>
     </section>
 </div>
