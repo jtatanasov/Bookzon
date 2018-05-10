@@ -61,6 +61,11 @@
                 })
         }
 
+        // search
+        vm.search = function() {
+            $location.path('/books/search').search({q: vm.keyword});
+        }
+        
         //admin
 
         vm.addNewBook = function ($event) {
@@ -68,11 +73,6 @@
             $location.path('/add-book');
         }
 
-        // search
-        vm.search = function() {
-            $location.path('/books/search').search({q: vm.keyword});
-        }
-        
         vm.getPendingOrders = function($event) {
             $event.preventDefault();
             $location.path('/pending-orders');
