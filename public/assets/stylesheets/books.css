@@ -2,8 +2,8 @@
 
 .categories .card-deck .card {
     /* margin: 0 auto; */
-    max-width: 6.4rem;
-    min-width: 6.4rem;
+    max-width: 5.9rem;
+    min-width: 5.9rem;
     /* width: 5rem; */
 }
 
@@ -13,7 +13,7 @@
 
 .categories .card-deck .card:hover,
 .categories .card-deck .card.active {
-    border-color: #331500;
+    border-color: orange;
 }
 
 .categories .card-deck .card:hover img.card-img-top,
@@ -38,8 +38,8 @@
 /* books list */
 #booksSection .card-deck .card {
     /* margin: 0 auto; */
-    max-width: 12rem;
-    min-width: 12rem;
+    max-width: 11rem;
+    min-width: 11rem;
     /* width: 12rem; */
 }
 

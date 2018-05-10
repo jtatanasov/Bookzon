@@ -3,7 +3,7 @@
     <div class="card-deck">
         <a href="#!books/category/{{category.link}}" class="card mb-3" ng-repeat="category in info" ng-class="{ true: 'active'}[category.title == active]">
             <img class="card-img-top" ng-src="{{category.imgUrl}}" alt="{{category.title}}">
-            <div class="card-body p-0 pb-1">
+            <div class="card-body p-1">
                 <p class="card-text text-center"><small>{{category.title}}</small></p>
             </div>
         </a>                   

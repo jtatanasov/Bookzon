@@ -119,7 +119,6 @@
                     <div>
                         <span class="text-warning" uib-rating ng-model="rCtrl.bookRating.averageRating" max="5" read-only="true" state-on="'fas fa-star'" state-off="'far fa-star'"
                             aria-labelledby="custom-icons-1"></span>
-                        <!-- <span class="label text-primary">{{ctrl.bookDetails.volumeInfo.ratingsCount}} customer {{(ctrl.bookDetails.volumeInfo.ratingsCount == 1 ? "review" : "reviews")}}</span> -->
                         <span class="label text-primary">{{rCtrl.bookRating.ratingsCount}} customer {{(rCtrl.bookRating.ratingsCount == 1 ? "review" : "reviews")}}</span>
                     </div>
                     <div class="text-muted mt-1">
@@ -152,7 +151,7 @@
 
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" name="title" class="form-control" ng-model="rCtrl.review.title" ng-minlength="5" ng-maxlength="50" required
+                        <input type="text" name="title" class="form-control" ng-model="rCtrl.review.title" ng-minlength="5" ng-maxlength="100" required
                             ng-class="{'is-invalid': ReviewForm.title.$invalid && ReviewForm.title.$touched}">
                         <div class="help-block" ng-messages="ReviewForm.title.$error" ng-if="ReviewForm.title.$touched">
                             <p class="text-danger" ng-message="required">
@@ -169,7 +168,7 @@
 
                     <div class="form-group">
                         <label>Review</label>
-                        <textarea type="text" name="text" class="form-control" ng-model="rCtrl.review.text" ng-maxlength="1000"></textarea>
+                        <textarea type="text" name="text" class="form-control" ng-model="rCtrl.review.text" ng-maxlength="2000"></textarea>
                     </div>
 
                     <p class="text-danger" ng-hide="ctrl.isLogged">
