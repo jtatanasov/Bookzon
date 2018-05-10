@@ -12,9 +12,9 @@
         vm.keyword = $routeParams.q || "";
         $scope.user.keyword = vm.keyword;
         vm.sorting = {
-            selectedProperty: "_id-ASC",
+            selectedProperty: "_id-DESC",
             propertyName: "_id",
-            reverse: false
+            reverse: true
         };
         vm.pagination = {
             currentPage: 1,
@@ -32,11 +32,10 @@
         };
 
         vm.sorting.sortBy = function(propertyName) {
-            var field = propertyName.split("-")[0];
+            var field = propertyName.split("-")[0].split("+");
             var reverse = propertyName.split("-")[1];
             vm.sorting.reverse = (reverse == "DESC");
             vm.sorting.propertyName = field;
-            allBooks = $filter('orderBy')(allBooks, vm.sorting.propertyName, vm.sorting.reverse);
             vm.pagination.currentPage = 1;
             getPaginationData();
         }
@@ -45,7 +44,7 @@
             /* Get books by category */
             if(category) {
                 BooksService.getBooksByCategory(category).then(function (response) {
-                        allBooks = $filter('orderBy')(response.data, vm.sorting.propertyName, vm.sorting.reverse);
+                        allBooks = response.data;
                         getPaginationData();
                     }).catch(function (err) {
                         console.log(err);
@@ -55,7 +54,7 @@
             } else if (vm.keyword) {
                 /* Get books by keyword (search) */
                 BooksService.getBooksByKeyword(vm.keyword).then(function (response) {
-                        allBooks = $filter('orderBy')(response.data, vm.sorting.propertyName, vm.sorting.reverse);
+                        allBooks = response.data;
                         vm.heading = 'We found ' + response.data.length + ' results for "' + vm.keyword + '"';
                         getPaginationData();
                     }).catch(function (err) {
@@ -66,7 +65,7 @@
             } else if (vm.keyword == "") {
                 /* get all books (search without a keyword) */
                 BooksService.getBooks().then(function (response) {
-                    allBooks = $filter('orderBy')(response.data, vm.sorting.propertyName, vm.sorting.reverse);
+                    allBooks = response.data;
                     vm.heading = 'All books';
                     vm.pagination.itemsPerPage = 36;
                     getPaginationData();    
@@ -79,6 +78,7 @@
         }
 
         function getPaginationData() {
+            allBooks = $filter('orderBy')(allBooks, vm.sorting.propertyName, vm.sorting.reverse);
             vm.pagination.totalItems = allBooks.length;
             $scope.$watch(() => vm.pagination.currentPage, function (newPage) {
                 vm.pagination.begin = ((newPage - 1) * vm.pagination.itemsPerPage);
