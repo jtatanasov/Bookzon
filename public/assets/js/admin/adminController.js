@@ -22,7 +22,7 @@
                     $location.path('/books/' + res.data.id);
                 })
                 .catch(err => {
-                    console.log('asdf');
+                    console.log(err);
                 });
         }
 
