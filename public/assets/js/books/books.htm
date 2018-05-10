@@ -21,11 +21,11 @@
                 <div class="col text-right">
                     <label class="d-none d-md-inline-block"><small>Sort by</small></label>
                     <select class="form-control-sm custom-select w-auto" ng-model="booksCtr.sorting.selectedProperty" ng-change="booksCtr.sorting.sortBy(booksCtr.sorting.selectedProperty)">
-                        <option value="_id-ASC">Recently added</option>
+                        <option value="_id-DESC">Recently added</option>
                         <option value="volumeInfo.title-ASC">Title</option>
                         <option value="volumeInfo.price-ASC">Price: Low to High</option>
                         <option value="volumeInfo.price-DESC">Price: High to Low</option>
-                        <option value="volumeInfo.averageRating-DESC">avg. Customer Review</option>
+                        <option value="volumeInfo.averageRating+volumeInfo.ratingsCount-DESC">avg. Customer Review</option>
                     </select>
                 </div>
             </div>                
