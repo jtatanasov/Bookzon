@@ -6,7 +6,7 @@
                 <label class='captions'>Title*</label>
             </p>
             <input class='form-inputs form-control' ng-model='admin.newBook.title' id='title' type="text" name='title' ng-minlength="3"
-                ng-maxlength="60" required ng-class="{'is-invalid': AddBookForm.title.$invalid && AddBookForm.title.$touched}"
+                ng-maxlength="100" required ng-class="{'is-invalid': AddBookForm.title.$invalid && AddBookForm.title.$touched}"
             />
             <div class="help-block" ng-messages="AddBookForm.title.$error" ng-if="AddBookForm.title.$touched">
                 <p class="text-danger" ng-message="required">
@@ -75,7 +75,7 @@
                 <label class='captions'>Description*</label>
             </p>
             <textarea class='form-inputs form-control' ng-model='admin.newBook.description' id='description' type="text" name='description'
-                ng-minlength="1" ng-maxlength="600" required ng-class="{'is-invalid': AddBookForm.description.$invalid && AddBookForm.description.$touched}"></textarea>
+                ng-minlength="1" ng-maxlength="2000" required ng-class="{'is-invalid': AddBookForm.description.$invalid && AddBookForm.description.$touched}"></textarea>
             <div class="help-block" ng-messages="AddBookForm.description.$error" ng-if="AddBookForm.description.$touched">
                 <p class="text-danger" ng-message="required">
                     <small>Description is required.</small>
@@ -188,7 +188,7 @@
             </div>
         </div>
         <div class='form-group'>
-            <button class='btn btn-warning btn-md' ng-disabled="AddBookForm.$invalid" type='submit' ng-click='admin.addNewBook()'>Upload</button>
+            <button class='btn btn-warning btn-md' ng-disabled="AddBookForm.$invalid" type='submit' ng-click='admin.addNewBook()'>Add Book</button>
         </div>
     </form>
 </div>
