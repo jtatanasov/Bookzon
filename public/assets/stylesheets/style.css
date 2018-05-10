@@ -659,3 +659,12 @@ main {
         font-size: 1em;
     }
 }
+
+@media (min-width: 1000px) {
+    .navbar-expand-md {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+    }
+}
